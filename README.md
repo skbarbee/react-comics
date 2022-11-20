@@ -29,15 +29,18 @@ As a user I want to...
     -   characters
     -   release date
 -   Like a comic
--   Add a comic to my "read shelf"
--   View my "read shelf"
--   Add a comic to my "want to read shelf"
--   View my "want to read shelf"
 -   View other comics based off of likes
 -   View other comics based off of authors
 -   View other comics based off of illustrators
 -   View other comics based off of characters
 -   View other comics based off of publishers
+​
+Stretch Goals
+​
+-   Add a comic to my "read shelf"
+-   View my "read shelf"
+-   View my "want to read shelf"
+-   Add a comic to my "want to read shelf"
 -   See other users' shelves
 -   Recommend comics to other users
 -   Follow other users shelves
