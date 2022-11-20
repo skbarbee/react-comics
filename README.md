@@ -57,5 +57,4 @@ Stretch Goals
 
 ![Character Page](https://user-images.githubusercontent.com/112446901/202876308-7ea23ce4-bdb6-4b8c-9f41-260e16b1b145.png)
 
-![Login](https://user-images.githubusercontent.com/112446901/202876314-0c691d7b-025c-4713-906e-dfea235df3cd.png)
 
