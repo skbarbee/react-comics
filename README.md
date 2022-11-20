@@ -4,14 +4,13 @@
 This is an application where users can add to a continuously growing database of comic books. Users will be able to add comics to their own virtual library and get suggestions based on what they like and what they set alerts for. Never miss a comic from your favorite write again!
 
 ## Team Roles
-  - Nick Abbott:
-  - Sarah Barbee: 
-  - Lauren Routier: Git Manager
-  - Harrison Simon:
+  - Nick Abbott: Full Stack Developer
+  - Sarah Barbee: Full Stack Developer
+  - Lauren Routier: Git Manager, Full Stack Developer
+  - Harrison Simon: Full Stack Developer
 
 ## Technologies Used
   - React
-  - Axios
   - Semantic
 
 ## User Stories
