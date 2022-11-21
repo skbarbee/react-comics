@@ -50,7 +50,7 @@ Stretch Goals
 ## Schedule
 
 - Monday: Back-end and Auth
-- Tuesday: MVP GOAl
+- Tuesday: MVP GOAL
 - Wednesday-Thursday: Off
 - Monday-Wednesday: Front End Styling
 - Thursday: Polishing and Finetuning
