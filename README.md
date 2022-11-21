@@ -47,6 +47,14 @@ Stretch Goals
 -   Add a comment to a read comic entry
 -   Add a comment to another user's read comic entry
 
+## Schedule
+
+- Monday: Back-end and Auth
+- Tuesday: MVP GOAl
+- Wednesday-Thursday: Off
+- Monday-Wednesday: Front End Styling
+- Thursday: Polishing and Finetuning
+
 ## Wireframes
 
 ![Login](https://user-images.githubusercontent.com/112446901/202876297-76cf25b8-f636-4313-acbc-312e55b55675.png)
