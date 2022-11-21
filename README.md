@@ -5,9 +5,9 @@ This is an application where users can add to a continuously growing database of
 
 ## Team Roles
   - Nick Abbott: Full Stack Developer
-  - Sarah Barbee: Full Stack Developer
+  - Sarah Barbee: Back-End Devolper
   - Lauren Routier: Git Manager, Full Stack Developer
-  - Harrison Simon: Full Stack Developer
+  - Harrison Simon: Front-End Developer
 
 ## Technologies Used
   - React
