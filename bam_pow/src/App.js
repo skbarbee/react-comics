@@ -12,6 +12,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import MyPage from './components/MyPage'
 
 const App = () => {
 
@@ -53,6 +54,7 @@ const App = () => {
 						path='/sign-in'
 						element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
 					/>
+					<Route path='/mypage' element={<MyPage msgAlert={msgAlert} user={user}/>}/>
           <Route
             path='/sign-out'
             element={
