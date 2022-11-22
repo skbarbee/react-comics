@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-const ComicIndex = ({ user, msgAlert}) => {
+const CharacterIndex = ({ user, msgAlert}) => {
 
     const [allComics, setAllComics] = useState([])
 
@@ -100,4 +100,4 @@ const ComicIndex = ({ user, msgAlert}) => {
     )
 }
 
-export default ComicIndex
+export default CharacterIndex
