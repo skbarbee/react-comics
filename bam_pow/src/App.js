@@ -13,6 +13,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import MyPage from './components/MyPage'
+import ComicIndex from './components/comic/ComicIndex'
 
 const App = () => {
 
@@ -54,22 +55,28 @@ const App = () => {
 						path='/sign-in'
 						element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
 					/>
-					<Route path='/mypage' element={<MyPage msgAlert={msgAlert} user={user}/>}/>
-          <Route
-            path='/sign-out'
-            element={
-              <RequireAuth user={user}>
-                <SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path='/change-password'
-            element={
-              <RequireAuth user={user}>
-                <ChangePassword msgAlert={msgAlert} user={user} />
-              </RequireAuth>}
-          />
+					<Route
+						path='/sign-out'
+						element={
+						<RequireAuth user={user}>
+							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+						</RequireAuth>
+						}
+					/>
+					<Route
+						path='/change-password'
+						element={
+						<RequireAuth user={user}>
+							<ChangePassword msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+					/>
+					<Route 
+						path='/comics' 
+						element={
+							<ComicIndex msgAlert={msgAlert} user={user} />
+							} 
+					/>
+
 				</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
