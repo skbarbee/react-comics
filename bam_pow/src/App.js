@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import MyPage from './components/MyPage'
 import ComicIndex from './components/ComicIndex'
+import CharacterIndex from './components/CharacterIndex'
 
 const App = () => {
 
@@ -74,6 +75,12 @@ const App = () => {
 						path='/comics' 
 						element={
 							<ComicIndex msgAlert={msgAlert} user={user} />
+							} 
+					/>
+					<Route 
+						path='/characters' 
+						element={
+							<CharacterIndex msgAlert={msgAlert} user={user} />
 							} 
 					/>
 					<Route 

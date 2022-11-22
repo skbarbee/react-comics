@@ -22,26 +22,41 @@ const ComicIndex = ({ user, msgAlert}) => {
     useEffect(() => {
         setAllComics( [
             {
-                title: "Title",
-                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
+                    alias: "Iron Man",
+                    real_name: "Tony Stark",
+                    imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                    details: 'Billionaire Playboy Philanthropist'
             },
             {
-                title: "Title2",
+                alias: "Winter Soldier",
+                real_name: "Bucky Barnes",
                 imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
+                details: 'What the hell happened to my arm??'
             },
             {
-                title: "Title3",
+                alias: "Captain Marvel",
+                real_name: "Carol Danvers",
                 imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
-            }
+                details: 'Crashed ship go brrrrrr'
+            },
+            {
+                alias: "Spiderman",
+                real_name: "Peter Parker",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                details: 'I was bit by a radioactive spider, oops'
+            },
+            {
+                alias: "Thor",
+                real_name: "Liam Hemsworth",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                details: "It's hammer time"
+            },
+            {
+                alias: "Black Widow",
+                real_name: "Natasha Romanova",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                details: 'what soul stone?'
+            },
         ])
     })
 
@@ -50,36 +65,34 @@ const ComicIndex = ({ user, msgAlert}) => {
         <Card>
             <Image src={Comic.imageurl} wrapped ui={false} />
             <Card.Content>
-                <Card.Header>
-                    {Comic.title}
-                </Card.Header>
+                <Card.Header>{Comic.alias}</Card.Header>
 
                 <Card.Meta>
-                    {Comic.releasedate}
+                    {Comic.real_name}
                     {/* <span className='date'>{Comic.releasedate}</span> */}
                 </Card.Meta>
 
                 <Card.Description>
-                    Issue {Comic.issue}
+                    {Comic.details}
                 </Card.Description>
 
             </Card.Content>
 
             {/* extra content for the bottom to link to just that line of comics or something */}
             {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
-            {/* <Card.Content extra>
+            <Card.Content extra>
                 <a>
                     <Icon name='user' />
-                    {Comic.name} appears in {Comic.editions} editions
+                    {Comic.alias} appears in 'this # of'{Comic.editions} comics
                 </a>
-            </Card.Content> */}
+            </Card.Content>
         </Card>
     ))
 
 
     return (
         <>
-            <Card.Group itemsPerRow={5}>
+            <Card.Group itemsPerRow={4}>
                 { ComicCards }
             </Card.Group>
         </>
