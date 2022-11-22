@@ -8,44 +8,49 @@ const linkStyle = {
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Item>
+		<Nav.Link>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
 			</Link>
-		</Nav.Item>
-		<Nav.Item>
+		</Nav.Link>
+		<Nav.Link>
 			<Link to='sign-out' style={linkStyle}>
 				Sign Out
 			</Link>
-		</Nav.Item>
-	</>
-)
-
-const unauthenticatedOptions = (
-	<>
-        <Nav.Item>
-		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
-        </Nav.Item>
-        <Nav.Item>
-		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
-        </Nav.Item>
-	</>
-)
-
-const alwaysOptions = (
-	<>
+		</Nav.Link>
 		<Nav.Link>
-			<Link to='/' style={linkStyle}>
-				Home
+			<Link to='/mypage' style={linkStyle}>
+				My Page
 			</Link>
 		</Nav.Link>
 	</>
 )
 
+const unauthenticatedOptions = (
+	<>
+        <Nav.Link>
+		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
+        </Nav.Link>
+        <Nav.Link>
+		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
+        </Nav.Link>
+
+	</>
+)
+
+const alwaysOptions = (
+	<>
+		
+	</>
+)
+
+
 const Header = ({ user }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
+		
 		<Navbar.Brand>
-            <Link to='/' style={linkStyle}>
+			
+            <Link to='/mypage' style={linkStyle}>
                 <div className='comic'>Bam Pow</div>
             </Link>
         </Navbar.Brand>
