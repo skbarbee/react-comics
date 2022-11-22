@@ -19,41 +19,69 @@ const ComicIndex = ({ user, msgAlert}) => {
     //     })
     // }, [])
 
-    // const ComicCards = allComics.map(Comic => (
-    //     <Card key={ Comic.id } style={{ width: '30%', margin: 5 }}>
-    //         <Card.Header>{ Comic.fullTitle }</Card.Header>
-    //         <Card.Body>
-    //             <Card.Text>
-    //                 <Link to={ `/Comics/${Comic.id}` }>View { Comic.name }</Link>
-    //             </Card.Text>
-    //         </Card.Body>
-    //     </Card>
-    // ))
+    useEffect(() => {
+        setAllComics( [
+            {
+                title: "Title",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                releasedate: '12-12-2022',
+                issue: 5,
+                editions: 6 
+            },
+            {
+                title: "Title2",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                releasedate: '12-12-2022',
+                issue: 5,
+                editions: 6 
+            },
+            {
+                title: "Title3",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                releasedate: '12-12-2022',
+                issue: 5,
+                editions: 6 
+            }
+        ])
+    })
+
+
+    const ComicCards = allComics.map(Comic => (
+        <Card>
+            <Image src={Comic.imageurl} wrapped ui={false} />
+            <Card.Content>
+                <Card.Header>
+                    {Comic.title}
+                </Card.Header>
+
+                <Card.Meta>
+                    {Comic.releasedate}
+                    {/* <span className='date'>{Comic.releasedate}</span> */}
+                </Card.Meta>
+
+                <Card.Description>
+                    Issue {Comic.issue}
+                </Card.Description>
+
+            </Card.Content>
+
+            {/* extra content for the bottom to link to just that line of comics or something */}
+            {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
+            {/* <Card.Content extra>
+                <a>
+                    <Icon name='user' />
+                    {Comic.name} appears in {Comic.editions} editions
+                </a>
+            </Card.Content> */}
+        </Card>
+    ))
+
 
     return (
         <>
-            {/* <div className='container-md' style={ cardContainerLayout }>
+            <Card.Group itemsPerRow={5}>
                 { ComicCards }
-            </div> */}
-
-            <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
-                <Card.Content>
-                <Card.Header>Nick</Card.Header>
-                <Card.Meta>
-                    <span className='date'>Joined in 2015</span>
-                </Card.Meta>
-                <Card.Description>
-                    Nick turned into spiderman after he was bitten by a radoiactive spider
-                </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                <a>
-                    <Icon name='user' />
-                    Appears in 5 editions
-                </a>
-                </Card.Content>
-            </Card>
+            </Card.Group>
         </>
 
     )
