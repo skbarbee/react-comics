@@ -12,8 +12,6 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 	background-color: blue;
-	background-image: url("./imgs/loginpage.svg");
-	background-size: cover;
 }
 .comic-panel {
 	font-family: "Bangers", cursive;
@@ -24,5 +22,6 @@ code {
 }
 .comic{
   font-family: "Bangers", cursive;
-	font-size: 3rem;
+	font-size: 2.5rem;
+  margin: 8px;
 }
