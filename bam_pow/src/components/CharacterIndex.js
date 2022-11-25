@@ -58,7 +58,7 @@ const CharacterIndex = ({ user, msgAlert}) => {
                 details: 'what soul stone?'
             },
         ])
-    })
+    },[])
 
 
     const ComicCards = allComics.map(Comic => (

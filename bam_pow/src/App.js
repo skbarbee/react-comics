@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
+
 import AutoDismissAlert from "./components/shared/AutoDismissAlert/AutoDismissAlert"
 import Header from "./components/shared/Header"
 import RequireAuth from "./components/shared/RequireAuth"
@@ -16,6 +17,10 @@ import MyPage from "./components/MyPage"
 import ComicIndex from "./components/ComicIndex"
 import CharacterIndex from "./components/CharacterIndex"
 import ComicDetail from "./components/ComicDetail"
+import ComicCreate from "./components/ComicCreate"
+import './App.css'
+
+
 
 
 const App = () => {
@@ -43,6 +48,8 @@ const App = () => {
 	}
 
 	return (
+		<div className="App">
+
 		<Fragment >
 			<Header user={user} />
 			<Routes>
@@ -95,6 +102,12 @@ const App = () => {
 							<MyPage msgAlert={msgAlert} user={user} />
 							} 
 					/>
+					<Route 
+						path='/add-comic' 
+						element={
+							<ComicCreate msgAlert={msgAlert} user={user} />
+							} 
+					/>
 
 				</Routes>
 				{msgAlerts.map((msgAlert) => (
@@ -108,6 +121,7 @@ const App = () => {
 					/>
 				))}
 			</Fragment>
+		</div>
 		)
 }
 
