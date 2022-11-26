@@ -4,16 +4,12 @@ import { useNavigate } from "react-router-dom"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-const ComicCreate = () => {
-	const [comic, setComic] = useState({
-		// title: null,
-		// edition: null,
-		// releaseDate: null,
-		// publisher: null,
-		// authors: [],
-		// illustrators: [],
-		// characters: [],
-	})
+const ComicCreate = (props) => {
+	const {msgAlert} = props
+
+	const [comic, setComic] = useState({})
+
+	const navigate = useNavigate()
 
 	const [startDate, setStartDate] = useState(new Date())
 
@@ -45,15 +41,16 @@ const ComicCreate = () => {
 	}
 
 	const handleSubmit = (e) => {
+		e.preventDefault()
+		setComic((comic.releaseDate = startDate))
 
 		console.log(comic)
 		
 
 		setComic((comic.releaseDate = startDate))
 		console.log("the comic?", comic)
+		// navigate('/mypage')
 
-		console.log("hi")
-		
 	}
 
 	return (

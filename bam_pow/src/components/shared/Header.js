@@ -1,23 +1,20 @@
 import React, { Fragment } from "react"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import { NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheckSquare, faCoffee, faUser } from '@fortawesome/free-solid-svg-icons';
+library.add(faCheckSquare, faCoffee, faUser);
+
+
 const linkStyle = {
 	color: "white",
 	textDecoration: "none",
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Link>
-			<Link to="change-password" style={linkStyle}>
-				Change Password
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
-			<Link to="sign-out" style={linkStyle}>
-				Sign Out
-			</Link>
-		</Nav.Link>
 		<Nav.Link>
 			<Link to="/mypage" style={linkStyle}>
 				My Page
@@ -28,6 +25,22 @@ const authenticatedOptions = (
 				Add Comic
 			</Link>
 		</Nav.Link>
+		<NavDropdown bg="dark" title={<FontAwesomeIcon icon="fa-user" />} menuVariant="dark" >
+			<NavDropdown.Item>
+				<Nav.Link>
+					<Link to="change-password" style={linkStyle}>
+						Change Password
+					</Link>
+				</Nav.Link>
+			</NavDropdown.Item>
+			<NavDropdown.Item>
+				<Nav.Link>
+					<Link to="sign-out" style={linkStyle}>
+						Sign Out
+					</Link>
+				</Nav.Link>
+			</NavDropdown.Item>
+		</NavDropdown>
 	</>
 )
 
@@ -49,7 +62,7 @@ const unauthenticatedOptions = (
 const alwaysOptions = <></>
 
 const Header = ({ user }) => (
-	<Navbar bg="primary" variant="dark" expand="md" >
+	<Navbar bg="dark" variant="dark" expand="md">
 		<Navbar.Brand>
 			<Link to={user ? "/mypage" : "/"} style={linkStyle}>
 				<div className="comic">Bam Pow</div>
@@ -63,8 +76,8 @@ const Header = ({ user }) => (
 						Welcome, {user.email}
 					</span>
 				)}
-				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
+				{alwaysOptions}
 			</Nav>
 		</Navbar.Collapse>
 	</Navbar>
