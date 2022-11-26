@@ -22,9 +22,10 @@ code {
 	background-color: blue;
 }
 .comic-panel {
+	margin: 20px;
 	background-color: white;
 	border: 8px solid black;
-	height: 50vh;
+
 	padding: 15px;
 }
 .comic {
@@ -68,6 +69,7 @@ code {
 	flex-direction: column;
 	overflow: hidden;
 	height: 100%;
+	text-align: center;
 }
 .home-content {
 	margin-top: 40px;
@@ -76,6 +78,7 @@ code {
 	font-family: "Bangers", cursive;
 	align-items: center;
 	font-size: 3rem;
+	text-align: center;
 }
 .home-buttons {
 	position: relative;

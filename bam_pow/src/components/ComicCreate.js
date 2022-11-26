@@ -6,11 +6,13 @@ import "react-datepicker/dist/react-datepicker.css"
 
 const ComicCreate = () => {
 	const [comic, setComic] = useState({
-		title: null,
-		author: null,
-		illustrator: null,
-		publisher: null,
-		releaseDate: null,
+		// title: null,
+		// edition: null,
+		// releaseDate: null,
+		// publisher: null,
+		// authors: [],
+		// illustrators: [],
+		// characters: [],
 	})
 
 	const [startDate, setStartDate] = useState(new Date())
@@ -20,11 +22,21 @@ const ComicCreate = () => {
 		setComic((prevComic) => {
 			const name = e.target.name
 			let value = e.target.value
-
+			if (name === 'illustrators' && value.includes(",")){
+				let str = value
+				value = str.split(",")
+			}
+			if (name === 'authors' && value.includes(",")){
+				let str = value
+				value = str.split(",")
+			}
+			if (name === 'characters' && value.includes(",")){
+				let str = value
+				value = str.split(",")
+			}
 			const updatedComic = {
 				[name]: value,
 			}
-
 			return {
 				...prevComic,
 				...updatedComic,
@@ -33,59 +45,73 @@ const ComicCreate = () => {
 	}
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
-        setComic(comic.releaseDate= startDate)
-        console.log(comic)
+
+		console.log(comic)
+		
+
+		setComic((comic.releaseDate = startDate))
+		console.log("the comic?", comic)
+
 		console.log("hi")
+		
 	}
 
 	return (
 		<Container>
 			<div className="comic-panel">
-			<Form >
-                <h1 className="comic-panel-font">Add a comic to your collection!</h1>
-				<Form.Input
-					required
-					fluid
-					label="Title"
-					placeholder="Title"
-					onChange={handleChange}
-					name="title"
-				/>
-				<Form.Input
-					required
-					fluid
-					label="Author"
-					placeholder="Author"
-					onChange={handleChange}
-					name="author"
-				/>
-				<Form.Input
-					required
-					fluid
-					label="Illustrator"
-					placeholder="Illustrator"
-					onChange={handleChange}
-					name="illustrator"
-				/>
-				<Form.Input
-					fluid
-					label="Publisher"
-					placeholder="Publisher"
-					onChange={handleChange}
-					name="publisher"
-				/>
-				<Form.Field>
-					<label>Release Date</label>
-					<DatePicker
-						selected={startDate}
-						onChange={(date) => setStartDate(date)}
-						name="releaseDate"
+				<Form>
+					<h1 className="comic-panel-font">
+						Add a comic to your collection!
+					</h1>
+					<Form.Input
+						required
+						fluid
+						label="Title"
+						placeholder="Title"
+						onChange={handleChange}
+						name="title"
 					/>
-				</Form.Field>
+					<Form.Input
+						required
+						fluid
+						label="Author"
+						placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
+						onChange={handleChange}
+						name="authors"
+					/>
+					<Form.Input
+						required
+						fluid
+						label="Illustrator"
+						placeholder="For multiple add commas e.g. (Mignola, Quinones)"
+						onChange={handleChange}
+						name="illustrators"
+					/>
+					<Form.Input
+						fluid
+						label="Publisher"
+						placeholder="Publisher"
+						onChange={handleChange}
+						name="publisher"
+					/>
+					<Form.Input
+						fluid
+						label="Characters"
+						placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
+						onChange={handleChange}
+						name="characters"
+					/>
+					<Form.Field>
+						<label>Release Date</label>
+						<DatePicker
+							selected={startDate}
+							onChange={(date) => setStartDate(date)}
+							name="releaseDate"
+						/>
+					</Form.Field>
 
-				<Form.Button onClick={handleSubmit}>Add</Form.Button>
-			</Form>
+					<Form.Button onClick={handleSubmit}>Add</Form.Button>
+				</Form>
 			</div>
 		</Container>
 	)

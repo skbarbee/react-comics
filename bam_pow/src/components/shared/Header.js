@@ -49,7 +49,7 @@ const unauthenticatedOptions = (
 const alwaysOptions = <></>
 
 const Header = ({ user }) => (
-	<Navbar bg="primary" variant="dark" expand="md">
+	<Navbar bg="primary" variant="dark" expand="md" >
 		<Navbar.Brand>
 			<Link to={user ? "/mypage" : "/"} style={linkStyle}>
 				<div className="comic">Bam Pow</div>
