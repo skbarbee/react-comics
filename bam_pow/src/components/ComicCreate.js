@@ -42,6 +42,7 @@ const ComicCreate = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
+
 		setComic((comic.releaseDate = startDate))
 
 		console.log(comic)

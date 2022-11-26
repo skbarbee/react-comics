@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Container } from 'semantic-ui-react'
 
 const ComicIndex = ({ user, msgAlert}) => {
 
@@ -47,6 +47,8 @@ const ComicIndex = ({ user, msgAlert}) => {
 
 
     const ComicCards = allComics.map(Comic => (
+
+
         <Card>
             <Image src={Comic.imageurl} wrapped ui={false} />
             <Card.Content>
@@ -74,15 +76,16 @@ const ComicIndex = ({ user, msgAlert}) => {
                 </a>
             </Card.Content> */}
         </Card>
+
     ))
 
 
     return (
-        <>
+        <Container className='comic-panel'>
             <Card.Group itemsPerRow={5}>
                 { ComicCards }
             </Card.Group>
-        </>
+        </Container>
 
     )
 }
