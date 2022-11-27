@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from "react"
-import { Form, Container } from "semantic-ui-react"
+import { Form, Container, Message } from "semantic-ui-react"
 import { useNavigate } from "react-router-dom"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
 const ComicCreate = (props) => {
-	const {msgAlert} = props
+	const { msgAlert } = props
 
-	const [comic, setComic] = useState({})
+	const [comic, setComic] = useState({
+		title: null,
+		authors: null,
+		illustrators: null,
+		publisher: null,
+		characters: null,
+		releaseDate: null,
+	})
 
 	const navigate = useNavigate()
 
 	const [startDate, setStartDate] = useState(new Date())
 
 	const handleChange = (e) => {
-		console.log(e.target.value)
+		// console.log(e.target.value)
 		setComic((prevComic) => {
 			const name = e.target.name
 			let value = e.target.value
-			if (name === 'illustrators' && value.includes(",")){
+			if (name === "illustrators" && value.includes(",")) {
 				let str = value
 				value = str.split(",")
 			}
-			if (name === 'authors' && value.includes(",")){
+			if (name === "authors" && value.includes(",")) {
 				let str = value
 				value = str.split(",")
 			}
-			if (name === 'characters' && value.includes(",")){
+			if (name === "characters" && value.includes(",")) {
 				let str = value
 				value = str.split(",")
 			}
@@ -41,38 +48,37 @@ const ComicCreate = (props) => {
 	}
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 
 		setComic((comic.releaseDate = startDate))
 
 		console.log(comic)
-		
 
 		setComic((comic.releaseDate = startDate))
 		console.log("the comic?", comic)
 		// navigate('/mypage')
-
 	}
 
 	return (
 		<Container>
 			<div className="comic-panel">
-				<Form>
+				<Form size="big">
 					<h1 className="comic-panel-font">
 						Add a comic to your collection!
 					</h1>
 					<Form.Input
 						required
 						fluid
-						label="Title"
+						label="Comic Title"
 						placeholder="Title"
 						onChange={handleChange}
 						name="title"
+						value={comic.title}
 					/>
 					<Form.Input
 						required
 						fluid
-						label="Author"
+						label="Author(s)"
 						placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
 						onChange={handleChange}
 						name="authors"
@@ -80,7 +86,7 @@ const ComicCreate = (props) => {
 					<Form.Input
 						required
 						fluid
-						label="Illustrator"
+						label="Illustrator(s)"
 						placeholder="For multiple add commas e.g. (Mignola, Quinones)"
 						onChange={handleChange}
 						name="illustrators"
@@ -93,8 +99,9 @@ const ComicCreate = (props) => {
 						name="publisher"
 					/>
 					<Form.Input
+						required
 						fluid
-						label="Characters"
+						label="Character(s)"
 						placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
 						onChange={handleChange}
 						name="characters"
@@ -107,6 +114,13 @@ const ComicCreate = (props) => {
 							name="releaseDate"
 						/>
 					</Form.Field>
+					<Message
+						warning
+						header="Could you check something!"
+						list={[
+							"That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.",
+						]}
+					/>
 
 					<Form.Button onClick={handleSubmit}>Add</Form.Button>
 				</Form>
