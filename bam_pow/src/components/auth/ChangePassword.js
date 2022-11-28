@@ -55,8 +55,8 @@ const ChangePassword = (props) => {
     return (
         <div className='row'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3>Change Password</h3>
-                <Form onSubmit={onChangePassword}>
+                <Form onSubmit={onChangePassword} className='sign-in-panel'>
+                <h3 className='auth-label' >Change Password</h3>
                     <Form.Group controlId='oldPassword'>
                         <Form.Label>Old password</Form.Label>
                         <Form.Control
