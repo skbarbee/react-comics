@@ -107,6 +107,18 @@ const ComicCreate = (props) => {
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
+			if (name === "illustrators" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "authors" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "characters" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
 			const updatedComic = {
 				[name]: value,
 			}
@@ -128,7 +140,6 @@ const ComicCreate = (props) => {
 	}
 
 	return (
-<<<<<<< HEAD
 		<Container>
 			<div className="comic-panel">
 				<Form size="big">
@@ -144,53 +155,37 @@ const ComicCreate = (props) => {
 						name="title"
 						value={comic.title}
 					/>
-					<Form.Select
+					<Form.Input
 						required
 						fluid
-						multiple
-						search
-						selection
-						placeholder="Authors"
-						name="authors"
-						options={authors}
 						label="Author(s)"
+						placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
 						onChange={handleChange}
+						name="authors"
 					/>
-					<Form.Select
-						placeholder="Illustrators"
+					<Form.Input
 						required
 						fluid
-						multiple
-
-						selection
-						name="illustrators"
-						onChange={handleChange}
 						label="Illustrator(s)"
-						options={illustrators}
-						// value={comic.illustrators}
+						placeholder="For multiple add commas e.g. (Mignola, Quinones)"
+						onChange={handleChange}
+						name="illustrators"
 					/>
-					<Form.Select
+					<Form.Input
 						required
 						fluid
-						search
-						selection
-						placeholder="Publishers"
+						label="Publisher"
+						placeholder="Publisher"
+						onChange={handleChange}
 						name="publisher"
-						options={publishers}
-						label="Publisher"
-						onChange={handleChange}
 					/>
-					<Form.Select
+					<Form.Input
 						required
 						fluid
-						search
-						selection
-						multiple
-						placeholder="Characters"
-						name="characters"
-						options={characters}
-						label="Publisher"
+						label="Character(s)"
+						placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
 						onChange={handleChange}
+						name="characters"
 					/>
 					<Form.Input
 						required
@@ -208,71 +203,6 @@ const ComicCreate = (props) => {
 							name="releaseDate"
 						/>
 					</Form.Field>
-=======
-		<>
-			<h1 className='edo-header' style={{color: 'white', fontSize: "60px", margin: "0, 0, 0, 0" }}>Add Comic to the Collection!</h1>
-			<Container>
-				<div className="comic-panel">
-					<Form size="big">
-						{/* <h1 className="comic-panel-font">
-							Add a comic to your collection!
-						</h1> */}
-						<Form.Input
-							required
-							fluid
-							label="Comic Title"
-							placeholder="Title"
-							onChange={handleChange}
-							name="title"
-							value={comic.title}
-						/>
-						<Form.Input
-							required
-							fluid
-							label="Author(s)"
-							placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
-							onChange={handleChange}
-							name="authors"
-						/>
-						<Form.Input
-							required
-							fluid
-							label="Illustrator(s)"
-							placeholder="For multiple add commas e.g. (Mignola, Quinones)"
-							onChange={handleChange}
-							name="illustrators"
-						/>
-						<Form.Input
-							fluid
-							label="Publisher"
-							placeholder="Publisher"
-							onChange={handleChange}
-							name="publisher"
-						/>
-						<Form.Input
-							required
-							fluid
-							label="Character(s)"
-							placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
-							onChange={handleChange}
-							name="characters"
-						/>
-						<Form.Field>
-							<label>Release Date</label>
-							<DatePicker
-								selected={startDate}
-								onChange={(date) => setStartDate(date)}
-								name="releaseDate"
-							/>
-						</Form.Field>
-						<Message
-							warning
-							header="Could you check something!"
-							list={[
-								"That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.",
-							]}
-						/>
->>>>>>> 340bd4c (Added Header text to page in the ENO font)
 
 						<Form.Button onClick={handleSubmit}>Add</Form.Button>
 					</Form>
