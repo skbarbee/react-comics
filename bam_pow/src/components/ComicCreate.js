@@ -22,6 +22,7 @@ const ComicCreate = (props) => {
 
 
 	useEffect(() => {
+
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
