@@ -20,51 +20,15 @@ const ComicCreate = (props) => {
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
 
-	useEffect(() => {
-		getAuthors()
-			.then((res) => {
-				let authors = res.data.authors
-				const authorOptions = authors.map((authors, index) => ({
-					key: index,
-					value: authors.first_name + " " + authors.last_name[index],
-					text: authors.first_name + " " + authors.last_name,
-				}))
-				setAuthors(authorOptions)
-			})
-			.catch(console.error)
-		getIllustrators()
-			.then((res) => {
-				let illustrators = res.data.illustrators
-				console.log("the res", illustrators)
-				const illustratorOptions = illustrators.map(
-					(illustrators, index) => ({
-						key: index,
-						value:
-							illustrators.first_name +
-							" " +
-							illustrators.last_name[index],
-						text:
-							illustrators.first_name +
-							" " +
-							illustrators.last_name,
-					})
-				)
-				setIllustrators(illustratorOptions)
-				console.log(illustrators)
-			})
-			.catch(console.error)
-		getCharacters()
-			.then((res) => {
-				let characters = res.data.characters
-				const characterOptions = characters.map(
-					(characters, index) => ({
-						key: index,
-						value: characters.real_name,
-						text: characters.real_name,
-					})
-				)
-				setCharacters(characterOptions)
-			})
+	const [comic, setComic] = useState({
+		title: null,
+		authors: null,
+		illustrators: null,
+		publisher: null,
+		characters: null,
+		releaseDate: null,
+		cover: null,
+	})
 
 			.catch(console.error)
 		getPublishers()
@@ -114,6 +78,18 @@ const ComicCreate = (props) => {
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
+			if (name === "illustrators" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "authors" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "characters" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
 			const updatedComic = {
 				[name]: value,
 			}
@@ -172,8 +148,12 @@ const ComicCreate = (props) => {
 						selection
 						placeholder="Illustrators"
 						name="illustrators"
-						options={illustrators}
-						label="Illustrator(s)"
+					/>
+					<Form.Input
+						required
+						fluid
+						label="Publisher"
+						placeholder="Publisher"
 						onChange={handleChange}
 					/>
 					<Form.Select
@@ -198,6 +178,14 @@ const ComicCreate = (props) => {
 						options={characters}
 						label="Publisher"
 						onChange={handleChange}
+					/>
+					<Form.Input
+						required
+						fluid
+						label="Cover"
+						placeholder="Paste a link to the cover"
+						onChange={handleChange}
+						name="cover"
 					/>
 					<Form.Input
 						required
