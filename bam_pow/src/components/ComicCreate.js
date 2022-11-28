@@ -20,17 +20,14 @@ const ComicCreate = (props) => {
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
 
-
 	useEffect(() => {
-
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
 				const authorOptions = authors.map((authors, index) => ({
-					key: authors.id,
+					key: index,
 					value: authors.first_name + " " + authors.last_name[index],
 					text: authors.first_name + " " + authors.last_name,
-					name: "illustrators",
 				}))
 				setAuthors(authorOptions)
 			})
@@ -40,17 +37,20 @@ const ComicCreate = (props) => {
 				let illustrators = res.data.illustrators
 				console.log("the res", illustrators)
 				const illustratorOptions = illustrators.map(
-					(illustrator, index) => ({
-						key: illustrator.id,
-						value: illustrator.id,
-						text:
-							illustrator.first_name +
+					(illustrators, index) => ({
+						key: index,
+						value:
+							illustrators.first_name +
 							" " +
-							illustrator.last_name,
-						name: "illustrator",
+							illustrators.last_name[index],
+						text:
+							illustrators.first_name +
+							" " +
+							illustrators.last_name,
 					})
 				)
 				setIllustrators(illustratorOptions)
+				console.log(illustrators)
 			})
 			.catch(console.error)
 		getCharacters()
@@ -70,11 +70,14 @@ const ComicCreate = (props) => {
 		getPublishers()
 			.then((res) => {
 				let publishers = res.data.publishers
-				const publisherOptions = publishers.map((publisher, index) => ({
-					key: index,
-					value: publisher.publisher_name,
-					text: publisher.publisher_name,
-				}))
+				console.log(publishers)
+				const publisherOptions = publishers.map(
+					(publishers, index) => ({
+						key: index,
+						value: publishers.publisher_name,
+						text: publishers.publisher_name,
+					})
+				)
 				setPublishers(publisherOptions)
 			})
 			.catch(console.error)
@@ -84,7 +87,7 @@ const ComicCreate = (props) => {
 		{
 			title: null,
 			authors: null,
-			illustrators: [],
+			illustrators: null,
 			publisher: null,
 			characters: null,
 			releaseDate: null,
@@ -92,11 +95,15 @@ const ComicCreate = (props) => {
 		},
 		[]
 	)
-	console.log(illustrators)
+		console.log(illustrators)
 	if (loaded) {
 		// console.log("out of useeffect", characters)
 	}
-
+	// useEffect(() => {
+	// 	const pub_options = publishers.map((publisher) => {
+	// console.log(publisher.publisher_name)
+	// 	})
+	// }, [publishers])
 	const navigate = useNavigate()
 
 	const [startDate, setStartDate] = useState(new Date())
@@ -107,18 +114,6 @@ const ComicCreate = (props) => {
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
-			if (name === "illustrators" && value.includes(",")) {
-				let str = value
-				value = str.split(", ")
-			}
-			if (name === "authors" && value.includes(",")) {
-				let str = value
-				value = str.split(", ")
-			}
-			if (name === "characters" && value.includes(",")) {
-				let str = value
-				value = str.split(", ")
-			}
 			const updatedComic = {
 				[name]: value,
 			}
@@ -155,37 +150,54 @@ const ComicCreate = (props) => {
 						name="title"
 						value={comic.title}
 					/>
-					<Form.Input
+					<Form.Select
 						required
 						fluid
-						label="Author(s)"
-						placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
-						onChange={handleChange}
+						multiple
+						search
+						selection
+						placeholder="Authors"
 						name="authors"
+						options={authors}
+						label="Author(s)"
+						onChange={handleChange}
 					/>
-					<Form.Input
+					
+					{/* <Button>Click for modal</Button> */}
+					<Form.Select
 						required
 						fluid
-						label="Illustrator(s)"
-						placeholder="For multiple add commas e.g. (Mignola, Quinones)"
-						onChange={handleChange}
+						multiple
+						search
+						selection
+						placeholder="Illustrators"
 						name="illustrators"
+						options={illustrators}
+						label="Illustrator(s)"
+						onChange={handleChange}
 					/>
-					<Form.Input
+					<Form.Select
 						required
 						fluid
-						label="Publisher"
-						placeholder="Publisher"
-						onChange={handleChange}
+						search
+						selection
+						placeholder="Publishers"
 						name="publisher"
+						options={publishers}
+						label="Publisher"
+						onChange={handleChange}
 					/>
-					<Form.Input
+					<Form.Select
 						required
 						fluid
-						label="Character(s)"
-						placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
-						onChange={handleChange}
+						search
+						selection
+						multiple
+						placeholder="Characters"
 						name="characters"
+						options={characters}
+						label="Publisher"
+						onChange={handleChange}
 					/>
 					<Form.Input
 						required
