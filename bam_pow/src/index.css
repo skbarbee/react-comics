@@ -19,6 +19,13 @@ body,
 }
   
 /* Styling */
+/* Fonts */
+@font-face {
+	font-family: Edo;
+	src: url("Edo-font/edo.ttf");
+}
+  
+/* Styling */
 .background {
 	background-image: url("./imgs/loginpage.svg");
 	background-color: blue;
@@ -35,6 +42,7 @@ code {
 	border: 8px solid black;
 	padding: 15px;
 }
+
 
 .comic {
 	font-family: "Bangers", cursive;
@@ -103,6 +111,41 @@ p {
 	font-weight: normal;
 }
 
+/* Sign In Page */
+.sign-in-panel {
+	margin: 20px;
+	background-color: white;
+	border: 8px solid black;
+	padding: 15px;
+	color: black;
+}
+
+.auth-label{
+	text-align: center;
+	color:black;
+	font-family: Edo;
+	font-size: 120px;
+	font-weight: normal;
+}
+
+.sign-in-field{
+	/* Can't get the margin to the right of an input to go away to help with centering */
+
+	/* text-align: center;
+	width: 20vw;
+	min-width: 350px;
+	color: black;
+	margin-right: 0;
+	/* background-color: transparent;
+	border: 0.15rem solid white;
+	border-radius: 0;
+	margin-bottom: 2vh;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	border-top-style: hidden;
+	border-right-style: hidden;
+	border-left-style: hidden; */
+  }
 /* Sign In Page */
 .sign-in-panel {
 	margin: 20px;

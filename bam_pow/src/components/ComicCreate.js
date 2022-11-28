@@ -20,6 +20,7 @@ const ComicCreate = (props) => {
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
 
+<<<<<<< HEAD
 	useEffect(() => {
 		getAuthors()
 			.then((res) => {
@@ -65,6 +66,17 @@ const ComicCreate = (props) => {
 				)
 				setCharacters(characterOptions)
 			})
+=======
+	const [comic, setComic] = useState({
+		title: null,
+		authors: null,
+		illustrators: null,
+		publisher: null,
+		characters: null,
+		releaseDate: null,
+		cover: null,
+	})
+>>>>>>> main
 
 			.catch(console.error)
 		getPublishers()
@@ -114,6 +126,21 @@ const ComicCreate = (props) => {
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
+<<<<<<< HEAD
+=======
+			if (name === "illustrators" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "authors" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+			if (name === "characters" && value.includes(",")) {
+				let str = value
+				value = str.split(", ")
+			}
+>>>>>>> main
 			const updatedComic = {
 				[name]: value,
 			}
@@ -172,8 +199,17 @@ const ComicCreate = (props) => {
 						selection
 						placeholder="Illustrators"
 						name="illustrators"
+<<<<<<< HEAD
 						options={illustrators}
 						label="Illustrator(s)"
+=======
+					/>
+					<Form.Input
+						required
+						fluid
+						label="Publisher"
+						placeholder="Publisher"
+>>>>>>> main
 						onChange={handleChange}
 					/>
 					<Form.Select
@@ -198,6 +234,14 @@ const ComicCreate = (props) => {
 						options={characters}
 						label="Publisher"
 						onChange={handleChange}
+					/>
+					<Form.Input
+						required
+						fluid
+						label="Cover"
+						placeholder="Paste a link to the cover"
+						onChange={handleChange}
+						name="cover"
 					/>
 					<Form.Input
 						required
