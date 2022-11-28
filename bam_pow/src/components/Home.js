@@ -14,7 +14,7 @@ const Home = (props) => {
 			<div className="home-content">
 				<p className="center">Welcome to</p>
 				<img className="logo" src={logo} />
-			<p>Your comic inventory</p>
+			<p className="center">Your comic inventory</p>
 			</div>
 			<div className="home-buttons">
 				<Link to="/sign-in">
