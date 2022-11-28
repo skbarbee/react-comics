@@ -43,7 +43,7 @@ const ComicIndex = ({ user, msgAlert}) => {
                 editions: 6 
             }
         ])
-    })
+    }, [])
 
 
     const ComicCards = allComics.map(Comic => (
