@@ -60,72 +60,75 @@ const ComicCreate = (props) => {
 	}
 
 	return (
-		<Container>
-			<div className="comic-panel">
-				<Form size="big">
-					<h1 className="comic-panel-font">
-						Add a comic to your collection!
-					</h1>
-					<Form.Input
-						required
-						fluid
-						label="Comic Title"
-						placeholder="Title"
-						onChange={handleChange}
-						name="title"
-						value={comic.title}
-					/>
-					<Form.Input
-						required
-						fluid
-						label="Author(s)"
-						placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
-						onChange={handleChange}
-						name="authors"
-					/>
-					<Form.Input
-						required
-						fluid
-						label="Illustrator(s)"
-						placeholder="For multiple add commas e.g. (Mignola, Quinones)"
-						onChange={handleChange}
-						name="illustrators"
-					/>
-					<Form.Input
-						fluid
-						label="Publisher"
-						placeholder="Publisher"
-						onChange={handleChange}
-						name="publisher"
-					/>
-					<Form.Input
-						required
-						fluid
-						label="Character(s)"
-						placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
-						onChange={handleChange}
-						name="characters"
-					/>
-					<Form.Field>
-						<label>Release Date</label>
-						<DatePicker
-							selected={startDate}
-							onChange={(date) => setStartDate(date)}
-							name="releaseDate"
+		<>
+			<h1 className='edo-header' style={{color: 'white', fontSize: "60px", margin: "0, 0, 0, 0" }}>Add Comic to the Collection!</h1>
+			<Container>
+				<div className="comic-panel">
+					<Form size="big">
+						{/* <h1 className="comic-panel-font">
+							Add a comic to your collection!
+						</h1> */}
+						<Form.Input
+							required
+							fluid
+							label="Comic Title"
+							placeholder="Title"
+							onChange={handleChange}
+							name="title"
+							value={comic.title}
 						/>
-					</Form.Field>
-					<Message
-						warning
-						header="Could you check something!"
-						list={[
-							"That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.",
-						]}
-					/>
+						<Form.Input
+							required
+							fluid
+							label="Author(s)"
+							placeholder="For multiple add commas e.g. (Hickman, Zdarsky)"
+							onChange={handleChange}
+							name="authors"
+						/>
+						<Form.Input
+							required
+							fluid
+							label="Illustrator(s)"
+							placeholder="For multiple add commas e.g. (Mignola, Quinones)"
+							onChange={handleChange}
+							name="illustrators"
+						/>
+						<Form.Input
+							fluid
+							label="Publisher"
+							placeholder="Publisher"
+							onChange={handleChange}
+							name="publisher"
+						/>
+						<Form.Input
+							required
+							fluid
+							label="Character(s)"
+							placeholder="For multiple add commas e.g. (Batman, Poison Ivy)"
+							onChange={handleChange}
+							name="characters"
+						/>
+						<Form.Field>
+							<label>Release Date</label>
+							<DatePicker
+								selected={startDate}
+								onChange={(date) => setStartDate(date)}
+								name="releaseDate"
+							/>
+						</Form.Field>
+						<Message
+							warning
+							header="Could you check something!"
+							list={[
+								"That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.",
+							]}
+						/>
 
-					<Form.Button onClick={handleSubmit}>Add</Form.Button>
-				</Form>
-			</div>
-		</Container>
+						<Form.Button onClick={handleSubmit}>Add</Form.Button>
+					</Form>
+				</div>
+			</Container>
+		</>
 	)
 }
 
