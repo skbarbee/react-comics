@@ -1,0 +1,6 @@
+.App {
+    background-image: url('./imgs/loginpage.svg');
+    background-size: cover;
+    color: white;
+    height: 100vh;
+}

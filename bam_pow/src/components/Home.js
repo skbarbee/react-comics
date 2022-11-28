@@ -1,5 +1,4 @@
 import logo from "../imgs/bampowlogo.png"
-import comicBg from "../imgs/loginpage.svg"
 import { Button } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
@@ -10,13 +9,12 @@ const Home = (props) => {
 	return (
 		<div
 			className="home"
-			style={{
-				"background-image": `url(${comicBg})`,
-			}}
+
 		>
 			<div className="home-content">
 				<p className="center">Welcome to</p>
 				<img className="logo" src={logo} />
+			<p>Your comic inventory</p>
 			</div>
 			<div className="home-buttons">
 				<Link to="/sign-in">
