@@ -40,3 +40,9 @@ export const getPublishers = () => {
 		url: apiUrl + '/publishers/',
 	})
 }
+export const getAllComics = () => {
+    return axios({
+		method: 'GET',
+		url: apiUrl + '/comics/',
+	})
+}
