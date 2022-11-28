@@ -95,6 +95,11 @@ code {
 	/* flex-direction: row; */
 	/* width: 20%; */
 }
+.edo-header{
+	text-align: center;
+	font-family: Edo;
+	font-weight: normal;
+}
 
 /* Sign In Page */
 .sign-in-panel {
