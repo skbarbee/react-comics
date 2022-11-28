@@ -21,11 +21,11 @@ code {
 		monospace;
 	background-color: blue;
 }
-.comic-panel {
+.comic-panel{
+	color: black;
 	margin: 20px;
 	background-color: white;
 	border: 8px solid black;
-
 	padding: 15px;
 }
 .comic {
@@ -40,7 +40,9 @@ code {
 	margin: 8px;
 	color: black;
 }
-
+p {
+	color: black;
+}
 .comic-detail {
 	display: flex;
 	flex-direction: row;

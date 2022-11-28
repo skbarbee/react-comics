@@ -14,6 +14,7 @@ const ComicCreate = (props) => {
 		publisher: null,
 		characters: null,
 		releaseDate: null,
+		cover: null,
 	})
 
 	const navigate = useNavigate()
@@ -27,15 +28,15 @@ const ComicCreate = (props) => {
 			let value = e.target.value
 			if (name === "illustrators" && value.includes(",")) {
 				let str = value
-				value = str.split(",")
+				value = str.split(", ")
 			}
 			if (name === "authors" && value.includes(",")) {
 				let str = value
-				value = str.split(",")
+				value = str.split(", ")
 			}
 			if (name === "characters" && value.includes(",")) {
 				let str = value
-				value = str.split(",")
+				value = str.split(", ")
 			}
 			const updatedComic = {
 				[name]: value,
@@ -92,6 +93,7 @@ const ComicCreate = (props) => {
 						name="illustrators"
 					/>
 					<Form.Input
+						required
 						fluid
 						label="Publisher"
 						placeholder="Publisher"
@@ -106,6 +108,14 @@ const ComicCreate = (props) => {
 						onChange={handleChange}
 						name="characters"
 					/>
+					<Form.Input
+						required
+						fluid
+						label="Cover"
+						placeholder="Paste a link to the cover"
+						onChange={handleChange}
+						name="cover"
+					/>
 					<Form.Field>
 						<label>Release Date</label>
 						<DatePicker
@@ -114,13 +124,6 @@ const ComicCreate = (props) => {
 							name="releaseDate"
 						/>
 					</Form.Field>
-					<Message
-						warning
-						header="Could you check something!"
-						list={[
-							"That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.",
-						]}
-					/>
 
 					<Form.Button onClick={handleSubmit}>Add</Form.Button>
 				</Form>
