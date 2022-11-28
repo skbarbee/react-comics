@@ -9,6 +9,7 @@ import {
 	getCharacters,
 	getIllustrators,
 	getPublishers,
+	getAllComics,
 } from "../api/api_calls"
 
 const ComicCreate = (props) => {
@@ -21,6 +22,7 @@ const ComicCreate = (props) => {
 
 
 	useEffect(() => {
+
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
