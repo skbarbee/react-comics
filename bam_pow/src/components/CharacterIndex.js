@@ -22,7 +22,7 @@ const CharacterIndex = ({ user, msgAlert}) => {
     }, [])
 
     const CharacterCards = allCharacters.map(Character => (
-        <Card>
+        <Card href={"/charcaters/" + Character.id}>
             <Image src={Character.imageurl} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>{Character.alias}</Card.Header>
