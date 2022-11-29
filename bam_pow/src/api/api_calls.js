@@ -55,7 +55,7 @@ export const postComic = (data) => {
 	})
 }
 
-export const createCharacter = (newCharacter) => {
+export const createCharacter = (data) => {
 	return axios({
 		method: 'POST',
 		url: apiUrl + '/characters/',
