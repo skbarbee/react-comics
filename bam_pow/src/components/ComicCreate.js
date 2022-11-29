@@ -80,11 +80,11 @@ const ComicCreate = (props) => {
 	const [comic, setComic] = useState(
 		{
 			title: null,
-			authors: [],
-			illustrators: [],
-			publisher: null,
-			characters: [],
 			edition: null,
+			publisher_id: null,
+			comicbook_authors: [],
+			comicbook_illustrators: [],
+			comicbook_characters: [],
 			release_date: null,
 			cover: null,
 		},
@@ -95,11 +95,14 @@ const ComicCreate = (props) => {
 	const navigate = useNavigate()
 
 
-
 	const handleChange = (e) => {
 		setComic((prevComic) => {
 			const name = e.target.name
 			let value = e.target.value
+			if (name === 'edition'){
+				let value = parseInt(e.target.value)
+				console.log("the int",value)
+			}
 			const updatedComic = {
 				[name]: value,
 			}
@@ -112,6 +115,7 @@ const ComicCreate = (props) => {
 
 			const name = 'release_date'
 			let value = startDate
+			
 			const updatedComic = {
 				[name]: value,
 			}
@@ -127,9 +131,9 @@ const ComicCreate = (props) => {
 		// e.preventDefault()
 
 		setComic((comic.release_date = startDate))
-		let sentComic = JSON.stringify(comic)
-		console.log(sentComic)
-		postComic(sentComic)
+		// let sentComic = JSON.stringify(comic)
+		// console.log(sentComic)
+		postComic(comic)
 		
 		console.log("the comic?", comic)
 	}
@@ -139,7 +143,7 @@ const ComicCreate = (props) => {
 		console.log(e)
 		e.forEach((e) => illustrators.push(e.value))
 		setComic((prevComic) => {
-			const name = "illustrators"
+			const name = "comicbook_illustrators"
 			let value = illustrators
 			const updatedComic = {
 				[name]: value,
@@ -158,7 +162,7 @@ const ComicCreate = (props) => {
 		e.forEach((e) => characters.push(e.value))
 		console.log("chars", characters)
 		setComic((prevComic) => {
-			const name = "characters"
+			const name = "comicbook_characters"
 			let value = characters
 			const updatedComic = {
 				[name]: value,
@@ -175,7 +179,7 @@ const ComicCreate = (props) => {
 		let authors = []
 		e.forEach((e) => authors.push(e.value))
 		setComic((prevComic) => {
-			const name = "authors"
+			const name = "comicbook_authors"
 			let value = authors
 			const updatedComic = {
 				[name]: value,
@@ -190,7 +194,7 @@ const ComicCreate = (props) => {
 	const handlePublisherSelect = (e) => {
 		let publisher = e.value
 		setComic((prevComic) => {
-			const name = "publisher"
+			const name = "publisher_id"
 			let value = publisher
 			const updatedComic = {
 				[name]: value,
