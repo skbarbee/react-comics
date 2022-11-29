@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import { Form, Container, Button } from "semantic-ui-react"
 import { publisherCreate } from "../api/publisher"
 
-const PublisherCreate = ({ user, msgAlert, setNewPublisher }) => {
+const PublisherCreate = ({ user, msgAlert }) => {
    
+    const navigate = useNavigate()
     const defaultPublisher = {
         publisher_name: ''
     }
@@ -33,7 +35,6 @@ const PublisherCreate = ({ user, msgAlert, setNewPublisher }) => {
                     variant: 'success'
                 })
             })
-            .then(() => setNewPublisher(prev => !prev))
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
