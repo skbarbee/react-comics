@@ -22,7 +22,7 @@ const IllustratorIndex = ({ user, msgAlert}) => {
     }, [])
 
     const IllustratorCards = allIllustrators.map(Illustrator => (
-        <Card>
+        <Card href={"/illustrators/" + Illustrator.id}>
             <Image src={Illustrator.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
