@@ -33,7 +33,7 @@ const AuthorCreate = ({user, msgAlert}) => {
 		const handleCreateAuthor =  (e) => {
 			e.preventDefault()
 			console.log(author)
-			authorCreate(author)
+			authorCreate(author, user)
 			
 				.then(() => {
 					msgAlert({

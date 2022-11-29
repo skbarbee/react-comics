@@ -25,6 +25,26 @@ const authenticatedOptions = (
 				Add Comic
 			</Link>
 		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-author" style={linkStyle}>
+				Add Author
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-character" style={linkStyle}>
+				Add Character
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-illustrator" style={linkStyle}>
+				Add Illustrator
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-publisher" style={linkStyle}>
+				Add Publisher
+			</Link>
+		</Nav.Link>
 		<NavDropdown bg="dark" title={<FontAwesomeIcon icon="fa-user" />} menuVariant="dark" >
 			<NavDropdown.Item>
 				<Nav.Link>

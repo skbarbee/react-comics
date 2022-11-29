@@ -10,8 +10,7 @@ export const publisherCreate = (data, user) => {
 			{publisher_name: data.publisher_name}
 		},
 		headers: {
-			// Authorization: `Token token=${user.token}`,
-			'Content-Type' : 'application/json'
+			Authorization: `Token token=${user.token}`
 		},
 	})
 }

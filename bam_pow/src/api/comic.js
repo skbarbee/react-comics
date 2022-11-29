@@ -1,16 +1,27 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const comicCreate = (data, user) => {
+export const postComic = (data) => {
+	console.log("this is the comic",data.title)
 	return axios({
 		method: 'POST',
-		url: apiUrl + '/comics',
-		data: {
-			comic: data,
+		url: apiUrl + '/comics/',
+		data : {
+			comicbook : {
+				title : data.title,
+				edition :Number(data.edition),
+				publisher: data.publisher_id,
+				authors : data.comicbook_authors,
+				illustrators : data.comicbook_illustrators,
+				characters : data.comicbook_characters,
+				release_date: data.release_date,
+				cover: data.cover
+
+			}
 		},
-		headers: {
-			Authorization: `Token token=${user.token}`,
-		},
+		// headers: {
+		// 	Authorization: `Token token=${user.token}`
+		// },
 	})
 }
 
