@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import { Form, Container, Button } from "semantic-ui-react"
-import { createCharacter } from "../api/api_calls"
+import { characterCreate } from "../api/character"
 
-const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
+const CharacterCreate = ({ user, msgAlert }) => {
    
+    const navigate = useNavigate()
     const defaultCharacter = {
         real_name: '',
         alias: '',
@@ -15,8 +17,8 @@ const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
     const handleChange = (e, target) => {
         setCharacter(prevCharacter => {
             const { name, value } = target
-            const updatedName = name
-            let updatedValue = value
+            const updatedName = e.target.name
+            let updatedValue = e.target.value
 
             const updatedCharacter = { [updatedName]: updatedValue }
 
@@ -28,7 +30,7 @@ const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
     const handleCreateCharacter = (e) => {
         e.preventDefault()
 
-        createCharacter(character)
+        characterCreate(character)
             .then(() => {
                 msgAlert({
                     heading: 'Success',
@@ -36,7 +38,6 @@ const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
                     variant: 'success'
                 })
             })
-            .then(() => setNewCharacter(prev => !prev))
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',

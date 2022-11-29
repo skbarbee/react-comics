@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Form, Container, Button } from "semantic-ui-react"
-import { createPublisher } from "../api/api_calls"
+import { publisherCreate } from "../api/publisher"
 
 const PublisherCreate = ({ user, msgAlert, setNewPublisher }) => {
    
@@ -25,7 +25,7 @@ const PublisherCreate = ({ user, msgAlert, setNewPublisher }) => {
     const handleCreatePublisher = (e) => {
         e.preventDefault()
 
-        createPublisher(publisher)
+        publisherCreate(publisher)
             .then(() => {
                 msgAlert({
                     heading: 'Success',

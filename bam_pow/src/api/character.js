@@ -4,12 +4,16 @@ import axios from 'axios'
 export const characterCreate = (data, user) => {
 	return axios({
 		method: 'POST',
-		url: apiUrl + '/characters',
+		url: apiUrl + '/characters/',
 		data: {
-			character: data,
+			character: 
+			{real_name: data.real_name,
+			alias: data.alias,
+			details: data.details}
 		},
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			// Authorization: `Token token=${user.token}`,
+			'Content-Type' : 'application/json'
 		},
 	})
 }

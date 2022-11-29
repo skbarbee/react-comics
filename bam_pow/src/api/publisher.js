@@ -4,12 +4,14 @@ import axios from 'axios'
 export const publisherCreate = (data, user) => {
 	return axios({
 		method: 'POST',
-		url: apiUrl + '/publishers',
+		url: apiUrl + '/publishers/',
 		data: {
-			publisher: data,
+			publisher: 
+			{publisher_name: data.publisher_name}
 		},
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			// Authorization: `Token token=${user.token}`,
+			'Content-Type' : 'application/json'
 		},
 	})
 }
