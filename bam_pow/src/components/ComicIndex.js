@@ -1,62 +1,42 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image, Container } from 'semantic-ui-react'
 
+import { comicIndex } from '../api/comic'
+
 const ComicIndex = ({ user, msgAlert}) => {
 
     const [allComics, setAllComics] = useState([])
 
-    // useEffect(() => {
-    //     ComicIndex(user)
-    //     .then(res => {
-    //         setAllComics(res.data.Comics)
-    //     })
-    //     .catch((error) => {
-    //         msgAlert({
-    //             heading: 'Failure',
-    //             message: 'Index Comics Failure' + error,
-    //             variant: 'danger'
-    //         })
-    //     })
-    // }, [])
-
     useEffect(() => {
-        setAllComics( [
-            {
-                title: "Title",
-                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
-            },
-            {
-                title: "Title2",
-                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
-            },
-            {
-                title: "Title3",
-                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                releasedate: '12-12-2022',
-                issue: 5,
-                editions: 6 
-            }
-        ])
+        comicIndex(user)
+        .then(res => {
+            setAllComics(res.data.comic_books)
+        })
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: 'Index Comics Failure' + error,
+                variant: 'danger'
+            })
+        })
     }, [])
-
 
     const ComicCards = allComics.map(Comic => (
 
 
         <Card>
-            <Image src={Comic.imageurl} wrapped ui={false} />
-            <Card.Content style={{paddingTop: '0'}}>
+            <Image src={Comic.cover} wrapped ui={false} />
+            <Card.Content>
+                <Card.Header>
+                    {Comic.title}
+                </Card.Header>
 
                 <Card.Meta>
-                    {Comic.releasedate}
-                    {/* <span className='date'>{Comic.releasedate}</span> */}
+                    {Comic.release_date}
                 </Card.Meta>
+
+                <Card.Description>
+                    Edition {Comic.edition}
 
                 <Card.Header>
                     {Comic.title}
@@ -66,6 +46,7 @@ const ComicIndex = ({ user, msgAlert}) => {
 
                 <Card.Description style={{marginTop: '0'}}>
                     Issue {Comic.issue}
+
                 </Card.Description>
 
             </Card.Content>
@@ -79,9 +60,7 @@ const ComicIndex = ({ user, msgAlert}) => {
                 </a>
             </Card.Content> */}
         </Card>
-
     ))
-
 
     return (
         <>

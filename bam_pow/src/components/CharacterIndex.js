@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Container, Icon, Image } from 'semantic-ui-react'
 
+import { characterIndex } from '../api/character'
+
 const CharacterIndex = ({ user, msgAlert}) => {
 
-    const [allComics, setAllComics] = useState([])
-
-    // useEffect(() => {
-    //     ComicIndex(user)
-    //     .then(res => {
-    //         setAllComics(res.data.Comics)
-    //     })
-    //     .catch((error) => {
-    //         msgAlert({
-    //             heading: 'Failure',
-    //             message: 'Index Comics Failure' + error,
-    //             variant: 'danger'
-    //         })
-    //     })
-    // }, [])
+    const [allCharacters, setAllCharacters] = useState([])
 
     useEffect(() => {
+        characterIndex(user)
+        .then(res => {
+            setAllCharacters(res.data.characters)
+        })
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: 'Index Characters Failure' + error,
+                variant: 'danger'
+            })
+        })
+    }, [])
         setAllComics( [
             {
                 alias: "Iron Man",
@@ -60,30 +60,31 @@ const CharacterIndex = ({ user, msgAlert}) => {
         ])
     },[])
 
-
-    const ComicCards = allComics.map(Comic => (
+    const CharacterCards = allCharacters.map(Character => (
         <Card>
-            <Image src={Comic.imageurl} wrapped ui={false} />
-            <Card.Content style={{paddingTop: '0'}}>
+
+            <Image src={Character.imageurl} wrapped ui={false} />
+            <Card.Content>
+                <Card.Header>{Character.alias}</Card.Header>
                 <Card.Meta>
-                    {Comic.real_name}
-                    {/* <span className='date'>{Comic.releasedate}</span> */}
+                    {Character.real_name}
+                    {/* <span className='date'>{Character.releasedate}</span> */}
                 </Card.Meta>
                 
                 <Card.Header>{Comic.alias}</Card.Header>
 
                 <Card.Description>
-                    {Comic.details}
+                    {Character.details}
                 </Card.Description>
 
             </Card.Content>
 
-            {/* extra content for the bottom to link to just that line of comics or something */}
+            {/* extra content for the bottom to link to just that line of characters or something */}
             {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
             <Card.Content extra>
                 <a>
                     <Icon name='user' />
-                    {Comic.alias} appears in 'this # of'{Comic.editions} comics
+                    {Character.alias} appears in 'this # of'{Character.editions} comics
                 </a>
             </Card.Content>
         </Card>
@@ -91,6 +92,13 @@ const CharacterIndex = ({ user, msgAlert}) => {
 
 
     return (
+        <>
+            <Container className='comic-panel'>
+                <Card.Group itemsPerRow={4}>
+                    { CharacterCards }
+                </Card.Group>
+            </Container>
+
         <>  
             <h1 className='edo-header' style={{color: 'white', fontSize: "60px", margin: "0, 0, 0, 0" }}>Characters</h1>
             <Container className='comic-panel'>
