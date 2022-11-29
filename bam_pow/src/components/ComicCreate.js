@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Form, Container, Message, Modal, Dropdown } from "semantic-ui-react"
 import { useNavigate } from "react-router-dom"
 import DatePicker from "react-datepicker"
+import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
 import { Button } from "react-bootstrap"
 import {
@@ -9,7 +10,7 @@ import {
 	getCharacters,
 	getIllustrators,
 	getPublishers,
-	getAllComics,
+	postComic,
 } from "../api/api_calls"
 
 const ComicCreate = (props) => {
@@ -19,18 +20,17 @@ const ComicCreate = (props) => {
 	const [illustrators, setIllustrators] = useState()
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
-
+	const [startDate, setStartDate] = useState(new Date())
 
 	useEffect(() => {
-
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
-				const authorOptions = authors.map((authors, index) => ({
-					key: authors.id,
-					value: authors.first_name + " " + authors.last_name[index],
-					text: authors.first_name + " " + authors.last_name,
-					name: "illustrators",
+
+				const authorOptions = authors.map((author, index) => ({
+					key: author.id,
+					value: author.id,
+					label: author.first_name + " " + author.last_name,
 				}))
 				setAuthors(authorOptions)
 			})
@@ -43,11 +43,10 @@ const ComicCreate = (props) => {
 					(illustrator, index) => ({
 						key: illustrator.id,
 						value: illustrator.id,
-						text:
+						label:
 							illustrator.first_name +
 							" " +
 							illustrator.last_name,
-						name: "illustrator",
 					})
 				)
 				setIllustrators(illustratorOptions)
@@ -56,13 +55,11 @@ const ComicCreate = (props) => {
 		getCharacters()
 			.then((res) => {
 				let characters = res.data.characters
-				const characterOptions = characters.map(
-					(characters, index) => ({
-						key: index,
-						value: characters.real_name,
-						text: characters.real_name,
-					})
-				)
+				const characterOptions = characters.map((character, index) => ({
+					key: character.id,
+					value: character.id,
+					label: character.real_name,
+				}))
 				setCharacters(characterOptions)
 			})
 
@@ -71,9 +68,9 @@ const ComicCreate = (props) => {
 			.then((res) => {
 				let publishers = res.data.publishers
 				const publisherOptions = publishers.map((publisher, index) => ({
-					key: index,
-					value: publisher.publisher_name,
-					text: publisher.publisher_name,
+					key: publisher.id,
+					value: publisher.id,
+					label: publisher.publisher_name,
 				}))
 				setPublishers(publisherOptions)
 			})
@@ -83,27 +80,23 @@ const ComicCreate = (props) => {
 	const [comic, setComic] = useState(
 		{
 			title: null,
-			authors: null,
+			authors: [],
 			illustrators: [],
 			publisher: null,
-			characters: null,
-			releaseDate: null,
+			characters: [],
+			edition: null,
+			release_date: null,
 			cover: null,
 		},
 		[]
 	)
-	console.log(illustrators)
-	if (loaded) {
-		// console.log("out of useeffect", characters)
-	}
+
 
 	const navigate = useNavigate()
 
-	const [startDate, setStartDate] = useState(new Date())
+
 
 	const handleChange = (e) => {
-		console.log("target?", e.target)
-
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
@@ -115,22 +108,104 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
+		setComic((prevComic) => {
+
+			const name = 'release_date'
+			let value = startDate
+			const updatedComic = {
+				[name]: value,
+			}
+			return {
+				...prevComic,
+				...updatedComic
+			}
+		})
 		console.log(comic)
 	}
 
 	const handleSubmit = (e) => {
 		// e.preventDefault()
 
-		setComic((comic.releaseDate = startDate))
-
+		setComic((comic.release_date = startDate))
+		let sentComic = JSON.stringify(comic)
+		console.log(sentComic)
+		postComic(sentComic)
+		
 		console.log("the comic?", comic)
-		// navigate('/mypage')
+	}
+
+	const handleIllustratorSelect = (e) => {
+		let illustrators = []
+		console.log(e)
+		e.forEach((e) => illustrators.push(e.value))
+		setComic((prevComic) => {
+			const name = "illustrators"
+			let value = illustrators
+			const updatedComic = {
+				[name]: value,
+			}
+			return {
+				...prevComic,
+				...updatedComic,
+			}
+		})
+		console.log(comic)
+	}
+	const handleCharacterSelect = (e) => {
+		let characters = []
+		console.log("the selection", e)
+
+		e.forEach((e) => characters.push(e.value))
+		console.log("chars", characters)
+		setComic((prevComic) => {
+			const name = "characters"
+			let value = characters
+			const updatedComic = {
+				[name]: value,
+			}
+			return {
+				...prevComic,
+				...updatedComic,
+			}
+		})
+		console.log(comic)
+	}
+
+	const handleAuthorSelect = (e) => {
+		let authors = []
+		e.forEach((e) => authors.push(e.value))
+		setComic((prevComic) => {
+			const name = "authors"
+			let value = authors
+			const updatedComic = {
+				[name]: value,
+			}
+			return {
+				...prevComic,
+				...updatedComic,
+			}
+		})
+		console.log(comic)
+	}
+	const handlePublisherSelect = (e) => {
+		let publisher = e.value
+		setComic((prevComic) => {
+			const name = "publisher"
+			let value = publisher
+			const updatedComic = {
+				[name]: value,
+			}
+			return {
+				...prevComic,
+				...updatedComic,
+			}
+		})
 	}
 
 	return (
 		<Container>
 			<div className="comic-panel">
-				<Form size="big">
+				<Form size="medium">
 					<h1 className="comic-panel-font">
 						Add a comic to your collection!
 					</h1>
@@ -143,54 +218,55 @@ const ComicCreate = (props) => {
 						name="title"
 						value={comic.title}
 					/>
-					<Form.Select
-						required
-						fluid
-						multiple
-						search
-						selection
-						placeholder="Authors"
-						name="authors"
-						options={authors}
-						label="Author(s)"
+					<Form.Field>
+						<label>Edition</label>
+						<input 
+						type ="number"
+						name= "edition"
 						onChange={handleChange}
-					/>
-					<Form.Select
-						placeholder="Illustrators"
-						required
-						fluid
-						multiple
+						/>
+					</Form.Field>
+					<Form.Field>
+						<label>Authors</label>
+						<Select
+							required
+							options={authors}
+							name="authors"
+							isMulti
+							onChange={handleAuthorSelect}
+						/>
+					</Form.Field>
+					<Form.Field>
+						<label>Illustrators</label>
+						<Select
+							required
+							options={illustrators}
+							name="illustrators"
+							isMulti
+							onChange={handleIllustratorSelect}
+						/>
+					</Form.Field>
 
-						selection
-						name="illustrators"
-						onChange={handleChange}
-						label="Illustrator(s)"
-						options={illustrators}
-						// value={comic.illustrators}
-					/>
-					<Form.Select
-						required
-						fluid
-						search
-						selection
-						placeholder="Publishers"
-						name="publisher"
-						options={publishers}
-						label="Publisher"
-						onChange={handleChange}
-					/>
-					<Form.Select
-						required
-						fluid
-						search
-						selection
-						multiple
-						placeholder="Characters"
-						name="characters"
-						options={characters}
-						label="Publisher"
-						onChange={handleChange}
-					/>
+					<Form.Field>
+						<label>Publisher</label>
+						<Select
+							required
+							options={publishers}
+							name="publisher"
+							onChange={handlePublisherSelect}
+						/>
+					</Form.Field>
+
+					<Form.Field>
+						<label>Characters</label>
+						<Select
+							required
+							options={characters}
+							name="characters"
+							isMulti
+							onChange={handleCharacterSelect}
+						/>
+					</Form.Field>
 					<Form.Input
 						required
 						fluid

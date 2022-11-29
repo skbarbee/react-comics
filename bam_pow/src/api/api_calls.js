@@ -47,6 +47,14 @@ export const getAllComics = () => {
 	})
 }
 
+export const postComic = (data) => {
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/comics/',
+		api_comicbook: data
+	})
+}
+
 export const createCharacter = (newCharacter) => {
 	return axios({
 		method: 'POST',
@@ -63,3 +71,4 @@ export const createPublisher = (data) => {
 		}
 	})
 }
+
