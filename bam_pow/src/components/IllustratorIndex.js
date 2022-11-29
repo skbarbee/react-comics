@@ -26,7 +26,7 @@ const IllustratorIndex = ({ user, msgAlert}) => {
             <Image src={Illustrator.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
-                    {Illustrator.illustrator_name}
+                    {Illustrator.first_name} {Illustrator.last_name}
                 </Card.Header>
             </Card.Content>
 
