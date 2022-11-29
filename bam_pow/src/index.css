@@ -73,6 +73,11 @@ p {
 	height: 20rem;
 	margin-bottom: 10px;
 }
+#center {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 .center {
 	justify-content: center;
 	align-items: center;
