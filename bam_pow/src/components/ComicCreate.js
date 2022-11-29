@@ -9,6 +9,7 @@ import {
 	getCharacters,
 	getIllustrators,
 	getPublishers,
+	getAllComics,
 } from "../api/api_calls"
 
 const ComicCreate = (props) => {
@@ -19,14 +20,17 @@ const ComicCreate = (props) => {
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
 
+
 	useEffect(() => {
+
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
 				const authorOptions = authors.map((authors, index) => ({
-					key: index,
+					key: authors.id,
 					value: authors.first_name + " " + authors.last_name[index],
 					text: authors.first_name + " " + authors.last_name,
+					name: "illustrators",
 				}))
 				setAuthors(authorOptions)
 			})
@@ -36,20 +40,17 @@ const ComicCreate = (props) => {
 				let illustrators = res.data.illustrators
 				console.log("the res", illustrators)
 				const illustratorOptions = illustrators.map(
-					(illustrators, index) => ({
-						key: index,
-						value:
-							illustrators.first_name +
-							" " +
-							illustrators.last_name[index],
+					(illustrator, index) => ({
+						key: illustrator.id,
+						value: illustrator.id,
 						text:
-							illustrators.first_name +
+							illustrator.first_name +
 							" " +
-							illustrators.last_name,
+							illustrator.last_name,
+						name: "illustrator",
 					})
 				)
 				setIllustrators(illustratorOptions)
-				console.log(illustrators)
 			})
 			.catch(console.error)
 		getCharacters()
@@ -69,14 +70,11 @@ const ComicCreate = (props) => {
 		getPublishers()
 			.then((res) => {
 				let publishers = res.data.publishers
-				console.log(publishers)
-				const publisherOptions = publishers.map(
-					(publishers, index) => ({
-						key: index,
-						value: publishers.publisher_name,
-						text: publishers.publisher_name,
-					})
-				)
+				const publisherOptions = publishers.map((publisher, index) => ({
+					key: index,
+					value: publisher.publisher_name,
+					text: publisher.publisher_name,
+				}))
 				setPublishers(publisherOptions)
 			})
 			.catch(console.error)
@@ -86,7 +84,7 @@ const ComicCreate = (props) => {
 		{
 			title: null,
 			authors: null,
-			illustrators: null,
+			illustrators: [],
 			publisher: null,
 			characters: null,
 			releaseDate: null,
@@ -94,22 +92,18 @@ const ComicCreate = (props) => {
 		},
 		[]
 	)
-		console.log(illustrators)
+	console.log(illustrators)
 	if (loaded) {
 		// console.log("out of useeffect", characters)
 	}
-	// useEffect(() => {
-	// 	const pub_options = publishers.map((publisher) => {
-	// console.log(publisher.publisher_name)
-	// 	})
-	// }, [publishers])
+
 	const navigate = useNavigate()
 
 	const [startDate, setStartDate] = useState(new Date())
 
 	const handleChange = (e) => {
+		console.log("target?", e.target)
 
-		console.log("value?", e.target)
 		setComic((prevComic) => {
 			const name = e.target.name
 			let value = e.target.value
@@ -129,9 +123,6 @@ const ComicCreate = (props) => {
 
 		setComic((comic.releaseDate = startDate))
 
-		console.log(comic)
-
-		setComic((comic.releaseDate = startDate))
 		console.log("the comic?", comic)
 		// navigate('/mypage')
 	}
@@ -164,19 +155,18 @@ const ComicCreate = (props) => {
 						label="Author(s)"
 						onChange={handleChange}
 					/>
-					
-					{/* <Button>Click for modal</Button> */}
 					<Form.Select
+						placeholder="Illustrators"
 						required
 						fluid
 						multiple
-						search
+
 						selection
-						placeholder="Illustrators"
 						name="illustrators"
-						options={illustrators}
-						label="Illustrator(s)"
 						onChange={handleChange}
+						label="Illustrator(s)"
+						options={illustrators}
+						// value={comic.illustrators}
 					/>
 					<Form.Select
 						required
@@ -200,14 +190,6 @@ const ComicCreate = (props) => {
 						options={characters}
 						label="Publisher"
 						onChange={handleChange}
-					/>
-					<Form.Input
-						required
-						fluid
-						label="Cover"
-						placeholder="Paste a link to the cover"
-						onChange={handleChange}
-						name="cover"
 					/>
 					<Form.Input
 						required
