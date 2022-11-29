@@ -18,7 +18,14 @@ import ComicIndex from "./components/ComicIndex"
 import CharacterIndex from "./components/CharacterIndex"
 import ComicDetail from "./components/ComicDetail"
 import ComicCreate from "./components/ComicCreate"
+import IllustratorIndex from "./components/IllustratorIndex"
+import AuthorIndex from "./components/AuthorIndex"
+import PublisherIndex from "./components/PublisherIndex"
+import AuthorCreate from "./components/AuthorCreate"	
+import CharacterCreate from "./components/CharacterCreate"
+import PublisherCreate from "./components/PublisherCreate"
 import './App.css'
+
 
 
 
@@ -108,8 +115,44 @@ const App = () => {
 							<ComicCreate msgAlert={msgAlert} user={user} />
 							} 
 					/>
+					<Route 
+						path='/add-character' 
+						element={
+							<CharacterCreate msgAlert={msgAlert} user={user} />
+							} 
+					/>
+					<Route 
+						path='/add-publisher' 
+						element={
+							<PublisherCreate msgAlert={msgAlert} user={user} />
+							} 
+					/>
 
-				</Routes>
+					<Route 
+					path='/add-author' 
+					element={
+						<AuthorCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/publishers' 
+					element={
+						<PublisherIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/illustrators' 
+					element={
+						<IllustratorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/authors' 
+					element={
+						<AuthorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+			</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
 						key={msgAlert.id}
