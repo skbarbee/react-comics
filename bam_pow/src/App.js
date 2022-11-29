@@ -19,6 +19,7 @@ import CharacterIndex from "./components/CharacterIndex"
 import ComicDetail from "./components/ComicDetail"
 import ComicCreate from "./components/ComicCreate"
 import IllustratorIndex from "./components/IllustratorIndex"
+import AuthorIndex from "./components/AuthorIndex"
 import PublisherIndex from "./components/PublisherIndex"
 import './App.css'
 
@@ -120,6 +121,12 @@ const App = () => {
 					path='/illustrators' 
 					element={
 						<IllustratorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/authors' 
+					element={
+						<AuthorIndex msgAlert={msgAlert} user={user} />
 						} 
 				/>
 				</Routes>
