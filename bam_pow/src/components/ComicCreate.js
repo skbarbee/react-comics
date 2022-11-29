@@ -15,8 +15,6 @@ import {
 
 const ComicCreate = (props) => {
  
-
-
 	const { msgAlert } = props
 	const [publishers, setPublishers] = useState()
 	const [authors, setAuthors] = useState()
@@ -136,6 +134,13 @@ const ComicCreate = (props) => {
 		setComic((comic.release_date = `${year}-${month}-${day}`))
 
 		postComic(comic)
+			.then(() => {
+				msgAlert({
+					heading: 'Success',
+					message: 'Comic Added!',
+					variant: 'success'
+				})
+			})
 
 		console.log("the comic?", comic)
 	}
