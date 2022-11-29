@@ -18,9 +18,11 @@ import ComicIndex from "./components/ComicIndex"
 import CharacterIndex from "./components/CharacterIndex"
 import ComicDetail from "./components/ComicDetail"
 import ComicCreate from "./components/ComicCreate"
+import AuthorCreate from "./components/AuthorCreate"	
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
 import './App.css'
+
 
 
 
@@ -122,6 +124,13 @@ const App = () => {
 							<PublisherCreate msgAlert={msgAlert} user={user} />
 							} 
 					/>
+
+					<Route 
+					path='/add-author' 
+					element={
+						<AuthorCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
 
 				</Routes>
 				{msgAlerts.map((msgAlert) => (

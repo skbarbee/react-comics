@@ -212,7 +212,6 @@ const ComicCreate = (props) => {
 					</Form>
 				</div>
 			</Container>
-		</>
 	)
 }
 
