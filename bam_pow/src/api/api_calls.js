@@ -32,3 +32,11 @@ export const getAllComics = () => {
 		url: apiUrl + '/comics/',
 	})
 }
+
+export const postComic = (data) => {
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/comics/',
+		api_comicbook: data
+	})
+}
