@@ -105,7 +105,7 @@ const ComicCreate = (props) => {
 		console.log("target?", e.target)
 
 		setComic((prevComic) => {
-			const name = e.target.name
+			const name = e.target.getAttribute("name")
 			let value = e.target.value
 			const updatedComic = {
 				[name]: value,

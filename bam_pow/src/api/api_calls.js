@@ -32,3 +32,13 @@ export const getAllComics = () => {
 		url: apiUrl + '/comics/',
 	})
 }
+
+export const createCharacter = (newCharacter) => {
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/add-character',
+		data: {
+			character: newCharacter
+		}
+	})
+}
