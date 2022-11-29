@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { Form, Container, Button } from "semantic-ui-react"
-import { createCharacter } from "../api/api_calls"
 
 const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
    
@@ -21,14 +20,13 @@ const CharacterCreate = ({ user, msgAlert, setNewCharacter }) => {
             const updatedCharacter = { [updatedName]: updatedValue }
 
             return { ...prevCharacter, ...updatedCharacter }
-            
 
         })
     }
     const handleCreateCharacter = (e) => {
         e.preventDefault()
 
-        createCharacter(character)
+        handleCreateCharacter(character)
             .then(() => {
                 msgAlert({
                     heading: 'Success',
