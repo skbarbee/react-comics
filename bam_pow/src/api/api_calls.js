@@ -2,6 +2,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 
+
 export const getAuthors = () => {
     return axios({
 		method: 'GET',
@@ -10,16 +11,20 @@ export const getAuthors = () => {
 }
 
 export const authorCreate = (data) => {
-	console.log('this is the data',JSON.stringify(data))
+	console.log('this is the data for create author', data.first_name, data.last_name)
 	return axios({
-		method: 'POST',
+		method: 'post',
 		url: apiUrl + '/authors/',
 		data: {
-			author: JSON.stringify(data),
+			author:
+			{first_name: data.first_name,
+			last_name: data.last_name}
+				
+		
 		},
-		// headers: {
-		// 	Authorization: `Token token=${user.token}`,
-		// },
+		headers: {
+			'Content-Type' : 'application/json'
+		},
 	})
 }
 export const getIllustrators = () => {
