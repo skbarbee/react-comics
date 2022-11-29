@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image, Container } from 'semantic-ui-react'
 
-import { publisherIndex } from '../api/publisher'
+import { authorIndex } from '../api/author'
 
-const PublisherIndex = ({ user, msgAlert}) => {
+const AuthorIndex = ({ user, msgAlert}) => {
 
-    const [allPublishers, setAllPublishers] = useState([])
+    const [allAuthors, setAllAuthors] = useState([])
 
     useEffect(() => {
-        publisherIndex(user)
+        authorIndex(user)
         .then(res => {
-            setAllPublishers(res.data.publishers)
+            setAllAuthors(res.data.authors)
         })
         .catch((error) => {
             msgAlert({
                 heading: 'Failure',
-                message: 'Index Publishers Failure' + error,
+                message: 'Index Authors Failure' + error,
                 variant: 'danger'
             })
         })
     }, [])
 
-    const PublisherCards = allPublishers.map(Publisher => (
+    const AuthorCards = allAuthors.map(Author => (
         <Card>
-            <Image src={Publisher.cover} wrapped ui={false} />
+            <Image src={Author.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
-                    {Publisher.publisher_name}
+                    {Author.first_name} {Author.last_name}
                 </Card.Header>
             </Card.Content>
 
-            {/* extra content for the bottom to link to just that line of publishers or something */}
+            {/* extra content for the bottom to link to just that line of authors or something */}
             {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
             {/* <Card.Content extra>
                 <a>
                     <Icon name='user' />
-                    {Publisher.name} appears in {Publisher.editions} editions
+                    {Author.name} appears in {Author.editions} editions
                 </a>
             </Card.Content> */}
         </Card>
@@ -44,11 +44,11 @@ const PublisherIndex = ({ user, msgAlert}) => {
     return (
         <Container className='comic-panel'>
             <Card.Group itemsPerRow={5}>
-                { PublisherCards }
+                { AuthorCards }
             </Card.Group>
         </Container>
 
     )
 }
 
-export default PublisherIndex
+export default AuthorIndex

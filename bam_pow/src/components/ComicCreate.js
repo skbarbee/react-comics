@@ -98,7 +98,7 @@ const ComicCreate = (props) => {
 
 	const handleChange = (e) => {
 		setComic((prevComic) => {
-			const name = e.target.name
+			const name = e.target.getAttribute("name")
 			let value = e.target.value
 			const updatedComic = {
 				[name]: value,
@@ -284,10 +284,10 @@ const ComicCreate = (props) => {
 						/>
 					</Form.Field>
 
-					<Form.Button onClick={handleSubmit}>Add</Form.Button>
-				</Form>
-			</div>
-		</Container>
+						<Form.Button onClick={handleSubmit}>Add</Form.Button>
+					</Form>
+				</div>
+			</Container>
 	)
 }
 

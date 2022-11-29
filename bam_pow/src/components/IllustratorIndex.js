@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image, Container } from 'semantic-ui-react'
 
-import { publisherIndex } from '../api/publisher'
+import { illustratorIndex } from '../api/illustrator'
 
-const PublisherIndex = ({ user, msgAlert}) => {
+const IllustratorIndex = ({ user, msgAlert}) => {
 
-    const [allPublishers, setAllPublishers] = useState([])
+    const [allIllustrators, setAllIllustrators] = useState([])
 
     useEffect(() => {
-        publisherIndex(user)
+        illustratorIndex(user)
         .then(res => {
-            setAllPublishers(res.data.publishers)
+            setAllIllustrators(res.data.illustrators)
         })
         .catch((error) => {
             msgAlert({
                 heading: 'Failure',
-                message: 'Index Publishers Failure' + error,
+                message: 'Index Illustrators Failure' + error,
                 variant: 'danger'
             })
         })
     }, [])
 
-    const PublisherCards = allPublishers.map(Publisher => (
+    const IllustratorCards = allIllustrators.map(Illustrator => (
         <Card>
-            <Image src={Publisher.cover} wrapped ui={false} />
+            <Image src={Illustrator.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
-                    {Publisher.publisher_name}
+                    {Illustrator.first_name} {Illustrator.last_name}
                 </Card.Header>
             </Card.Content>
 
-            {/* extra content for the bottom to link to just that line of publishers or something */}
+            {/* extra content for the bottom to link to just that line of illustrators or something */}
             {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
             {/* <Card.Content extra>
                 <a>
                     <Icon name='user' />
-                    {Publisher.name} appears in {Publisher.editions} editions
+                    {Illustrator.name} appears in {Illustrator.editions} editions
                 </a>
             </Card.Content> */}
         </Card>
@@ -44,11 +44,11 @@ const PublisherIndex = ({ user, msgAlert}) => {
     return (
         <Container className='comic-panel'>
             <Card.Group itemsPerRow={5}>
-                { PublisherCards }
+                { IllustratorCards }
             </Card.Group>
         </Container>
 
     )
 }
 
-export default PublisherIndex
+export default IllustratorIndex

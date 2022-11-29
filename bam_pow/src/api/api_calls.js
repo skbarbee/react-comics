@@ -8,6 +8,20 @@ export const getAuthors = () => {
 		url: apiUrl + '/authors/',
 	})
 }
+
+export const authorCreate = (data) => {
+	console.log('this is the data',JSON.stringify(data))
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/authors/',
+		data: {
+			author: JSON.stringify(data),
+		},
+		// headers: {
+		// 	Authorization: `Token token=${user.token}`,
+		// },
+	})
+}
 export const getIllustrators = () => {
     return axios({
 		method: 'GET',
@@ -40,3 +54,21 @@ export const postComic = (data) => {
 		api_comicbook: data
 	})
 }
+
+export const createCharacter = (newCharacter) => {
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/characters/',
+		body: JSON.stringify(data)
+	})
+}
+export const createPublisher = (data) => {
+	return axios({
+		method: 'POST',
+		url: apiUrl + '/publishers/',
+		data: {
+			publisher: data
+		}
+	})
+}
+
