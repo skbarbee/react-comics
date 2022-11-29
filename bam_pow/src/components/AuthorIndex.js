@@ -22,7 +22,7 @@ const AuthorIndex = ({ user, msgAlert}) => {
     }, [])
 
     const AuthorCards = allAuthors.map(Author => (
-        <Card>
+        <Card href={"/authors/" + Author.id}>
             <Image src={Author.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
