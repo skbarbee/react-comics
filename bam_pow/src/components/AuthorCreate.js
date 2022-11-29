@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {Button, Checkbox, Form, Container, Icon} from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom'
-import { authorCreate } from '../api/api_calls'
+import { authorCreate } from '../api/author.js'
+import AuthorForm from './shared/AuthorForm'
 
 const AuthorCreate = ({user, msgAlert}) => {
 	
@@ -51,36 +52,12 @@ const AuthorCreate = ({user, msgAlert}) => {
 				})
 		}
 	return (
-	<Container>
-		<div className="comic-panel">
-			<Form size="big">
-				<h1 className="comic-panel-font">
-					Add an Author
-				</h1>
-				<Form.Input
-					required
-					fluid
-					label="First Name"
-					placeholder="First Name"
-					onChange={handleChange}
-					name="first_name"
-					value={author.first_name}
-					
-				/>
-				<Form.Input
-					required
-					fluid
-					label="Last Name"
-					placeholder="Last Name"
-					onChange={handleChange}
-					name="last_name"
-					value={author.last_name}
-					
-				/>
-				<Form.Button onClick={handleCreateAuthor}>Add</Form.Button>
-			</Form>
-		</div>
-	</Container>
+		<AuthorForm
+			author={author}
+			handleChange = {handleChange}
+			handleSubmit={handleCreateAuthor}
+			heading='Create an Author'
+	/>
 )
     
 }

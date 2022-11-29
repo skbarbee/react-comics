@@ -1,15 +1,20 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const authorCreate = (data, user) => {
+export const authorCreate = (data) => {
+	console.log('this is the data for create author', data.first_name, data.last_name)
 	return axios({
-		method: 'POST',
-		url: apiUrl + '/authors',
+		method: 'post',
+		url: apiUrl + '/authors/',
 		data: {
-			author: data,
+			author:
+			{first_name: data.first_name,
+			last_name: data.last_name}
+				
+		
 		},
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			'Content-Type' : 'application/json'
 		},
 	})
 }
