@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Container, Icon, Image } from 'semantic-ui-react'
 
 const CharacterIndex = ({ user, msgAlert}) => {
 
@@ -22,10 +22,10 @@ const CharacterIndex = ({ user, msgAlert}) => {
     useEffect(() => {
         setAllComics( [
             {
-                    alias: "Iron Man",
-                    real_name: "Tony Stark",
-                    imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
-                    details: 'Billionaire Playboy Philanthropist'
+                alias: "Iron Man",
+                real_name: "Tony Stark",
+                imageurl: 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                details: 'Billionaire Playboy Philanthropist'
             },
             {
                 alias: "Winter Soldier",
@@ -64,13 +64,13 @@ const CharacterIndex = ({ user, msgAlert}) => {
     const ComicCards = allComics.map(Comic => (
         <Card>
             <Image src={Comic.imageurl} wrapped ui={false} />
-            <Card.Content>
-                <Card.Header>{Comic.alias}</Card.Header>
-
+            <Card.Content style={{paddingTop: '0'}}>
                 <Card.Meta>
                     {Comic.real_name}
                     {/* <span className='date'>{Comic.releasedate}</span> */}
                 </Card.Meta>
+                
+                <Card.Header>{Comic.alias}</Card.Header>
 
                 <Card.Description>
                     {Comic.details}
@@ -91,10 +91,14 @@ const CharacterIndex = ({ user, msgAlert}) => {
 
 
     return (
-        <>
-            <Card.Group itemsPerRow={4}>
-                { ComicCards }
-            </Card.Group>
+        <>  
+            <h1 className='edo-header' style={{color: 'white', fontSize: "60px", margin: "0, 0, 0, 0" }}>Characters</h1>
+            <Container className='comic-panel'>
+                <Card.Group itemsPerRow={4}>
+                    { ComicCards }
+                </Card.Group>
+            </Container>
+
         </>
 
     )

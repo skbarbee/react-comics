@@ -43,7 +43,7 @@ const ComicIndex = ({ user, msgAlert}) => {
                 editions: 6 
             }
         ])
-    })
+    }, [])
 
 
     const ComicCards = allComics.map(Comic => (
@@ -51,17 +51,20 @@ const ComicIndex = ({ user, msgAlert}) => {
 
         <Card>
             <Image src={Comic.imageurl} wrapped ui={false} />
-            <Card.Content>
-                <Card.Header>
-                    {Comic.title}
-                </Card.Header>
+            <Card.Content style={{paddingTop: '0'}}>
 
                 <Card.Meta>
                     {Comic.releasedate}
                     {/* <span className='date'>{Comic.releasedate}</span> */}
                 </Card.Meta>
 
-                <Card.Description>
+                <Card.Header>
+                    {Comic.title}
+                </Card.Header>
+
+
+
+                <Card.Description style={{marginTop: '0'}}>
                     Issue {Comic.issue}
                 </Card.Description>
 
@@ -81,11 +84,14 @@ const ComicIndex = ({ user, msgAlert}) => {
 
 
     return (
-        <Container className='comic-panel'>
-            <Card.Group itemsPerRow={5}>
-                { ComicCards }
-            </Card.Group>
-        </Container>
+        <>
+            <h1 className='edo-header' style={{color: 'white', fontSize: "60px", margin: "0, 0, 0, 0" }}>All Comics</h1>
+            <Container className='comic-panel'>
+                <Card.Group itemsPerRow={5}>
+                    { ComicCards }
+                </Card.Group>
+            </Container>
+        </>
 
     )
 }

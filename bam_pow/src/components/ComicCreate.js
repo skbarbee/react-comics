@@ -208,10 +208,11 @@ const ComicCreate = (props) => {
 						/>
 					</Form.Field>
 
-					<Form.Button onClick={handleSubmit}>Add</Form.Button>
-				</Form>
-			</div>
-		</Container>
+						<Form.Button onClick={handleSubmit}>Add</Form.Button>
+					</Form>
+				</div>
+			</Container>
+		</>
 	)
 }
 
