@@ -23,10 +23,12 @@ const ComicCreate = (props) => {
 		getAuthors()
 			.then((res) => {
 				let authors = res.data.authors
-				const authorOptions = authors.map((authors, index) => ({
-					key: index,
-					value: authors.first_name + " " + authors.last_name[index],
-					text: authors.first_name + " " + authors.last_name,
+				console.log('this is authors raw data', authors)
+				const authorOptions = authors.map((author, index) => ({
+					key: author._id,
+					value: author._id,
+					text: author.first_name + " " + author.last_name,
+					name: "authors"
 				}))
 				setAuthors(authorOptions)
 			})
@@ -37,7 +39,7 @@ const ComicCreate = (props) => {
 				console.log("the res", illustrators)
 				const illustratorOptions = illustrators.map(
 					(illustrators, index) => ({
-						key: index,
+						key: illustrators.index,
 						value:
 							illustrators.first_name +
 							" " +
@@ -49,7 +51,7 @@ const ComicCreate = (props) => {
 					})
 				)
 				setIllustrators(illustratorOptions)
-				console.log(illustrators)
+				console.log('this is illustrators',illustrators)
 			})
 			.catch(console.error)
 		getCharacters()
@@ -85,16 +87,16 @@ const ComicCreate = (props) => {
 	const [comic, setComic] = useState(
 		{
 			title: null,
-			authors: null,
-			illustrators: null,
+			authors: [],
+			illustrators: [],
 			publisher: null,
-			characters: null,
+			characters: [],
 			releaseDate: null,
 			cover: null,
 		},
 		[]
 	)
-		console.log(illustrators)
+		console.log('this is authors', authors)
 	if (loaded) {
 		// console.log("out of useeffect", characters)
 	}
@@ -107,14 +109,15 @@ const ComicCreate = (props) => {
 
 	const [startDate, setStartDate] = useState(new Date())
 
-	const handleChange = (e) => {
+	const handleChange = (e,index) => {
 
-		console.log("value?", e.target)
+		console.log("THIS IS THE VALUE FOR HANDLE CHANGE", e.target.innerText)
 		setComic((prevComic) => {
 			const name = e.target.name
-			let value = e.target.value
+			let value = e.target.innerText
+			console.log('This is name\n', name, 'This is value\n', value)
 			const updatedComic = {
-				[name]: value,
+				name : [...value]
 			}
 			return {
 				...prevComic,
