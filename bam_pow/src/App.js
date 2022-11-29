@@ -24,6 +24,7 @@ import PublisherIndex from "./components/PublisherIndex"
 import AuthorCreate from "./components/AuthorCreate"	
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
+import IllustratorCreate from "./components/IllustratorCreate"
 import './App.css'
 
 
@@ -119,6 +120,12 @@ const App = () => {
 						path='/add-character' 
 						element={
 							<CharacterCreate msgAlert={msgAlert} user={user} />
+							} 
+					/>
+					<Route 
+						path='/add-illustrator' 
+						element={
+							<IllustratorCreate msgAlert={msgAlert} user={user} />
 							} 
 					/>
 					<Route 
