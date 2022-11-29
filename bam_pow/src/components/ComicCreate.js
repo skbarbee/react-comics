@@ -14,6 +14,9 @@ import {
 } from "../api/api_calls"
 
 const ComicCreate = (props) => {
+ 
+
+
 	const { msgAlert } = props
 	const [publishers, setPublishers] = useState()
 	const [authors, setAuthors] = useState()
@@ -35,6 +38,7 @@ const ComicCreate = (props) => {
 				setAuthors(authorOptions)
 			})
 			.catch(console.error)
+
 		getIllustrators()
 			.then((res) => {
 				let illustrators = res.data.illustrators
@@ -52,6 +56,7 @@ const ComicCreate = (props) => {
 				setIllustrators(illustratorOptions)
 			})
 			.catch(console.error)
+
 		getCharacters()
 			.then((res) => {
 				let characters = res.data.characters
@@ -62,8 +67,8 @@ const ComicCreate = (props) => {
 				}))
 				setCharacters(characterOptions)
 			})
-
 			.catch(console.error)
+
 		getPublishers()
 			.then((res) => {
 				let publishers = res.data.publishers
@@ -91,18 +96,13 @@ const ComicCreate = (props) => {
 		[]
 	)
 
-
 	const navigate = useNavigate()
-
 
 	const handleChange = (e) => {
 		setComic((prevComic) => {
 			const name = e.target.getAttribute("name")
 			let value = e.target.value
-			if (name === 'edition'){
-				let value = parseInt(e.target.value)
-				console.log("the int",value)
-			}
+
 			const updatedComic = {
 				[name]: value,
 			}
@@ -112,16 +112,15 @@ const ComicCreate = (props) => {
 			}
 		})
 		setComic((prevComic) => {
-
-			const name = 'release_date'
+			const name = "release_date"
 			let value = startDate
-			
+
 			const updatedComic = {
 				[name]: value,
 			}
 			return {
 				...prevComic,
-				...updatedComic
+				...updatedComic,
 			}
 		})
 		console.log(comic)
@@ -130,11 +129,14 @@ const ComicCreate = (props) => {
 	const handleSubmit = (e) => {
 		// e.preventDefault()
 
-		setComic((comic.release_date = startDate))
-		// let sentComic = JSON.stringify(comic)
-		// console.log(sentComic)
+		let year = startDate.getFullYear()
+		let month = startDate.getMonth()
+		let day = startDate.getDay()
+
+		setComic((comic.release_date = `${year}-${month}-${day}`))
+
 		postComic(comic)
-		
+
 		console.log("the comic?", comic)
 	}
 
@@ -224,10 +226,10 @@ const ComicCreate = (props) => {
 					/>
 					<Form.Field>
 						<label>Edition</label>
-						<input 
-						type ="number"
-						name= "edition"
-						onChange={handleChange}
+						<input
+							type="number"
+							name="edition"
+							onChange={handleChange}
 						/>
 					</Form.Field>
 					<Form.Field>
@@ -285,13 +287,14 @@ const ComicCreate = (props) => {
 							selected={startDate}
 							onChange={(date) => setStartDate(date)}
 							name="releaseDate"
+							dateFormat={"MM/dd/yyyy"}
 						/>
 					</Form.Field>
 
-						<Form.Button onClick={handleSubmit}>Add</Form.Button>
-					</Form>
-				</div>
-			</Container>
+					<Form.Button onClick={handleSubmit}>Add</Form.Button>
+				</Form>
+			</div>
+		</Container>
 	)
 }
 
