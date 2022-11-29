@@ -22,7 +22,7 @@ const PublisherIndex = ({ user, msgAlert}) => {
     }, [])
 
     const PublisherCards = allPublishers.map(Publisher => (
-        <Card>
+        <Card href={"/publishers/" + Publisher.id}>
             <Image src={Publisher.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
