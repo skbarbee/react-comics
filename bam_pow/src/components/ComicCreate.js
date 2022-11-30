@@ -14,7 +14,6 @@ import {
 } from "../api/api_calls"
 
 const ComicCreate = (props) => {
- 
 	const { msgAlert } = props
 	const [publishers, setPublishers] = useState()
 	const [authors, setAuthors] = useState()
@@ -134,11 +133,19 @@ const ComicCreate = (props) => {
 		setComic((comic.release_date = `${year}-${month}-${day}`))
 
 		postComic(comic)
+			.then(res => {navigate('/comics')})
 			.then(() => {
 				msgAlert({
-					heading: 'Success',
-					message: 'Comic Added!',
-					variant: 'success'
+					heading: "Success",
+					message: "Comic Added!",
+					variant: "success",
+				})
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: "Failure",
+					message: "Comic Add Failure" + error,
+					variant: "danger",
 				})
 			})
 
@@ -268,7 +275,7 @@ const ComicCreate = (props) => {
 						/>
 					</Form.Field>
 
-					<Form.Field>
+					<Form.Field required>
 						<label>Characters</label>
 						<Select
 							required
@@ -279,14 +286,13 @@ const ComicCreate = (props) => {
 						/>
 					</Form.Field>
 					<Form.Input
-						required
 						fluid
 						label="Cover"
 						placeholder="Paste a link to the cover"
 						onChange={handleChange}
 						name="cover"
 					/>
-					<Form.Field>
+					<Form.Field required>
 						<label>Release Date</label>
 						<DatePicker
 							selected={startDate}

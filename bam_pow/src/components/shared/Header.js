@@ -3,14 +3,9 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
-import {
-	faCheckSquare,
-	faCoffee,
-	faUser,
-} from "@fortawesome/free-solid-svg-icons"
-library.add(faCheckSquare, faCoffee, faUser)
+
+
 
 const linkStyle = {
 	color: "white",
@@ -35,7 +30,7 @@ const authenticatedOptions = (
 		</Nav.Link>
 		<NavDropdown
 			bg="dark"
-			title={<FontAwesomeIcon icon="fa-user" />}
+			title={<i class="user icon"></i>}
 			menuVariant="dark"
 		>
 			<NavDropdown.Item>

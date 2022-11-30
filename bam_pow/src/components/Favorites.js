@@ -1,16 +1,27 @@
-import React from 'react'
-
+import React from "react"
+import { useNavigate, Link } from "react-router-dom"
 
 const Favorites = () => {
-
-    return (
-        <>
-            My faves
-            <h2>Authors</h2>
-            <h2>Illustrators</h2>
-            <h2>Characters</h2>
-        </>
-    )
+	return (
+		<>
+			<h1 className="comic-panel-font">My Favorites</h1>
+			<h2>
+				<Link to="/" className="comic-panel-link">
+					Authors
+				</Link>
+			</h2>
+			<h2>
+				<Link to="/" className="comic-panel-link">
+					Illustrators
+				</Link>
+			</h2>
+			<h2>
+				<Link to="/" className="comic-panel-link">
+					Characters
+				</Link>
+			</h2>
+		</>
+	)
 }
 
 export default Favorites

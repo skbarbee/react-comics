@@ -24,7 +24,7 @@ const MyPage = () => {
 							<p>Books I want to read</p>
 						</div>
 					</Grid.Column>
-					<Grid.Column floated="right" width={7}>
+					<Grid.Column floated="center" width={7}>
 						<div className="comic-panel">
 							<Favorites />
 						</div>
