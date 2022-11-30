@@ -16,6 +16,7 @@ import ChangePassword from "./components/auth/ChangePassword"
 import MyPage from "./components/MyPage"
 import ComicIndex from "./components/ComicIndex"
 import CharacterIndex from "./components/CharacterIndex"
+import CharacterDetail from "./components/CharacterDetail"
 import ComicDetail from "./components/ComicDetail"
 import ComicCreate from "./components/ComicCreate"
 import IllustratorIndex from "./components/IllustratorIndex"
@@ -108,6 +109,12 @@ const App = () => {
 					path='/characters' 
 					element={
 						<CharacterIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/characters/:id' 
+					element={
+						<CharacterDetail msgAlert={msgAlert} user={user} />
 						} 
 				/>
 				<Route 
