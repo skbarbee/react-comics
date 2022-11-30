@@ -10,7 +10,7 @@ export const getAuthors = () => {
 }
 
 export const authorCreate = (data) => {
-	console.log('this is the data',JSON.stringify(data))
+	
 	return axios({
 		method: 'POST',
 		url: apiUrl + '/authors/',
@@ -47,7 +47,7 @@ export const getAllComics = () => {
 	})
 }
 
-export const postComic = (data) => {
+export const postComic = (data,user) => {
 	console.log("this is the comic",data.title)
 	return axios({
 		method: 'POST',
