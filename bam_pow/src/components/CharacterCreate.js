@@ -30,7 +30,7 @@ const CharacterCreate = ({ user, msgAlert }) => {
     const handleCreateCharacter = (e) => {
         e.preventDefault()
 
-        characterCreate(character)
+        characterCreate(character, user)
             .then(() => {
                 msgAlert({
                     heading: 'Success',

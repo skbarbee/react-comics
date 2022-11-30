@@ -33,6 +33,26 @@ const authenticatedOptions = (
 			title={<i class="user icon"></i>}
 			menuVariant="dark"
 		>
+		<Nav.Link>
+			<Link to="/add-author" style={linkStyle}>
+				Add Author
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-character" style={linkStyle}>
+				Add Character
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-illustrator" style={linkStyle}>
+				Add Illustrator
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to="/add-publisher" style={linkStyle}>
+				Add Publisher
+			</Link>
+		</Nav.Link>
 			<NavDropdown.Item>
 				<Nav.Link>
 					<Link to="change-password" style={linkStyle}>

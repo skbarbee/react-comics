@@ -1,7 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const illustratorCreate = (data) => {
+export const illustratorCreate = (data, user) => {
 	console.log('this is the data for create illustrator', data.first_name, data.last_name)
 	return axios({
 		method: 'post',
@@ -14,7 +14,7 @@ export const illustratorCreate = (data) => {
 		
 		},
 		headers: {
-			'Content-Type' : 'application/json'
+			Authorization: `Token token=${user.token}`
 		},
 	})
 }

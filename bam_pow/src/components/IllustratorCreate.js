@@ -33,7 +33,7 @@ const AuthorCreate = ({user, msgAlert}) => {
 		const handleCreateIllustrator =  (e) => {
 			e.preventDefault()
 			console.log(illustrator)
-			illustratorCreate(illustrator)
+			illustratorCreate(illustrator, user)
 			
 				.then(() => {
 					msgAlert({

@@ -27,7 +27,7 @@ const PublisherCreate = ({ user, msgAlert }) => {
     const handleCreatePublisher = (e) => {
         e.preventDefault()
 
-        publisherCreate(publisher)
+        publisherCreate(publisher, user)
             .then(() => {
                 msgAlert({
                     heading: 'Success',

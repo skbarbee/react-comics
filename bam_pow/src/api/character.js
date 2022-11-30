@@ -12,8 +12,7 @@ export const characterCreate = (data, user) => {
 			details: data.details}
 		},
 		headers: {
-			// Authorization: `Token token=${user.token}`,
-			'Content-Type' : 'application/json'
+			Authorization: `Token token=${user.token}`
 		},
 	})
 }
