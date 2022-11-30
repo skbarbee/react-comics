@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
+import { Link } from 'react-router-dom'
 
-import { authorIndex } from "../api/author"
+import { authorIndex, authorShow } from "../api/author"
 
 const AuthorIndex = ({ user, msgAlert }) => {
 	const [allAuthors, setAllAuthors] = useState([])
@@ -9,9 +10,14 @@ const AuthorIndex = ({ user, msgAlert }) => {
 	console.log("user in author index",user)
 
 	useEffect(() => {
+        // authorShow(user, 1)
+        //     .then((res) => {
+        //         console.log(res.data)
+        //     })
 		authorIndex(user)
 			.then((res) => {
 				setAllAuthors(res.data.authors)
+                console.log(res.data)
 			})
 			.catch((error) => {
 				msgAlert({
@@ -39,7 +45,7 @@ const AuthorIndex = ({ user, msgAlert }) => {
     /// set like function for the heart handle like posts
 
 	const AuthorCards = allAuthors.map((Author) => (
-		<Card>
+		<Card center>
 			<Image src={Author.cover} wrapped ui={false} />
 			<Card.Content>
 				<Card.Header>
@@ -54,9 +60,9 @@ const AuthorIndex = ({ user, msgAlert }) => {
                         {/* setLiked */}
 							{heart}
 						</Button>
-						<Button secondary href={"/authors/" + Author.id}>
-							View author
-						</Button>
+						<Link to={`/authors/${Author.id}`}>
+							<Button primary>View author</Button>
+						</Link>
 					</Button.Group>
 				</div>
 			</Card.Content>
