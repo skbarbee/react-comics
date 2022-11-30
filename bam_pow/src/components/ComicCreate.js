@@ -5,16 +5,15 @@ import DatePicker from "react-datepicker"
 import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
 import { Button } from "react-bootstrap"
-import {
-	getAuthors,
-	getCharacters,
-	getIllustrators,
-	getPublishers,
-	postComic,
-} from "../api/api_calls"
+// import { postComic } from "../api/api_calls"
+import { postComic } from "../api/comic"
+import { characterIndex } from "../api/character"
+import { publisherIndex } from "../api/publisher"
+import { illustratorIndex } from "../api/illustrator"
+import { authorIndex } from "../api/author"
 
 const ComicCreate = (props) => {
-	const { msgAlert } = props
+	const { msgAlert, user } = props
 	const [publishers, setPublishers] = useState()
 	const [authors, setAuthors] = useState()
 	const [illustrators, setIllustrators] = useState()
@@ -23,7 +22,7 @@ const ComicCreate = (props) => {
 	const [startDate, setStartDate] = useState(new Date())
 
 	useEffect(() => {
-		getAuthors()
+		authorIndex()
 			.then((res) => {
 				let authors = res.data.authors
 
@@ -36,7 +35,7 @@ const ComicCreate = (props) => {
 			})
 			.catch(console.error)
 
-		getIllustrators()
+		illustratorIndex()
 			.then((res) => {
 				let illustrators = res.data.illustrators
 				console.log("the res", illustrators)
@@ -54,7 +53,7 @@ const ComicCreate = (props) => {
 			})
 			.catch(console.error)
 
-		getCharacters()
+		characterIndex()
 			.then((res) => {
 				let characters = res.data.characters
 				const characterOptions = characters.map((character, index) => ({
@@ -66,7 +65,7 @@ const ComicCreate = (props) => {
 			})
 			.catch(console.error)
 
-		getPublishers()
+		publisherIndex()
 			.then((res) => {
 				let publishers = res.data.publishers
 				const publisherOptions = publishers.map((publisher, index) => ({
@@ -125,14 +124,18 @@ const ComicCreate = (props) => {
 
 	const handleSubmit = (e) => {
 		// e.preventDefault()
-
+		console.log(typeof startDate)
 		let year = startDate.getFullYear()
 		let month = startDate.getMonth()
+		console.log(month)
 		let day = startDate.getDay()
+		console.log(day)
 
-		setComic((comic.release_date = `${year}-${month}-${day}`))
+		const formattedDate = `${startDate.getFullYear()}-${startDate.getMonth()+1}-${startDate.getDate()}`;
+		setComic((comic.release_date = formattedDate))
+		// setComic((comic.release_date = startDate))
 
-		postComic(comic)
+		postComic(comic, user)
 			.then(res => {navigate('/comics')})
 			.then(() => {
 				msgAlert({
@@ -149,7 +152,7 @@ const ComicCreate = (props) => {
 				})
 			})
 
-		console.log("the comic?", comic)
+		console.log("the comic and user", comic, user)
 	}
 
 	const handleIllustratorSelect = (e) => {
@@ -218,6 +221,9 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
+	}
+	const handleDateChange = (e) => {
+		setStartDate(e)
 	}
 
 	return (
@@ -296,9 +302,9 @@ const ComicCreate = (props) => {
 						<label>Release Date</label>
 						<DatePicker
 							selected={startDate}
-							onChange={(date) => setStartDate(date)}
+							onChange={handleDateChange}
 							name="releaseDate"
-							dateFormat={"MM/dd/yyyy"}
+							
 						/>
 					</Form.Field>
 
