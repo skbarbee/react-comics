@@ -5,7 +5,7 @@ import comicBg from "../imgs/loginpage.svg"
 // import components for
 import Favorites from "./Favorites"
 
-const MyPage = () => {
+const MyPage = ({user, msgAlert}) => {
 	return (
 		<div>
 			<Container>
@@ -26,7 +26,7 @@ const MyPage = () => {
 					</Grid.Column>
 					<Grid.Column floated="center" width={7}>
 						<div className="comic-panel">
-							<Favorites />
+							<Favorites user={user} msgAlert={msgAlert} />
 						</div>
 					</Grid.Column>
 				</Grid>
