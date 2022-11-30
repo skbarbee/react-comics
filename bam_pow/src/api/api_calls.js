@@ -65,9 +65,9 @@ export const postComic = (data) => {
 
 			}
 		},
-		// headers: {
-		// 	Authorization: `Token token=${user.token}`
-		// },
+		headers: {
+			Authorization: `Token token=${user.token}`
+		},
 	})
 }
 
