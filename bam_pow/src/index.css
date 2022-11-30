@@ -63,7 +63,7 @@ p {
 	display: flex;
 	flex-direction: row;
 	max-width: 100%;
-	padding: 0;
+	padding: 20px;
 	margin: 30px;
 }
 .logo {
@@ -181,3 +181,5 @@ p {
 	border-right-style: hidden;
 	border-left-style: hidden; */
   }
+
+  /* Comic Show Page Styling */

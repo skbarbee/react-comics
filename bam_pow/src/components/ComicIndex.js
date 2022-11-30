@@ -22,8 +22,6 @@ const ComicIndex = ({ user, msgAlert}) => {
     }, [])
 
     const ComicCards = allComics.map(Comic => (
-
-
         <Card href={"/comics/" + Comic.id}>
             <Image src={Comic.cover} wrapped ui={false} />
             <Card.Content>

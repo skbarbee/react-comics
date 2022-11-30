@@ -91,55 +91,61 @@ const App = () => {
 						<RequireAuth user={user}>
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-					/>
-					<Route 
-						path='/comics' 
-						element={
-							<ComicIndex msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/characters' 
-						element={
-							<CharacterIndex msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/mypage' 
-						element={
-							<MyPage msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/add-comic' 
-						element={
-							<ComicCreate msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/add-character' 
-						element={
-							<CharacterCreate msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/add-illustrator' 
-						element={
-							<IllustratorCreate msgAlert={msgAlert} user={user} />
-							} 
-					/>
-					<Route 
-						path='/add-publisher' 
-						element={
-							<PublisherCreate msgAlert={msgAlert} user={user} />
-							} 
-					/>
-
-					<Route 
-					path='/add-author' 
+				/>
+				<Route 
+					path='/comics' 
 					element={
-						<AuthorCreate msgAlert={msgAlert} user={user} />
+						<ComicIndex msgAlert={msgAlert} user={user} />
 						} 
+				/>
+				<Route 
+					path='/comics/:id' 
+					element={
+						<ComicDetail msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/characters' 
+					element={
+						<CharacterIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/mypage' 
+					element={
+						<MyPage msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/add-comic' 
+					element={
+						<ComicCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/add-character' 
+					element={
+						<CharacterCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/add-illustrator' 
+					element={
+						<IllustratorCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/add-publisher' 
+					element={
+						<PublisherCreate msgAlert={msgAlert} user={user} />
+						} 
+				/>
+
+				<Route 
+				path='/add-author' 
+				element={
+					<AuthorCreate msgAlert={msgAlert} user={user} />
+					} 
 				/>
 				<Route 
 					path='/publishers' 
