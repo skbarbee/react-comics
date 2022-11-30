@@ -48,7 +48,7 @@ export const getAllComics = () => {
 }
 
 export const postComic = (data, user) => {
-	console.log("this is the comic",data.title)
+	console.log("this is the comic release",data.release_date)
 	return axios({
 		method: 'POST',
 		url: apiUrl + '/comics/',
@@ -62,7 +62,6 @@ export const postComic = (data, user) => {
 				characters : data.comicbook_characters,
 				release_date: data.release_date,
 				cover: data.cover
-
 			}
 		},
 		headers: {
