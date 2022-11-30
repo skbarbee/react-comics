@@ -3,10 +3,8 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheckSquare, faCoffee, faUser } from '@fortawesome/free-solid-svg-icons';
-library.add(faCheckSquare, faCoffee, faUser);
+import { library } from "@fortawesome/fontawesome-svg-core"
+
 
 
 const linkStyle = {
@@ -15,6 +13,11 @@ const linkStyle = {
 }
 const authenticatedOptions = (
 	<>
+		<Nav.Link>
+			<Link to="/discover" style={linkStyle}>
+			 	Discover
+			</Link>
+		</Nav.Link>
 		<Nav.Link>
 			<Link to="/mypage" style={linkStyle}>
 				My Page
@@ -25,6 +28,11 @@ const authenticatedOptions = (
 				Add Comic
 			</Link>
 		</Nav.Link>
+		<NavDropdown
+			bg="dark"
+			title={<i class="user icon"></i>}
+			menuVariant="dark"
+		>
 		<Nav.Link>
 			<Link to="/add-author" style={linkStyle}>
 				Add Author
@@ -45,7 +53,6 @@ const authenticatedOptions = (
 				Add Publisher
 			</Link>
 		</Nav.Link>
-		<NavDropdown bg="dark" title={<FontAwesomeIcon icon="fa-user" />} menuVariant="dark" >
 			<NavDropdown.Item>
 				<Nav.Link>
 					<Link to="change-password" style={linkStyle}>

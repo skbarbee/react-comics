@@ -56,6 +56,12 @@ code {
 	margin: 8px;
 	color: black;
 }
+.comic-panel-link {
+	font-family: "Bangers", cursive;
+	font-size: 2rem;
+	margin: 8px;
+	color: black;
+}
 p {
 	color: black;
 }
@@ -72,6 +78,11 @@ p {
 	justify-content: center;
 	height: 20rem;
 	margin-bottom: 10px;
+}
+#center {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }
 .center {
 	justify-content: center;

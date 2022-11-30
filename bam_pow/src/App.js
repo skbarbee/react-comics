@@ -26,6 +26,7 @@ import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
 import IllustratorCreate from "./components/IllustratorCreate"
 import './App.css'
+import Discover from "./components/Discover"
 
 
 
@@ -157,6 +158,12 @@ const App = () => {
 					path='/authors' 
 					element={
 						<AuthorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+								<Route 
+					path='/discover' 
+					element={
+						<Discover msgAlert={msgAlert} user={user} />
 						} 
 				/>
 			</Routes>
