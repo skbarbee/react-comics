@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Card, Container, Image } from "semantic-ui-react"
 
-import { comicShow } from "../api/comic"
+import { characterShow } from "../api/character"
 
-const ComicDetail = (user, msgAlert) => {
-    const [Comic, setComic] = useState([])
+const CharacterDetail = (user, msgAlert) => {
+    const [Character, setCharacter] = useState([])
     // const [isUpdateShown, setIsUpdateShown] = useState(false)
     // const [editModalShow, setEditModalShow] = useState(false)
     // const [toyModalShow, setToyModalShow] = useState(false)
@@ -16,14 +16,14 @@ const ComicDetail = (user, msgAlert) => {
     // const navigate = useNavigate()
 
     useEffect(() => {
-        comicShow(user, id)
+        characterShow(user, id)
             .then((res) => {
-                setComic(res.data.comic_book)
+                setCharacter(res.data.character)
             })
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
-                    message: 'Show Comic Failure' + error,
+                    message: 'Show Character Failure' + error,
                     variant: 'danger'
                 })
             })
@@ -32,34 +32,26 @@ const ComicDetail = (user, msgAlert) => {
 	return (
 		<>
 			<Container>
-				<div className="comic-panel comic-detail">
-					<Card.Group itemsPerRow={2}>
-					<Card>
-						<Image
-							src={Comic.cover}
-							wrapped
-							ui={false}
-						/>
-					</Card>
+				<div className="comic-panel">
 					<Card>
 						<Card.Content>
-							<Card.Header>{Comic.title}</Card.Header>
-							More about this comic
-							<br />
-							Illustrator: {Comic.illustrators}
-							<br />
-							Author: {Comic.authors}
-							<br />
-							Publisher: {Comic.publisher}
-							<br />
-							Character also appears in: TBD
+							<Card.Header>{Character.title}</Card.Header>
+                            <Card.Description>
+                                {Character.real_name}
+                            </Card.Description>
+                            <Card.Description>
+                                {Character.alias} 
+                            </Card.Description>
+                            <Card.Description>
+                                {Character.details}
+                            </Card.Description>
 						</Card.Content>
 					</Card>
-					</Card.Group>
+					{/* </Card.Group> */}
 				</div>
 			</Container>
 		</>
 	)
 }
 
-export default ComicDetail
+export default CharacterDetail
