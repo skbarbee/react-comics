@@ -47,7 +47,7 @@ export const getAllComics = () => {
 	})
 }
 
-export const postComic = (data,user) => {
+export const postComic = (data, user) => {
 	console.log("this is the comic",data.title)
 	return axios({
 		method: 'POST',
