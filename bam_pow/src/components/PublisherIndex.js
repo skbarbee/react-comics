@@ -1,54 +1,74 @@
-import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image, Container } from 'semantic-ui-react'
+import React, { useEffect, useState } from "react"
+import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 
-import { publisherIndex } from '../api/publisher'
+import { publisherIndex } from "../api/publisher"
 
-const PublisherIndex = ({ user, msgAlert}) => {
+const PublisherIndex = ({ user, msgAlert }) => {
+	const [allPublishers, setAllPublishers] = useState([])
+	const [liked, setLiked] = useState(false)
+	console.log(user)
 
-    const [allPublishers, setAllPublishers] = useState([])
+	useEffect(() => {
+		publisherIndex(user)
+			.then((res) => {
+				setAllPublishers(res.data.publishers)
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: "Failure",
+					message: "Index Publishers Failure" + error,
+					variant: "danger",
+				})
+			})
+	}, [])
 
-    useEffect(() => {
-        publisherIndex(user)
-        .then(res => {
-            setAllPublishers(res.data.publishers)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Index Publishers Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }, [])
+	const handleLike = () => {
+		setLiked(true)
+		console.log("liked")
+	}
+	let heart
 
-    const PublisherCards = allPublishers.map(Publisher => (
-        <Card href={"/publishers/" + Publisher.id}>
-            <Image src={Publisher.cover} wrapped ui={false} />
-            <Card.Content>
-                <Card.Header>
-                    {Publisher.publisher_name}
-                </Card.Header>
-            </Card.Content>
+	if (liked === true) {
+		heart = <Icon className="heart"></Icon>
+	} else {
+		heart = <Icon className="heart outline"></Icon>
+	}
 
-            {/* extra content for the bottom to link to just that line of publishers or something */}
-            {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
-            {/* <Card.Content extra>
+	const PublisherCards = allPublishers.map((Publisher) => (
+		<Card href={"/publishers/" + Publisher.id}>
+			<Image src={Publisher.cover} wrapped ui={false} />
+			<Card.Content>
+				<Card.Header>{Publisher.publisher_name}</Card.Header>
+			</Card.Content>
+
+			{/* extra content for the bottom to link to just that line of publishers or something */}
+			{/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
+			{/* <Card.Content extra>
                 <a>
                     <Icon name='user' />
                     {Publisher.name} appears in {Publisher.editions} editions
                 </a>
             </Card.Content> */}
-        </Card>
-    ))
+			<Card.Content>
+				<div className="ui two buttons">
+					<Button.Group>
+						<Button icon link onClick={handleLike}>
+							{heart}
+						</Button>
+						<Button secondary href={"/authors/" + Publisher.id}>
+							View author
+						</Button>
+					</Button.Group>
+				</div>
+			</Card.Content>
+		</Card>
+	))
 
-    return (
-        <Container className='comic-panel'>
-            <Card.Group itemsPerRow={5}>
-                { PublisherCards }
-            </Card.Group>
-        </Container>
-
-    )
+	return (
+		<Container className="comic-panel">
+			<Card.Group>{PublisherCards}</Card.Group>
+		</Container>
+	)
 }
 
 export default PublisherIndex

@@ -5,7 +5,8 @@ import DatePicker from "react-datepicker"
 import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
 import { Button } from "react-bootstrap"
-import { postComic } from "../api/api_calls"
+// import { postComic } from "../api/api_calls"
+import { postComic } from "../api/comic"
 import { characterIndex } from "../api/character"
 import { publisherIndex } from "../api/publisher"
 import { illustratorIndex } from "../api/illustrator"
@@ -130,7 +131,9 @@ const ComicCreate = (props) => {
 		let day = startDate.getDay()
 		console.log(day)
 
-		setComic((comic.release_date = `${year}-${month}-${day}`))
+		const formattedDate = `${startDate.getFullYear()}-${startDate.getMonth()+1}-${startDate.getDate()}`;
+		setComic((comic.release_date = formattedDate))
+		// setComic((comic.release_date = startDate))
 
 		postComic(comic, user)
 			.then(res => {navigate('/comics')})
@@ -220,9 +223,7 @@ const ComicCreate = (props) => {
 		})
 	}
 	const handleDateChange = (e) => {
-
 		setStartDate(e)
-
 	}
 
 	return (

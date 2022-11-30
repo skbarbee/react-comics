@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image, Container } from 'semantic-ui-react'
+import { Card, Icon, Image, Container, Button } from 'semantic-ui-react'
 
 import { illustratorIndex } from '../api/illustrator'
 
 const IllustratorIndex = ({ user, msgAlert}) => {
 
     const [allIllustrators, setAllIllustrators] = useState([])
+    const [liked, setLiked] = useState(false)
+	console.log(user)
 
     useEffect(() => {
         illustratorIndex(user)
@@ -21,8 +23,20 @@ const IllustratorIndex = ({ user, msgAlert}) => {
         })
     }, [])
 
+    const handleLike = () => {
+		setLiked(true)
+		console.log("liked")
+	}
+	let heart
+
+	if (liked === true) {
+		heart = <Icon className="heart"></Icon>
+	} else {
+		heart = <Icon className="heart outline"></Icon>
+	}
+
     const IllustratorCards = allIllustrators.map(Illustrator => (
-        <Card href={"/illustrators/" + Illustrator.id}>
+        <Card>
             <Image src={Illustrator.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
@@ -38,12 +52,24 @@ const IllustratorIndex = ({ user, msgAlert}) => {
                     {Illustrator.name} appears in {Illustrator.editions} editions
                 </a>
             </Card.Content> */}
+            			<Card.Content>
+				<div className="ui two buttons">
+					<Button.Group>
+						<Button icon link onClick={handleLike}>
+							{heart}
+						</Button>
+						<Button secondary href={"/illustrators/" + Illustrator.id}>
+							View author
+						</Button>
+					</Button.Group>
+				</div>
+			</Card.Content>
         </Card>
     ))
 
     return (
         <Container className='comic-panel'>
-            <Card.Group itemsPerRow={5}>
+            <Card.Group>
                 { IllustratorCards }
             </Card.Group>
         </Container>
