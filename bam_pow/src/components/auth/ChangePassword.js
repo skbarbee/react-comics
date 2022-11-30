@@ -31,6 +31,7 @@ const ChangePassword = (props) => {
         const passwords = {oldPassword, newPassword}
 
 		changePassword(passwords, user)
+            .then(()=> console.log('this is the passwords\n'. passwords, "this is the user\n", user))
 			.then(() =>
 				msgAlert({
 					heading: 'Change Password Success',
