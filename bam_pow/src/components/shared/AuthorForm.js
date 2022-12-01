@@ -4,7 +4,6 @@ import {Form, Container} from 'semantic-ui-react'
 
 const AuthorForm = ({user, msgAlert, heading, author, handleChange, handleSubmit}) => {
 	
-	
 	return (
 	<Container>
 		<div className="comic-panel">

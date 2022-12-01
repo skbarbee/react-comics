@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image, Button } from "semantic-ui-react"
+import { Card, Container, Image, Button, Form } from "semantic-ui-react"
 import { authorShow, authorUpdate, authorDelete } from "../api/author"
 
 const AuthorDetail = (props) => {
 	const { user , msgAlert } = props
 	const [written, setWritten] = useState([])
-	const [author, setAuthor] = useState(null)
+	const [author, setAuthor] = useState([])
 	const { id } = useParams()
 	const [deleted, setDeleted] = useState(false)
 
 	useEffect(() => {
+
 		authorShow(user, id)
 			.then((res) => {
-				console.log("written", res.data.written)
-				console.log(res.data.author)
+				// console.log("written", res.data.written)
+				// console.log(res.data.author)
 				setAuthor(res.data.author)
 				setWritten(res.data.written)
 			})
@@ -70,6 +71,45 @@ const AuthorDetail = (props) => {
         })
     }
 
+	const handleChange = (e) => {
+		setAuthor((prevAuthor) => {
+			
+			const updatedName = e.target.name
+			let updatedValue = e.target.value
+			
+			console.log('this is the updatedName', updatedName)
+			console.log('this is the updatedValue', updatedValue)
+
+
+			const updatedAuthor = { [updatedName]: updatedValue }
+			console.log('this is the updatedAuthor', updatedAuthor)
+			return { ...prevAuthor, ...updatedAuthor}
+			
+		})
+		console.log('this is author after set', author)
+	}
+
+	const handleUpdateAuthor =  (e) => {
+		e.preventDefault()
+		console.log(author)
+		authorUpdate(author, user, author.id)
+		
+			.then(() => {
+				msgAlert({
+					heading: 'Success',
+					message: 'Updated Author',
+					variant: 'success'
+				})
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: 'Failure',
+					message: 'Updated Author' + error,
+					variant: 'danger'
+				})
+			})
+	}
+console.log(author)
 	return (
 		<>
 			<Container className="comic-panel">
@@ -85,6 +125,38 @@ const AuthorDetail = (props) => {
 					user.staff === true
 					?
 					<>
+						<Container className = "comic-panel">
+							<Form size="big">
+								<h1 className="comic-panel-font">
+									Update Author
+								</h1>
+								<Form.Input
+									required
+									fluid
+									label="First Name"
+									placeholder="First Name"
+									onChange={handleChange}
+									name="first_name"
+									value={author.first_name}
+									
+								/>
+								<Form.Input
+									required
+									fluid
+									label="Last Name"
+									placeholder="Last Name"
+									onChange={handleChange}
+									name="last_name"
+									value={author.last_name}
+									
+								/>
+								<Form.Button 
+									color="green" 
+									onClick={handleUpdateAuthor}
+									>Update
+								</Form.Button>
+							</Form>
+						</Container>
 						<Container className = "comic-panel">
 							<h1 className="comic-panel-font">Delete this Author</h1>
 							<Button 

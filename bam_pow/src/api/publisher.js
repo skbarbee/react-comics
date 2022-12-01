@@ -32,7 +32,7 @@ export const publisherShow = (user, id) => {
 export const publisherUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/publishers/' + id,
+		url: apiUrl + '/publishers/' + id + '/',
 		data: {
 			publisher: data,
 		},
