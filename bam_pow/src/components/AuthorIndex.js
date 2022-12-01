@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
 import { authorIndex, authorShow } from "../api/author"
 import { favoritesIndex, favoritesPost } from "../api/favorites"
@@ -8,24 +8,24 @@ import { favoritesIndex, favoritesPost } from "../api/favorites"
 const AuthorIndex = ({ user, msgAlert }) => {
 	const [allAuthors, setAllAuthors] = useState([])
 	const [liked, setLiked] = useState(false)
-	const [allFavorites, setAllFavorites]= useState([])
-	console.log("user in author index",user)
+	const [allFavorites, setAllFavorites] = useState([])
+	console.log("user in author index", user)
 
 	useEffect(() => {
-        // authorShow(user, 1)
-        //     .then((res) => {
-        //         console.log(res.data)
-        //     })
+		// authorShow(user, 1)
+		//     .then((res) => {
+		//         console.log(res.data)
+		//     })
 		// favoritesIndex(user)
-        // .then(res => {
-        //     setAllFavorites(res.data.favorites)
+		// .then(res => {
+		//     setAllFavorites(res.data.favorites)
 		// 	// console.log('This is the res from favorites in author', res.data)
 		// 	// console.log("all faves",allFavorites)
-        // })
+		// })
 		authorIndex(user)
 			.then((res) => {
 				setAllAuthors(res.data.authors)
-                console.log(res.data)
+				console.log(res.data)
 			})
 			.catch((error) => {
 				msgAlert({
@@ -36,21 +36,19 @@ const AuthorIndex = ({ user, msgAlert }) => {
 			})
 	}, [])
 
-	const postFave = (id,user) => {
+	const postFave = (id, user) => {
 		console.log("this is the id", id)
 		console.log("this is the user", user)
-		let fav = {favorite_authors: id}
-		favoritesPost(fav, user)
-			.catch((error) => {
-				msgAlert({
-					heading: "Failure",
-					message: "favorite Author Failure" + error,
-					variant: "danger",
-				})
+		let fav = { favorite_authors: id }
+		favoritesPost(fav, user).catch((error) => {
+			msgAlert({
+				heading: "Failure",
+				message: "favorite Author Failure" + error,
+				variant: "danger",
 			})
+		})
 	}
 
- 
 	// console.log("mapped",favorited.favorite_authors)
 
 	const handleLike = () => {
@@ -65,9 +63,7 @@ const AuthorIndex = ({ user, msgAlert }) => {
 		heart = <Icon className="heart outline"></Icon>
 	}
 
-
-
-    /// set like function for the heart handle like posts
+	/// set like function for the heart handle like posts
 
 	const AuthorCards = allAuthors.map((Author) => (
 		<Card center>
@@ -81,8 +77,12 @@ const AuthorIndex = ({ user, msgAlert }) => {
 			<Card.Content>
 				<div className="ui two buttons">
 					<Button.Group>
-						<Button icon link onClick={() => postFave(Author.id, user)}>
-                        {/* setLiked */}
+						<Button
+							icon
+							link
+							onClick={() => postFave(Author.id, user)}
+						>
+							{/* setLiked */}
 							{heart}
 						</Button>
 						<Link to={`/authors/${Author.id}`}>
@@ -105,11 +105,15 @@ const AuthorIndex = ({ user, msgAlert }) => {
 
 	return (
 		<>
+			<Link to="/discover">
+				<Button color="orange" className="back-button">
+					<i class="left arrow icon"></i>
+					Back to Discover
+				</Button>
+			</Link>
 			<h1 className="index-header">Authors</h1>
-			<Container className="comic-panel">
-				<Card.Group itemsPerRow={3}>
-					{AuthorCards}
-				</Card.Group>
+			<Container  className="comic-panel">
+				<Card.Group centered >{AuthorCards}</Card.Group>
 			</Container>
 		</>
 	)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import { publisherIndex } from "../api/publisher"
 
 const PublisherIndex = ({ user, msgAlert }) => {
@@ -66,11 +66,15 @@ const PublisherIndex = ({ user, msgAlert }) => {
 
 	return (
 		<>
+			<Link to="/discover">
+				<Button color="orange" className="back-button">
+					<i class="left arrow icon"></i>
+					Back to Discover
+				</Button>
+			</Link>
 			<h1 className="index-header">Publishers</h1>
 			<Container className="comic-panel">
-				<Card.Group itemsPerRow={3}>
-					{PublisherCards}
-				</Card.Group>
+				<Card.Group centered>{PublisherCards}</Card.Group>
 			</Container>
 		</>
 	)

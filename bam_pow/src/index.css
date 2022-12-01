@@ -13,7 +13,7 @@ body,
 	overflow: auto;
 }
 
-*{
+* {
 	background-attachment: fixed;
 }
 
@@ -23,7 +23,7 @@ body,
 	font-family: Edo;
 	src: url("Edo-font/edo.ttf");
 }
-  
+
 /* Styling */
 .background {
 	background-image: url("./imgs/loginpage.svg");
@@ -35,14 +35,13 @@ code {
 		monospace;
 	background-color: blue;
 }
-.comic-panel{
+.comic-panel {
 	color: black;
 	margin: 20px;
 	background-color: white;
 	border: 8px solid black;
 	padding: 15px;
 }
-
 
 .comic {
 	font-family: "Bangers", cursive;
@@ -116,7 +115,7 @@ p {
 	/* flex-direction: row; */
 	/* width: 20%; */
 }
-.edo-header{
+.edo-header {
 	text-align: center;
 	font-family: Edo;
 	font-weight: normal;
@@ -131,15 +130,15 @@ p {
 	color: black;
 }
 
-.auth-label{
+.auth-label {
 	text-align: center;
-	color:black;
+	color: black;
 	font-family: Edo;
 	font-size: 120px;
 	font-weight: normal;
 }
 
-.sign-in-field{
+.sign-in-field {
 	/* Can't get the margin to the right of an input to go away to help with centering */
 
 	/* text-align: center;
@@ -156,7 +155,7 @@ p {
 	border-top-style: hidden;
 	border-right-style: hidden;
 	border-left-style: hidden; */
-  }
+}
 /* Sign In Page */
 .sign-in-panel {
 	margin: 20px;
@@ -166,24 +165,38 @@ p {
 	color: black;
 }
 
-.auth-label{
+.auth-label {
 	text-align: center;
-	color:black;
+	color: black;
 	font-family: Edo;
 	font-size: 120px;
 	font-weight: normal;
 }
 
-.index-header{
+.index-header {
 	font-family: "Bangers", cursive;
 	font-size: 5.5rem;
 	text-align: center;
-	color: black;
+	color: white;
 	margin-top: 0vh;
 	margin-bottom: -2vh;
+	text-shadow: 5px 5px black;
+}
+.back-button {
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+	/* position: relative;
+	top:  20px;
+	left: 30px; */
 }
 
-.sign-in-field{
+.sign-in-field {
 	/* Can't get the margin to the right of an input to go away to help with centering */
 
 	/* text-align: center;
@@ -200,6 +213,6 @@ p {
 	border-top-style: hidden;
 	border-right-style: hidden;
 	border-left-style: hidden; */
-  }
+}
 
-  /* Comic Show Page Styling */
+/* Comic Show Page Styling */

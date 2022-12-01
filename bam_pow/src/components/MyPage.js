@@ -13,7 +13,7 @@ const MyPage = ({ user, msgAlert }) => {
 		favoritesIndex(user)
 			.then((res) => {
 				console.log("the res",res.data)
-				setFavorites(res.data.favorites)
+				// setFavorites(res.data.favorites)
 			})
 			.catch((error) => {
 				msgAlert({
@@ -23,7 +23,7 @@ const MyPage = ({ user, msgAlert }) => {
 				})
 			})
 	},[])
-	console.log("the faves", favorites)
+	// console.log("the faves", favorites)
 	return (
 		<div>
 			<Container>
