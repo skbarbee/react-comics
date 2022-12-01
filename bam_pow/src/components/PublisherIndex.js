@@ -55,7 +55,7 @@ const PublisherIndex = ({ user, msgAlert }) => {
 						<Button icon link onClick={handleLike}>
 							{heart}
 						</Button>
-						<Link to={`/publishers/${Publisher.id}`>
+						<Link to={`/publishers/${Publisher.id}`}>
 							<Button primary>View Publisher</Button>
 						</Link>
 					</Button.Group>

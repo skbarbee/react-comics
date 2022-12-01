@@ -29,7 +29,7 @@ import PublisherDetail from "./components/PublisherDetail"
 import IllustratorCreate from "./components/IllustratorCreate"
 import Discover from "./components/Discover"
 import AuthorDetail from "./components/AuthorDetail"
-import PublisherDetail from "./components/PublisherDetail"
+
 import IllustratorDetail from "./components/IllustratorDetail"
 import './App.css'
 
