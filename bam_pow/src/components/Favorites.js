@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom"
 import { favoritesIndex } from "../api/favorites"
 
 const Favorites = ({user, msgAlert}) => {
-
+console.log('this is the user in Favorite', user)
 	const [allFavorites, setAllFavorites]= useState([])
 
 	useEffect(() => {
