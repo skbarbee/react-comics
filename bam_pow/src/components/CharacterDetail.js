@@ -27,6 +27,37 @@ const CharacterDetail = (props) => {
             })
     }, [])
 
+    const handleChange = (e, target) => {
+        setCharacter(prevCharacter => {
+            const { name, value } = target
+            const updatedName = e.target.name
+            let updatedValue = e.target.value
+
+            const updatedCharacter = { [updatedName]: updatedValue }
+
+            return { ...prevCharacter, ...updatedCharacter }
+        })
+    }
+
+    const handleUpdateCharacter = (e) => {
+        e.preventDefault()
+
+        characterUpdate(Character, user, Character.id)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'Created Character',
+                    variant: 'success'
+                })
+            })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Create Character Failure' + error,
+                    variant: 'danger'
+                })
+            })
+    }
 
     const handleDeleteCharacter = () => {
         characterDelete(user, id)
@@ -39,7 +70,7 @@ const CharacterDetail = (props) => {
             })
             
         })
-		.then(() => {navigate('/authors')})
+		.then(() => {navigate('/characters')})
         .catch((error) => {
             msgAlert({
                 heading: 'Failure',
@@ -75,6 +106,43 @@ console.log(user)
 					user.staff === true
 					?
 					<>
+                        <Container className = "comic-panel">
+                            <Form size="big">
+                                <h1 className="comic-panel-font">
+                                    Update Character!
+                                </h1>
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Real Name"
+                                    placeholder="Real Name"
+                                    onChange={handleChange}
+                                    name="real_name"
+                                    value={Character.real_name}
+                                />
+                                <Form.Input 
+                                    required
+                                    fluid
+                                    label="Alias"
+                                    placeholder="Alias"
+                                    onChange={handleChange}
+                                    name="alias"
+                                    value={Character.alias}
+                                />
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Details"
+                                    placeholder="Details"
+                                    onChange={handleChange}
+                                    name="details"
+                                    value={Character.details}
+                                />
+                            <Form.Button color="green" onClick={handleUpdateCharacter}>
+                                    Update
+                            </Form.Button>
+                            </Form>
+                        </Container>
 						<Container className = "comic-panel">
 							<h1 className="comic-panel-font">Delete this Character</h1>
 							<Button 
