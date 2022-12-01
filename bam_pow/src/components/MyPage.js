@@ -28,21 +28,8 @@ const MyPage = ({ user, msgAlert }) => {
 		<div>
 			<Container>
 				<Grid stackable>
-					<Grid.Column height={15} width={16}></Grid.Column>
-
-					<Grid.Column floated="left" width={7}>
-						<div className="comic-panel">
-							<h1 className="comic-panel-font">My Collection</h1>
-							<p>All my read books</p>
-						</div>
-					</Grid.Column>
-					<Grid.Column floated="right" width={7}>
-						<div className="comic-panel">
-							<h1 className="comic-panel-font">To Be Read</h1>
-							<p>Books I want to read</p>
-						</div>
-					</Grid.Column>
-					<Grid.Column floated="center" width={7}>
+					
+					<Grid.Column floated="center">
 						<div className="comic-panel">
 							<Favorites user={user} msgAlert={msgAlert}
 							favorites={favorites}
