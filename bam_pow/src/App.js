@@ -25,6 +25,7 @@ import PublisherIndex from "./components/PublisherIndex"
 import AuthorCreate from "./components/AuthorCreate"	
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
+import PublisherDetail from "./components/PublisherDetail"
 import IllustratorCreate from "./components/IllustratorCreate"
 import IllustratorDetail from "./components/IllusratorDetail"
 import './App.css'
@@ -160,6 +161,12 @@ const App = () => {
 					path='/publishers' 
 					element={
 						<PublisherIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/publishers/:id' 
+					element={
+						<PublisherDetail msgAlert={msgAlert} user={user} />
 						} 
 				/>
 				<Route 
