@@ -182,6 +182,9 @@ p {
 	margin-top: 0vh;
 	margin-bottom: -2vh;
 }
+.navbar-nav{
+	text-align: right;
+}
 
 .sign-in-field{
 	/* Can't get the margin to the right of an input to go away to help with centering */
