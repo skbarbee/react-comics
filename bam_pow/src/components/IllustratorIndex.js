@@ -70,12 +70,14 @@ const IllustratorIndex = ({ user, msgAlert}) => {
     ))
 
     return (
-        <Container className='comic-panel'>
-            <Card.Group>
-                { IllustratorCards }
-            </Card.Group>
-        </Container>
-
+        <>
+            <h1 className="index-header">Illustrators</h1>
+            <Container className='comic-panel'>
+                <Card.Group>
+                    { IllustratorCards }
+                </Card.Group>
+            </Container>
+        </>
     )
 }
 

@@ -65,11 +65,14 @@ const PublisherIndex = ({ user, msgAlert }) => {
 	))
 
 	return (
-		<Container className="comic-panel">
-			<Card.Group itemsPerRow={3}>
-				{PublisherCards}
-			</Card.Group>
-		</Container>
+		<>
+			<h1 className="index-header">Publishers</h1>
+			<Container className="comic-panel">
+				<Card.Group itemsPerRow={3}>
+					{PublisherCards}
+				</Card.Group>
+			</Container>
+		</>
 	)
 }
 
