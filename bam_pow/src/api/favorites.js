@@ -13,22 +13,71 @@ export const favoritesIndex = (user) => {
 	})
 }
 
-export const favoritesPost = (data,user) => {
+export const favoritesAuthorPost = (data,user) => {
 	console.log("data in patch",data)
 	return axios({
 		method: 'PATCH',
-		url:  apiUrl + '/favorites/' ,
+		url: apiUrl + '/favorites/' + user.id + '/',
 		headers: {
 			Authorization: `Token ${user.token}`,
 		},
 		data : {
 			favorites : {
-				favorite_authors: [data.favorite_authors],
-				favorite_characters: data.favorite_characters,
-				favorite_illustrators:data.favorite_illustrators,
-				favoirte_publishers: data.favoirte_publishers,
+				favorite_authors: [data.favorite_authors]
+				
+			},
+			owner: user.id
+		}
+	})
+}
 
+export const favoritesIllustratorPost = (data,user) => {
+	console.log("data in patch",data)
+	return axios({
+		method: 'PATCH',
+		url: apiUrl + '/favorites/' + user.id + '/',
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
+		data : {
+			favorites : {
+				favorite_illustrators: [data.favorite_illustrators]
+				
+			},
+			owner: user.id
+		}
+	})
+}
 
+export const favoritesCharacterPost = (data,user) => {
+	console.log("data in patch",data)
+	return axios({
+		method: 'PATCH',
+		url: apiUrl + '/favorites/' + user.id + '/',
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
+		data : {
+			favorites : {
+				favorite_characters: [data.favorite_characters]
+				
+			},
+			owner: user.id
+		}
+	})
+}
+
+export const favoritesPublisherPost = (data,user) => {
+	console.log("data in patch",data)
+	return axios({
+		method: 'PATCH',
+		url: apiUrl + '/favorites/' + user.id + '/',
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
+		data : {
+			favorites : {
+				favorite_publishers: [data.favorite_publishers]
 				
 			},
 			owner: user.id
