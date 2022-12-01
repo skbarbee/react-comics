@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image } from "semantic-ui-react"
+import { Card, Container, Image, Button, Form, Feed } from "semantic-ui-react"
 
-import { characterShow } from "../api/character"
+import { characterShow, characterUpdate, characterDelete } from "../api/character"
 
-const CharacterDetail = (user, msgAlert) => {
+const CharacterDetail = (props) => {
+    const { user , msgAlert } = props
+
     const [Character, setCharacter] = useState([])
-    // const [isUpdateShown, setIsUpdateShown] = useState(false)
-    // const [editModalShow, setEditModalShow] = useState(false)
-    // const [toyModalShow, setToyModalShow] = useState(false)
-    // const [deleted, setDeleted] = useState(false)
-    // const [updated, setUpdated] = useState(false)
-
     const { id } = useParams()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
+
+    const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         characterShow(user, id)
@@ -29,13 +27,75 @@ const CharacterDetail = (user, msgAlert) => {
             })
     }, [])
 
+    const handleChange = (e, target) => {
+        setCharacter(prevCharacter => {
+            const { name, value } = target
+            const updatedName = e.target.name
+            let updatedValue = e.target.value
+
+            const updatedCharacter = { [updatedName]: updatedValue }
+
+            return { ...prevCharacter, ...updatedCharacter }
+        })
+    }
+
+    const handleUpdateCharacter = (e) => {
+        e.preventDefault()
+
+        characterUpdate(Character, user, Character.id)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'Created Character',
+                    variant: 'success'
+                })
+            })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Create Character Failure' + error,
+                    variant: 'danger'
+                })
+            })
+    }
+
+    const handleDeleteCharacter = () => {
+        characterDelete(user, id)
+        .then(() => {
+            setDeleted(true)
+            msgAlert({
+                heading: 'Success',
+                message: 'Deleting an Character',
+                variant: 'success'
+            })
+            
+        })
+		.then(() => {navigate('/characters')})
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: 'Deleting an Character Failure' + error,
+                variant: 'danger'
+            })
+        })
+    }
+console.log(user)
 	return (
 		<>
-			<Container>
-				<div className="comic-panel">
-					<Card>
-						<Card.Content>
-							<Card.Header>{Character.title}</Card.Header>
+			<Container className = "comic-panel">
+                <Card.Group>
+                    {
+                        Character.profile_picture !== null
+                        ?
+                        <>
+                            <Image src={Character.profile_picture} circular size='small'/>
+                        </>
+                        :
+                        null
+                    }
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>{Character.title}</Card.Header>
                             <Card.Description>
                                 {Character.real_name}
                             </Card.Description>
@@ -45,11 +105,76 @@ const CharacterDetail = (user, msgAlert) => {
                             <Card.Description>
                                 {Character.details}
                             </Card.Description>
-						</Card.Content>
-					</Card>
-					{/* </Card.Group> */}
-				</div>
+                        </Card.Content>
+                    </Card>
+                </Card.Group>
 			</Container>
+            {
+				user !== null
+				?
+					user.staff === true
+					?
+					<>
+                        <Container className = "comic-panel">
+                            <Form size="big">
+                                <h1 className="comic-panel-font">
+                                    Update Character!
+                                </h1>
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Real Name"
+                                    placeholder="Real Name"
+                                    onChange={handleChange}
+                                    name="real_name"
+                                    value={Character.real_name}
+                                />
+                                <Form.Input 
+                                    required
+                                    fluid
+                                    label="Alias"
+                                    placeholder="Alias"
+                                    onChange={handleChange}
+                                    name="alias"
+                                    value={Character.alias}
+                                />
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Details"
+                                    placeholder="Details"
+                                    onChange={handleChange}
+                                    name="details"
+                                    value={Character.details}
+                                />
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Profile Picture"
+                                    placeholder="Profile Picture"
+                                    onChange={handleChange}
+                                    name="profile_picture"
+                                    value={Character.profile_picture}
+                                />
+                            <Form.Button color="green" onClick={handleUpdateCharacter}>
+                                    Update
+                            </Form.Button>
+                            </Form>
+                        </Container>
+						<Container className = "comic-panel">
+							<h1 className="comic-panel-font">Delete this Character</h1>
+							<Button 
+								color="red" 
+								onClick={handleDeleteCharacter}
+								>Delete Character
+							</Button>
+						</Container>					
+					</>
+					:
+					null
+				:
+				null
+			}
 		</>
 	)
 }

@@ -25,7 +25,9 @@ import PublisherIndex from "./components/PublisherIndex"
 import AuthorCreate from "./components/AuthorCreate"	
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
+import PublisherDetail from "./components/PublisherDetail"
 import IllustratorCreate from "./components/IllustratorCreate"
+import IllustratorDetail from "./components/IllusratorDetail"
 import './App.css'
 import Discover from "./components/Discover"
 import AuthorDetail from './components/AuthorDetail'
@@ -162,9 +164,21 @@ const App = () => {
 						} 
 				/>
 				<Route 
+					path='/publishers/:id' 
+					element={
+						<PublisherDetail msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
 					path='/illustrators' 
 					element={
 						<IllustratorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/illustrators/:id' 
+					element={
+						<IllustratorDetail msgAlert={msgAlert} user={user} />
 						} 
 				/>
 				<Route 

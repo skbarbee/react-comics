@@ -37,7 +37,7 @@ export const authorShow = (user, id) => {
 export const authorUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/authors/' + id,
+		url: apiUrl + '/authors/' + id + '/',
 		data: {
 			author: data,
 		},

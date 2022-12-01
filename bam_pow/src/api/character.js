@@ -34,7 +34,7 @@ export const characterShow = (user, id) => {
 export const characterUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/characters/' + id,
+		url: apiUrl + '/characters/' + id + '/',
 		data: {
 			character: data,
 		},

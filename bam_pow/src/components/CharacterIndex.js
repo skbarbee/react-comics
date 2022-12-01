@@ -7,7 +7,6 @@ import { characterIndex } from "../api/character"
 const CharacterIndex = ({ user, msgAlert }) => {
 	const [allCharacters, setAllCharacters] = useState([])
 	const [liked, setLiked] = useState(false)
-	console.log(user)
 
 	useEffect(() => {
 		characterIndex(user)
