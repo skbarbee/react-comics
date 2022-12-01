@@ -3,6 +3,7 @@ import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 import { comicIndex } from "../api/comic"
+import bampowCover from "../imgs/bampowcomiccover.png"
 
 const ComicIndex = ({ user, msgAlert }) => {
 	const [allComics, setAllComics] = useState([])
@@ -21,9 +22,35 @@ const ComicIndex = ({ user, msgAlert }) => {
 			})
 	}, [])
 
-	const ComicCards = allComics.map((Comic) => (
-		<Card>
-			<Image src={Comic.cover} wrapped ui={false} />
+	// somefunc function checkURL(url) {
+    // return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+	// function checkURL(url) {
+	// 	if(url.match(/\.(jpeg|jpg|gif|png)$/)){
+	// 		return (url)
+	// 	} else {
+	// 		return <Bam Pow Image link goes here>
+	// 	}
+	// }
+	const checkURL = (url) => {
+		if (url !== null) {
+			if(url.match(/\.(jpeg|jpg|gif|png)$/)){
+				console.log("in match",url)
+				return (url)
+			} else {
+				return (bampowCover)
+			}
+		}
+	}
+
+
+	const ComicCards = allComics.map((Comic, index) => (
+		<Card key={index}>
+			{/* {Comic.cover !== undefined  ? ( */}
+				<Image src={checkURL(Comic.cover)} wrapped ui={false} />
+
+			{/* ) : (
+				<Image src={bampowCover} wrapped ui={false} />
+			)} */}
 			<Card.Content>
 				<Card.Header>{Comic.title}</Card.Header>
 
