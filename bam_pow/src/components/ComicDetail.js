@@ -22,7 +22,7 @@ const ComicDetail = (props) => {
 
 	// const { msgAlert } = props
 	const [publishers, setPublishers] = useState()
-	const [authors, setAuthors] = useState()
+	const [authors, setAuthors] = useState([])
 	const [illustrators, setIllustrators] = useState()
 	const [characters, setCharacters] = useState()
 	const [loaded, setLoaded] = useState(null)
@@ -247,7 +247,9 @@ const ComicDetail = (props) => {
         })
     }
 
-	console.log(user)
+	const authorsInit = '[authors[1]]'
+
+	console.log(authors)
 	return (
 		<>
 			<Container className="comic-panel comic-detail">
@@ -275,115 +277,130 @@ const ComicDetail = (props) => {
 				</Card>
 				</Card.Group>
 			</Container>
-				{
-					user !== null
+			{
+				user !== null
+				?
+					user.staff === true
 					?
-						user.staff === true
-						?
-						<>
-							<Container className="comic-panel">
-								<Form size="medium">
-									<h1 className="comic-panel-font">
-										Edit this Comic
-									</h1>
-									<Form.Input
+					<>
+						<Container className="comic-panel">
+							<Form size="medium">
+								<h1 className="comic-panel-font">
+									Edit this Comic
+								</h1>
+								<Form.Input
+									required
+									fluid
+									label="Comic Title"
+									placeholder="Title"
+									onChange={handleChange}
+									name="title"
+									value={Comic.title}
+								/>
+								<Form.Field>
+									<label>Edition</label>
+									<input
+										type="number"
+										name="edition"
+										onChange={handleChange}
+										value={Comic.edition}
+									/>
+								</Form.Field>
+								<Form.Field>
+									<label>Authors</label>
+									<Select
+										// defaultValue = {[authors[1], authors[2]]}
 										required
-										fluid
-										label="Comic Title"
-										placeholder="Title"
-										onChange={handleChange}
-										name="title"
-										value={Comic.title}
+										options={authors}
+										name="authors"
+										isMulti
+										onChange={handleAuthorSelect}
 									/>
-									<Form.Field>
-										<label>Edition</label>
-										<input
-											type="number"
-											name="edition"
-											onChange={handleChange}
-											value={Comic.edition}
-										/>
-									</Form.Field>
-									<Form.Field>
-										<label>Authors</label>
-										<Select
-											// defaultValue = {}
-											required
-											options={authors}
-											name="authors"
-											isMulti
-											onChange={handleAuthorSelect}
-										/>
-									</Form.Field>
-									<Form.Field>
-										<label>Illustrators</label>
-										<Select
-											required
-											options={illustrators}
-											name="illustrators"
-											isMulti
-											onChange={handleIllustratorSelect}
-										/>
-									</Form.Field>
-
-									<Form.Field>
-										<label>Publisher</label>
-										<Select
-											required
-											options={publishers}
-											name="publisher"
-											onChange={handlePublisherSelect}
-										/>
-									</Form.Field>
-
-									<Form.Field required>
-										<label>Characters</label>
-										<Select
-											required
-											options={characters}
-											name="characters"
-											isMulti
-											onChange={handleCharacterSelect}
-										/>
-									</Form.Field>
-									<Form.Input
-										fluid
-										label="Cover"
-										placeholder="Paste a link to the cover"
-										onChange={handleChange}
-										name="cover"
-										value={Comic.cover}
+								</Form.Field>
+								<Form.Field>
+									<label>Illustrators</label>
+									<Select
+										required
+										options={illustrators}
+										name="illustrators"
+										isMulti
+										onChange={handleIllustratorSelect}
 									/>
-									<Form.Field required>
-										<label>Release Date</label>
-										<DatePicker
-											selected={startDate}
-											onChange={(date) => setStartDate(date)}
-											name="releaseDate"
-											dateFormat={"MM/dd/yyyy"}
-										/>
-									</Form.Field>
+								</Form.Field>
 
-									<Form.Button onClick={handleSubmit}>Update</Form.Button>
-								</Form>
-							</Container>
-							<Container className = "comic-panel">
-								<h1 className="comic-panel-font">Delete this Comic</h1>
-								<Button 
-									color="red" 
-									onClick={handleDeleteComic}
-									>Delete Comic
-								</Button>
-							</Container>
-							
-						</>
-						:
-						null
+								<Form.Field>
+									<label>Publisher</label>
+									<Select
+										required
+										options={publishers}
+										name="publisher"
+										onChange={handlePublisherSelect}
+									/>
+								</Form.Field>
+
+								<Form.Field required>
+									<label>Characters</label>
+									<Select
+										required
+										options={characters}
+										name="characters"
+										isMulti
+										onChange={handleCharacterSelect}
+									/>
+								</Form.Field>
+								<Form.Input
+									fluid
+									label="Cover"
+									placeholder="Paste a link to the cover"
+									onChange={handleChange}
+									name="cover"
+									value={Comic.cover}
+								/>
+								<Form.Field required>
+									<label>Release Date</label>
+									<DatePicker
+										selected={startDate}
+										onChange={(date) => setStartDate(date)}
+										name="releaseDate"
+										dateFormat={"MM/dd/yyyy"}
+									/>
+								</Form.Field>
+
+								<Form.Button onClick={handleSubmit}>Update</Form.Button>
+							</Form>
+						</Container>
+						<Container className = "comic-panel">
+							<h1 className="comic-panel-font">Delete this Comic</h1>
+							<Button 
+								color="red" 
+								onClick={handleDeleteComic}
+								>Delete Comic
+							</Button>
+						</Container>
+						
+					</>
 					:
 					null
-				}
+				:
+				null
+			}
 		</>
 	)
 }
 
 export default ComicDetail
+
+{/* <Card>
+    <Card.Content>
+      <Feed size="large">
+        <Feed.Event>
+          <Feed.Label image={Character.profile_picture} />
+          <Feed.Content>
+            <Feed.Summary>
+              {Character.alias}
+            </Feed.Summary>
+          </Feed.Content>
+        </Feed.Event>
+      </Feed>
+    </Card.Content>
+</Card> */}

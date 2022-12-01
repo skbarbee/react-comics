@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image, Button, Form } from "semantic-ui-react"
+import { Card, Container, Image, Button, Form, Feed } from "semantic-ui-react"
 
 import { characterShow, characterUpdate, characterDelete } from "../api/character"
 
@@ -83,9 +83,19 @@ console.log(user)
 	return (
 		<>
 			<Container className = "comic-panel">
-					<Card>
-						<Card.Content>
-							<Card.Header>{Character.title}</Card.Header>
+                <Card.Group>
+                    {
+                        Character.profile_picture !== null
+                        ?
+                        <>
+                            <Image src={Character.profile_picture} circular size='small'/>
+                        </>
+                        :
+                        null
+                    }
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>{Character.title}</Card.Header>
                             <Card.Description>
                                 {Character.real_name}
                             </Card.Description>
@@ -95,11 +105,10 @@ console.log(user)
                             <Card.Description>
                                 {Character.details}
                             </Card.Description>
-						</Card.Content>
-					</Card>
-					{/* </Card.Group> */}
+                        </Card.Content>
+                    </Card>
+                </Card.Group>
 			</Container>
-
             {
 				user !== null
 				?
@@ -137,6 +146,15 @@ console.log(user)
                                     onChange={handleChange}
                                     name="details"
                                     value={Character.details}
+                                />
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label="Profile Picture"
+                                    placeholder="Profile Picture"
+                                    onChange={handleChange}
+                                    name="profile_picture"
+                                    value={Character.profile_picture}
                                 />
                             <Form.Button color="green" onClick={handleUpdateCharacter}>
                                     Update
