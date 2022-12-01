@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Icon, Image, Container, Button, Grid } from "semantic-ui-react";
 import { useNavigate, Link } from "react-router-dom";
 import { favoritesIndex } from "../api/favorites";
-import { faV } from "@fortawesome/free-solid-svg-icons";
+
 
 const Favorites = ({ user, msgAlert }) => {
   const [favorites, setFavorites] = useState(null);
@@ -10,7 +10,7 @@ const Favorites = ({ user, msgAlert }) => {
   useEffect(() => {
     favoritesIndex(user)
       .then((res) => {
-        setFavorites(res.data.favorites[0]);
+        setFavorites(res.data.users[0]);
       })
       .catch((error) => {
         msgAlert({
