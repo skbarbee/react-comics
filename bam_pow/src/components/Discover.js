@@ -8,16 +8,19 @@ const Discover = () => {
 			<Container className="comic-panel">
 				<h1 className="comic-panel-font" id="center">Discover</h1>
 				<Grid>
-					<Grid.Row columns={2} id="center">
+					<Grid.Row columns={3} id="center">
 						<Grid.Column>
-                        <Link to='/publishers' className="comic-panel-link">Publishers</Link>
+                        	<Link to='/comics' className="comic-panel-link">All Comics</Link>
 						</Grid.Column>
 						<Grid.Column>
-                        <Link to='/characters' className="comic-panel-link">Characters</Link>
+                        	<Link to='/publishers' className="comic-panel-link">Publishers</Link>
+						</Grid.Column>
+						<Grid.Column>
+                        	<Link to='/characters' className="comic-panel-link">Characters</Link>
 						</Grid.Column>
 					</Grid.Row>
 
-                    <Grid.Row columns={2} id="center">
+                    <Grid.Row columns={3} id="center">
 						<Grid.Column >
 							<Link to='/authors' className="comic-panel-link">Authors</Link>
 						</Grid.Column>
