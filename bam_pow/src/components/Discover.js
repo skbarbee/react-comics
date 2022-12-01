@@ -13,11 +13,12 @@ const Discover = () => {
                         	<Link to='/comics' className="comic-panel-link">All Comics</Link>
 						</Grid.Column>
 						<Grid.Column>
-                        	<Link to='/publishers' className="comic-panel-link">Publishers</Link>
-						</Grid.Column>
-						<Grid.Column>
                         	<Link to='/characters' className="comic-panel-link">Characters</Link>
 						</Grid.Column>
+						<Grid.Column>
+                        	<Link to='/publishers' className="comic-panel-link">Publishers</Link>
+						</Grid.Column>
+
 					</Grid.Row>
 
                     <Grid.Row columns={3} id="center">
@@ -27,6 +28,7 @@ const Discover = () => {
 						<Grid.Column>
 							<Link to='/illustrators' className="comic-panel-link">Illustrators</Link>
 						</Grid.Column>
+						<Grid.Column></Grid.Column>
 					</Grid.Row>
 				</Grid>
 			</Container>
