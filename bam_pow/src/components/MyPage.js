@@ -1,11 +1,29 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Card, Image, Container, Grid } from "semantic-ui-react"
 // import { Button } from 'semantic-ui-css'
 import comicBg from "../imgs/loginpage.svg"
 // import components for
 import Favorites from "./Favorites"
+import { favoritesIndex } from "../api/favorites"
 
-const MyPage = ({user, msgAlert}) => {
+const MyPage = ({ user, msgAlert }) => {
+	const [favorites, setFavorites] = useState(null)
+
+	useEffect(() => {
+		favoritesIndex(user)
+			.then((res) => {
+				console.log("the res",res.data)
+				setFavorites(res.data.favorites[0])
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: "Failure",
+					message: "Index Favorites Failure" + error,
+					variant: "danger",
+				})
+			})
+	},[])
+	console.log("the faves", favorites)
 	return (
 		<div>
 			<Container>
@@ -26,7 +44,9 @@ const MyPage = ({user, msgAlert}) => {
 					</Grid.Column>
 					<Grid.Column floated="center" width={7}>
 						<div className="comic-panel">
-							<Favorites user={user} msgAlert={msgAlert} />
+							<Favorites user={user} msgAlert={msgAlert}
+							favorites={favorites}
+							/>
 						</div>
 					</Grid.Column>
 				</Grid>

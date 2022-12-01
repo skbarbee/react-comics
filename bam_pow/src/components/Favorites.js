@@ -6,20 +6,20 @@ const Favorites = ({user, msgAlert}) => {
 console.log('this is the user in Favorite', user)
 	const [allFavorites, setAllFavorites]= useState([])
 
-	useEffect(() => {
-        favoritesIndex(user)
-        .then(res => {
-            setAllFavorites(res.data.favorites)
-			console.log('This is the res from favorites', res.data)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Index Favorites Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }, [])
+	// useEffect(() => {
+    //     favoritesIndex(user)
+    //     .then(res => {
+    //         setAllFavorites(res.data.favorites)
+	// 		console.log('This is the res from favorites', res.data)
+    //     })
+    //     .catch((error) => {
+    //         msgAlert({
+    //             heading: 'Failure',
+    //             message: 'Index Favorites Failure' + error,
+    //             variant: 'danger'
+    //         })
+    //     })
+    // }, [])
 
 	return (
 		<>
