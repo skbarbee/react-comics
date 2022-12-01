@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image, Container, Button } from 'semantic-ui-react'
+import React, { useEffect, useState } from "react"
+import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
-import { illustratorIndex } from '../api/illustrator'
+import { illustratorIndex } from "../api/illustrator"
 
-const IllustratorIndex = ({ user, msgAlert}) => {
-
-    const [allIllustrators, setAllIllustrators] = useState([])
-    const [liked, setLiked] = useState(false)
+const IllustratorIndex = ({ user, msgAlert }) => {
+	const [allIllustrators, setAllIllustrators] = useState([])
+	const [liked, setLiked] = useState(false)
 	console.log(user)
 
-    useEffect(() => {
-        illustratorIndex(user)
-        .then(res => {
-            setAllIllustrators(res.data.illustrators)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Index Illustrators Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }, [])
+	useEffect(() => {
+		illustratorIndex(user)
+			.then((res) => {
+				setAllIllustrators(res.data.illustrators)
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: "Failure",
+					message: "Index Illustrators Failure" + error,
+					variant: "danger",
+				})
+			})
+	}, [])
 
-    const handleLike = () => {
+	const handleLike = () => {
 		setLiked(true)
 		console.log("liked")
 	}
@@ -37,24 +36,24 @@ const IllustratorIndex = ({ user, msgAlert}) => {
 		heart = <Icon className="heart outline"></Icon>
 	}
 
-    const IllustratorCards = allIllustrators.map(Illustrator => (
-        <Card>
-            <Image src={Illustrator.cover} wrapped ui={false} />
-            <Card.Content>
-                <Card.Header>
-                    {Illustrator.first_name} {Illustrator.last_name}
-                </Card.Header>
-            </Card.Content>
+	const IllustratorCards = allIllustrators.map((Illustrator) => (
+		<Card>
+			<Image src={Illustrator.cover} wrapped ui={false} />
+			<Card.Content>
+				<Card.Header>
+					{Illustrator.first_name} {Illustrator.last_name}
+				</Card.Header>
+			</Card.Content>
 
-            {/* extra content for the bottom to link to just that line of illustrators or something */}
-            {/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
-            {/* <Card.Content extra>
+			{/* extra content for the bottom to link to just that line of illustrators or something */}
+			{/* Maybe we should have a main character listed so we can say "Iron man appears in 'x' other issues" */}
+			{/* <Card.Content extra>
                 <a>
                     <Icon name='user' />
                     {Illustrator.name} appears in {Illustrator.editions} editions
                 </a>
             </Card.Content> */}
-            			<Card.Content>
+			<Card.Content>
 				<div className="ui two buttons">
 					<Button.Group>
 						<Button icon link onClick={handleLike}>
@@ -66,19 +65,23 @@ const IllustratorIndex = ({ user, msgAlert}) => {
 					</Button.Group>
 				</div>
 			</Card.Content>
-        </Card>
-    ))
+		</Card>
+	))
 
-    return (
-        <>
-            <h1 className="index-header">Illustrators</h1>
-            <Container className='comic-panel'>
-                <Card.Group>
-                    { IllustratorCards }
-                </Card.Group>
-            </Container>
-        </>
-    )
+	return (
+		<>
+			<Link to="/discover">
+				<Button color="orange" className="back-button">
+					<i class="left arrow icon"></i>
+					Back to Discover
+				</Button>
+			</Link>
+			<h1 className="index-header">Illustrators</h1>
+			<Container className="comic-panel">
+				<Card.Group>{IllustratorCards}</Card.Group>
+			</Container>
+		</>
+	)
 }
 
 export default IllustratorIndex

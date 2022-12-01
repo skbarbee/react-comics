@@ -9,20 +9,20 @@ import { favoritesIndex } from "../api/favorites"
 const MyPage = ({ user, msgAlert }) => {
 	// const [favorites, setFavorites] = useState(null)
 
-	// useEffect(() => {
-	// 	favoritesIndex(user)
-	// 		.then((res) => {
-	// 			console.log("the res",res.data)
-	// 			setFavorites(res.data.favorites)
-	// 		})
-	// 		.catch((error) => {
-	// 			msgAlert({
-	// 				heading: "Failure",
-	// 				message: "Index Favorites Failure" + error,
-	// 				variant: "danger",
-	// 			})
-	// 		})
-	// },[])
+	useEffect(() => {
+		favoritesIndex(user)
+			.then((res) => {
+				console.log("the res",res.data)
+				// setFavorites(res.data.favorites)
+			})
+			.catch((error) => {
+				msgAlert({
+					heading: "Failure",
+					message: "Index Favorites Failure" + error,
+					variant: "danger",
+				})
+			})
+	},[])
 	// console.log("the faves", favorites)
 	return (
 		<div>

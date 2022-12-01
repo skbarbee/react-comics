@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { Card, Container, Image, Button, Form, Feed } from "semantic-ui-react"
 import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
@@ -253,7 +253,8 @@ const ComicDetail = (props) => {
 	return (
 		<>
 			<Container className="comic-panel comic-detail">
-				<Card.Group itemsPerRow={2}>
+				<Card.Group >
+			<Link to='/comics'> <Button>Back to All Comics</Button></Link>
 				<Card>
 					<Image
 						src={Comic.cover}

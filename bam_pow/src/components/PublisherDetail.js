@@ -102,7 +102,10 @@ console.log(user)
 	return (
 		<>
 			<Container className="comic-panel">
-                <Link to='/publishers'> <Button>Back to All Publishers</Button></Link>
+                <Card.Group centered>
+
+            <Link to='/publishers'> <Button>Back to All Publishers</Button></Link>
+                </Card.Group>
 			    <h1 className="comic-panel-font">
 				    Titles published by
 				    {publisherName}

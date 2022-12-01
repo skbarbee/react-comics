@@ -8,7 +8,7 @@ const Discover = () => {
 			<Container className="comic-panel">
 				<h1 className="comic-panel-font" id="center">Discover</h1>
 				<Grid>
-					<Grid.Row columns={3} id="center">
+					<Grid.Row columns={2} id="center">
 						<Grid.Column>
                         	<Link to='/comics' className="comic-panel-link">All Comics</Link>
 						</Grid.Column>

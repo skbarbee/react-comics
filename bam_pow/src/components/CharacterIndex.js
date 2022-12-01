@@ -75,11 +75,15 @@ const CharacterIndex = ({ user, msgAlert }) => {
 
 	return (
 		<>
-            <h1 className="index-header">Characters</h1>
+			<Link to="/discover">
+				<Button color="orange" className="back-button">
+					<i class="left arrow icon"></i>
+					Back to Discover
+				</Button>
+			</Link>
+			<h1 className="index-header">Characters</h1>
 			<Container className="comic-panel">
-				<Card.Group itemsPerRow={3}>
-					{CharacterCards}
-				</Card.Group>
+				<Card.Group centered>{CharacterCards}</Card.Group>
 			</Container>
 		</>
 	)
