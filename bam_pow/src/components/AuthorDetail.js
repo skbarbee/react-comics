@@ -5,14 +5,14 @@ import { authorShow } from "../api/author"
 
 const AuthorDetail = (user, msgAlert) => {
 	const [written, setWritten] = useState([])
-	const [author, setAuthor] = useState()
+	const [author, setAuthor] = useState(null)
 	const { id } = useParams()
 	console.log(id)
 
 	useEffect(() => {
 		authorShow(user, id)
 			.then((res) => {
-				console.log(res.data.written)
+				console.log("written", res.data.written)
 				console.log(res.data.author)
 				setAuthor(res.data.author)
 				setWritten(res.data.written)
@@ -26,18 +26,28 @@ const AuthorDetail = (user, msgAlert) => {
 				})
 			})
 	}, [])
-
-	const allWritten = written.map((titles) => (
-		// console.log(titles.title)
-		<Card>
-			<h1>{titles.title}</h1>
-		</Card>
-	))
+    let allWritten
+    let authorName
+	if (written === []) {
+        allWritten = <>nothing</>
+	} else {
+		allWritten = written.map((titles) => (
+			// console.log(titles.title)
+			<Card>
+				<h1>{titles.title}</h1>
+			</Card>
+		))
+	}
+    if (author === null) {
+        authorName = "no such author"
+    } else {
+        authorName = ` ${author.first_name}  ${author.last_name}`
+    }
 	return (
 		<Container className="comic-panel">
 			<h1 className="comic-panel-font">
-				Titles written by 
-				{" " +author.first_name + " " + author.last_name}
+				Titles written by
+				{authorName}
 			</h1>
 			{allWritten}
 		</Container>

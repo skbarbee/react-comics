@@ -66,7 +66,7 @@ const CharacterIndex = ({ user, msgAlert }) => {
 						</Button>
 
 						<Link to={`/characters/${Character.id}`}>
-							<Button primary>View author</Button>
+							<Button primary>View Character</Button>
 						</Link>
 					</Button.Group>
 				</div>
