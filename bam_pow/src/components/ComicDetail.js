@@ -250,32 +250,31 @@ const ComicDetail = (props) => {
 	console.log(user)
 	return (
 		<>
-			<Container>
-				<div className="comic-panel comic-detail">
-					<Card.Group itemsPerRow={2}>
-					<Card>
-						<Image
-							src={Comic.cover}
-							wrapped
-							ui={false}
-						/>
-					</Card>
-					<Card>
-						<Card.Content>
-							<Card.Header>{Comic.title}</Card.Header>
-							More about this comic
-							<br />
-							Illustrator: {Comic.illustrators}
-							<br />
-							Author: {Comic.authors}
-							<br />
-							Publisher: {Comic.publisher}
-							<br />
-							Character also appears in: TBD
-						</Card.Content>
-					</Card>
-					</Card.Group>
-				</div>
+			<Container className="comic-panel comic-detail">
+				<Card.Group itemsPerRow={2}>
+				<Card>
+					<Image
+						src={Comic.cover}
+						wrapped
+						ui={false}
+					/>
+				</Card>
+				<Card>
+					<Card.Content>
+						<Card.Header>{Comic.title}</Card.Header>
+						More about this comic
+						<br />
+						Illustrator: {Comic.illustrators}
+						<br />
+						Author: {Comic.authors}
+						<br />
+						Publisher: {Comic.publisher}
+						<br />
+						Character also appears in: TBD
+					</Card.Content>
+				</Card>
+				</Card.Group>
+			</Container>
 				{
 					user !== null
 					?
@@ -383,28 +382,8 @@ const ComicDetail = (props) => {
 					:
 					null
 				}
-
-			</Container>
 		</>
 	)
 }
 
 export default ComicDetail
-
-// { 
-// 	pet.owner && user && pet.owner._id === user._id 
-// 	?
-// 	<>
-// 		<Button onClick={() => setEditModalShow(true)} className="m-2" variant="warning">
-// 			Edit Pet
-// 		</Button>
-// 		<Button onClick={() => handleDeletePet()}
-// 			className="m-2"
-// 			variant="danger"
-// 		>
-// 			Set { pet.name } Free
-// 		</Button>
-// 	</>
-// 	:
-// 	null
-// }

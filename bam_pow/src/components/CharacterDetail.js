@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image } from "semantic-ui-react"
+import { Card, Container, Image, Button, Form } from "semantic-ui-react"
 
-import { characterShow } from "../api/character"
+import { characterShow, characterUpdate, characterDelete } from "../api/character"
 
-const CharacterDetail = (user, msgAlert) => {
+const CharacterDetail = (props) => {
+    const { user , msgAlert } = props
+
     const [Character, setCharacter] = useState([])
-    // const [isUpdateShown, setIsUpdateShown] = useState(false)
-    // const [editModalShow, setEditModalShow] = useState(false)
-    // const [toyModalShow, setToyModalShow] = useState(false)
-    // const [deleted, setDeleted] = useState(false)
-    // const [updated, setUpdated] = useState(false)
-
     const { id } = useParams()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
+
+    const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         characterShow(user, id)
@@ -29,10 +27,31 @@ const CharacterDetail = (user, msgAlert) => {
             })
     }, [])
 
+
+    const handleDeleteCharacter = () => {
+        characterDelete(user, id)
+        .then(() => {
+            setDeleted(true)
+            msgAlert({
+                heading: 'Success',
+                message: 'Deleting an Character',
+                variant: 'success'
+            })
+            
+        })
+		.then(() => {navigate('/authors')})
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: 'Deleting an Character Failure' + error,
+                variant: 'danger'
+            })
+        })
+    }
+console.log(user)
 	return (
 		<>
-			<Container>
-				<div className="comic-panel">
+			<Container className = "comic-panel">
 					<Card>
 						<Card.Content>
 							<Card.Header>{Character.title}</Card.Header>
@@ -48,8 +67,28 @@ const CharacterDetail = (user, msgAlert) => {
 						</Card.Content>
 					</Card>
 					{/* </Card.Group> */}
-				</div>
 			</Container>
+
+            {
+				user !== null
+				?
+					user.staff === true
+					?
+					<>
+						<Container className = "comic-panel">
+							<h1 className="comic-panel-font">Delete this Character</h1>
+							<Button 
+								color="red" 
+								onClick={handleDeleteCharacter}
+								>Delete Character
+							</Button>
+						</Container>					
+					</>
+					:
+					null
+				:
+				null
+			}
 		</>
 	)
 }
