@@ -12,6 +12,7 @@ import { publisherIndex } from "../api/publisher"
 import { illustratorIndex } from "../api/illustrator"
 import { authorIndex } from "../api/author"
 
+
 const ComicCreate = (props) => {
 	const { msgAlert, user } = props
 	const [publishers, setPublishers] = useState()
@@ -38,7 +39,7 @@ const ComicCreate = (props) => {
 		illustratorIndex()
 			.then((res) => {
 				let illustrators = res.data.illustrators
-				console.log("the res", illustrators)
+
 				const illustratorOptions = illustrators.map(
 					(illustrator, index) => ({
 						key: illustrator.id,
@@ -119,17 +120,17 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
-		console.log(comic)
+		
 	}
 
 	const handleSubmit = (e) => {
 		// e.preventDefault()
-		console.log(typeof startDate)
+		
 		let year = startDate.getFullYear()
 		let month = startDate.getMonth()
-		console.log(month)
+		
 		let day = startDate.getDay()
-		console.log(day)
+		
 
 		const formattedDate = `${startDate.getFullYear()}-${startDate.getMonth()+1}-${startDate.getDate()}`;
 		setComic((comic.release_date = formattedDate))
@@ -152,12 +153,12 @@ const ComicCreate = (props) => {
 				})
 			})
 
-		console.log("the comic and user", comic, user)
+
 	}
 
 	const handleIllustratorSelect = (e) => {
 		let illustrators = []
-		console.log(e)
+
 		e.forEach((e) => illustrators.push(e.value))
 		setComic((prevComic) => {
 			const name = "comicbook_illustrators"
@@ -170,14 +171,14 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
-		console.log(comic)
+
 	}
 	const handleCharacterSelect = (e) => {
 		let characters = []
-		console.log("the selection", e)
+
 
 		e.forEach((e) => characters.push(e.value))
-		console.log("chars", characters)
+
 		setComic((prevComic) => {
 			const name = "comicbook_characters"
 			let value = characters
@@ -189,7 +190,7 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
-		console.log(comic)
+
 	}
 
 	const handleAuthorSelect = (e) => {
@@ -206,7 +207,7 @@ const ComicCreate = (props) => {
 				...updatedComic,
 			}
 		})
-		console.log(comic)
+
 	}
 	const handlePublisherSelect = (e) => {
 		let publisher = e.value

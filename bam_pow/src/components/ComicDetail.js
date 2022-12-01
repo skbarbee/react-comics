@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import DatePicker from "react-datepicker"
 
 import { comicShow, comicUpdate, comicDelete, postComic } from "../api/comic"
+import comicCover from '../imgs/bampowcomiccover.png'
 
 import {
 	getAuthors,
@@ -247,20 +248,37 @@ const ComicDetail = (props) => {
         })
     }
 
+
 	const authorsInit = '[authors[1]]'
 
-	console.log(authors)
+	if (Comic.cover !== undefined){
+		if(Comic.cover.includes('http')){
+			console.log("yup")
+		} else {
+			Comic.cover = comicCover
+		}
+	}
+
 	return (
 		<>
 			<Container className="comic-panel comic-detail">
 				<Card.Group >
 			<Link to='/comics'> <Button>Back to All Comics</Button></Link>
 				<Card>
+				{
+                        // Comic.cover.includes("https")
+                        // ?
+                        // // <>
+                        //     <Image src={comicCover} />
+                        // // </>
+                        // :
+                      
 					<Image
 						src={Comic.cover}
 						wrapped
 						ui={false}
 					/>
+                    }
 				</Card>
 				<Card>
 					<Card.Content>
