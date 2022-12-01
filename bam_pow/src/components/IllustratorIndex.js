@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image, Container, Button } from 'semantic-ui-react'
-import { Link } from "react-router-dom"
+
+import { Link } from 'react-router-dom'
 
 import { illustratorIndex } from '../api/illustrator'
 

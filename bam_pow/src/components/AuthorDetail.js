@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { useParams, useNavigate } from "react-router-dom"
 import { Card, Container, Image, Button, Form } from "semantic-ui-react"
 import { authorShow, authorUpdate, authorDelete } from "../api/author"
@@ -111,14 +113,16 @@ const AuthorDetail = (props) => {
 	}
 console.log(author)
 	return (
-		<>
-			<Container className="comic-panel">
-				<h1 className="comic-panel-font">
-					Titles written by
-					{authorName}
-				</h1>
-				{allWritten}
-			</Container>
+
+		<Container className="comic-panel">
+            <Link to='/authors'> <Button>Back to All Authors</Button></Link>
+			<h1 className="comic-panel-font">
+				Titles written by
+				{authorName}
+			</h1>
+			{allWritten}
+		</Container>
+    <>
 			{
 				user !== null
 				?

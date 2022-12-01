@@ -135,3 +135,4 @@ console.log(user)
 }
 
 export default PublisherDetail
+
