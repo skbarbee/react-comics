@@ -14,16 +14,24 @@ export const favoritesIndex = (user) => {
 }
 
 export const favoritesPost = (data,user) => {
+	console.log("data in patch",data)
 	return axios({
 		method: 'PATCH',
-		url:  apiUrl + '/favorites/',
+		url:  apiUrl + '/favorites/' ,
 		headers: {
 			Authorization: `Token ${user.token}`,
 		},
 		data : {
 			favorites : {
-				favorite: data.favorite
+				favorite_authors: [data.favorite_authors],
+				favorite_characters: data.favorite_characters,
+				favorite_illustrators:data.favorite_illustrators,
+				favoirte_publishers: data.favoirte_publishers,
+
+
+				
 			},
+			owner: user.id
 		}
 	})
 }

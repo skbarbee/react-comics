@@ -4,6 +4,7 @@
 	background-size: cover;
 	background-position: center;
     background-attachment: fixed;
+    overflow-x: hidden;
 	color: white;
 	height: 100vh;
 }
