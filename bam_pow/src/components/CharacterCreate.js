@@ -81,6 +81,15 @@ const CharacterCreate = ({ user, msgAlert }) => {
                         name="details"
                         value={character.details}
                     />
+                    <Form.Input
+                        required
+                        fluid
+                        label="Profile Picture"
+                        placeholder="Profile Picture"
+                        onChange={handleChange}
+                        name="profile_picture"
+                        value={character.profile_picture}
+                    />
                    <Form.Button onClick={handleCreateCharacter}>
                         Add
                    </Form.Button>

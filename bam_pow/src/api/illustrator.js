@@ -36,7 +36,7 @@ export const illustratorShow = (user, id) => {
 export const illustratorUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/illustrators/' + id,
+		url: apiUrl + '/illustrators/' + id + '/',
 		data: {
 			illustrator: data,
 		},

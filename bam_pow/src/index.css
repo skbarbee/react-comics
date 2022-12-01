@@ -12,12 +12,11 @@ body,
 	height: 100%;
 	overflow: auto;
 }
-/* Fonts */
-@font-face {
-	font-family: Edo;
-	src: url("Edo-font/edo.ttf");
+
+*{
+	background-attachment: fixed;
 }
-  
+
 /* Styling */
 /* Fonts */
 @font-face {
@@ -30,6 +29,7 @@ body,
 	background-image: url("./imgs/loginpage.svg");
 	background-color: blue;
 }
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;

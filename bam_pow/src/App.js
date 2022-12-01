@@ -25,12 +25,13 @@ import PublisherIndex from "./components/PublisherIndex"
 import AuthorCreate from "./components/AuthorCreate"
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
+import PublisherDetail from "./components/PublisherDetail"
 import IllustratorCreate from "./components/IllustratorCreate"
-import "./App.css"
 import Discover from "./components/Discover"
 import AuthorDetail from "./components/AuthorDetail"
 import PublisherDetail from "./components/PublisherDetail"
 import IllustratorDetail from "./components/IllustratorDetail"
+import './App.css'
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -153,7 +154,6 @@ const App = () => {
 							<PublisherCreate msgAlert={msgAlert} user={user} />
 						}
 					/>
-
 					<Route
 						path="/add-author"
 						element={
@@ -199,11 +199,13 @@ const App = () => {
 							<AuthorDetail msgAlert={msgAlert} user={user} />
 						}
 					/>
-					<Route
-						path="/discover"
-						element={<Discover msgAlert={msgAlert} user={user} />}
-					/>
-				</Routes>
+					<Route 
+					path='/discover' 
+					element={
+						<Discover msgAlert={msgAlert} user={user} />
+						} 
+				/>
+			</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
 						key={msgAlert.id}

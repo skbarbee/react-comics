@@ -2,79 +2,79 @@ import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Card, Container, Image, Button, Form } from "semantic-ui-react"
 
-import { publisherShow, publisherUpdate, publisherDelete } from "../api/publisher"
+import { illustratorShow, illustratorUpdate, illustratorDelete } from "../api/illustrator"
 
-const PublisherDetail = (props) => {
+const IllustratorDetail = (props) => {
     const { user , msgAlert } = props
 
-    const [Publisher, setPublisher] = useState([])
+    const [Illustrator, setIllustrator] = useState([])
     const { id } = useParams()
     const navigate = useNavigate()
 
     const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
-        publisherShow(user, id)
+        illustratorShow(user, id)
             .then((res) => {
-                setPublisher(res.data.publisher)
+                setIllustrator(res.data.illustrator)
             })
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
-                    message: 'Show Publisher Failure' + error,
+                    message: 'Show Illustrator Failure' + error,
                     variant: 'danger'
                 })
             })
     }, [])
 
     const handleChange = (e, target) => {
-        setPublisher(prevPublisher => {
+        setIllustrator(prevIllustrator => {
             const { name, value } = target
             const updatedName = e.target.name
             let updatedValue = e.target.value
 
-            const updatedPublisher = { [updatedName]: updatedValue }
+            const updatedIllustrator = { [updatedName]: updatedValue }
 
-            return { ...prevPublisher, ...updatedPublisher }
+            return { ...prevIllustrator, ...updatedIllustrator }
         })
     }
 
-    const handleUpdatePublisher = (e) => {
+    const handleUpdateIllustrator = (e) => {
         e.preventDefault()
 
-        publisherUpdate(Publisher, user, Publisher.id)
+        illustratorUpdate(Illustrator, user, Illustrator.id)
             .then(() => {
                 msgAlert({
                     heading: 'Success',
-                    message: 'Created Publisher',
+                    message: 'Created Illustrator',
                     variant: 'success'
                 })
             })
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
-                    message: 'Create Publisher Failure' + error,
+                    message: 'Create Illustrator Failure' + error,
                     variant: 'danger'
                 })
             })
     }
 
-    const handleDeletePublisher = () => {
-        publisherDelete(user, id)
+    const handleDeleteIllustrator = () => {
+        illustratorDelete(user, id)
         .then(() => {
             setDeleted(true)
             msgAlert({
                 heading: 'Success',
-                message: 'Deleting an Publisher',
+                message: 'Deleting an Illustrator',
                 variant: 'success'
             })
             
         })
-		.then(() => {navigate('/publishers')})
+		.then(() => {navigate('/illustrators')})
         .catch((error) => {
             msgAlert({
                 heading: 'Failure',
-                message: 'Deleting an Publisher Failure' + error,
+                message: 'Deleting an Illustrator Failure' + error,
                 variant: 'danger'
             })
         })
@@ -85,7 +85,7 @@ console.log(user)
 			<Container className = "comic-panel">
 					<Card>
 						<Card.Content>
-							<Card.Header>{Publisher.publisher_name}</Card.Header>
+							<Card.Header>{Illustrator.first_name} {Illustrator.last_name}</Card.Header>
 						</Card.Content>
 					</Card>
 					{/* </Card.Group> */}
@@ -100,28 +100,37 @@ console.log(user)
                         <Container className = "comic-panel">
                             <Form size="big">
                                 <h1 className="comic-panel-font">
-                                    Update Publisher!
+                                    Update Illustrator!
                                 </h1>
                                 <Form.Input
                                     required
                                     fluid
-                                    label="Publisher Name"
-                                    placeholder="Publisher Name"
+                                    label="First Name"
+                                    placeholder="First Name"
                                     onChange={handleChange}
-                                    name="publisher_name"
-                                    value={Publisher.publisher_name}
+                                    name="first_name"
+                                    value={Illustrator.first_name}
                                 />
-                            <Form.Button color="green" onClick={handleUpdatePublisher}>
+                                <Form.Input 
+                                    required
+                                    fluid
+                                    label="Last Name"
+                                    placeholder="Last Name"
+                                    onChange={handleChange}
+                                    name="last_name"
+                                    value={Illustrator.last_name}
+                                />
+                            <Form.Button color="green" onClick={handleUpdateIllustrator}>
                                     Update
                             </Form.Button>
                             </Form>
                         </Container>
 						<Container className = "comic-panel">
-							<h1 className="comic-panel-font">Delete this Publisher</h1>
+							<h1 className="comic-panel-font">Delete this Illustrator</h1>
 							<Button 
 								color="red" 
-								onClick={handleDeletePublisher}
-								>Delete Publisher
+								onClick={handleDeleteIllustrator}
+								>Delete Illustrator
 							</Button>
 						</Container>					
 					</>
@@ -134,5 +143,4 @@ console.log(user)
 	)
 }
 
-export default PublisherDetail
-
+export default IllustratorDetail

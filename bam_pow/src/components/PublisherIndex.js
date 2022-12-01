@@ -55,11 +55,8 @@ const PublisherIndex = ({ user, msgAlert }) => {
 						<Button icon link onClick={handleLike}>
 							{heart}
 						</Button>
-						<Link to={`/publishers/${Publisher.id}`}>
-						
-						<Button primary>
-							View author
-						</Button>
+						<Link to={`/publishers/${Publisher.id}`>
+							<Button primary>View Publisher</Button>
 						</Link>
 					</Button.Group>
 				</div>
@@ -69,7 +66,9 @@ const PublisherIndex = ({ user, msgAlert }) => {
 
 	return (
 		<Container className="comic-panel">
-			<Card.Group>{PublisherCards}</Card.Group>
+			<Card.Group itemsPerRow={3}>
+				{PublisherCards}
+			</Card.Group>
 		</Container>
 	)
 }

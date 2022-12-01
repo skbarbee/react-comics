@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react' 
-import { Card, Icon, Image, Container } from 'semantic-ui-react'
+import { Card, Icon, Image, Container, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 import { comicIndex } from '../api/comic'
 
@@ -22,7 +23,8 @@ const ComicIndex = ({ user, msgAlert}) => {
     }, [])
 
     const ComicCards = allComics.map(Comic => (
-        <Card href={"/comics/" + Comic.id}>
+        
+        <Card >
             <Image src={Comic.cover} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>
@@ -36,6 +38,9 @@ const ComicIndex = ({ user, msgAlert}) => {
                 <Card.Description>
                     Edition {Comic.edition}
                 </Card.Description>
+                <Link to={`/comics/${Comic.id}`}>
+					<Button primary>View Comic</Button>
+				</Link>
 
             </Card.Content>
 
@@ -47,7 +52,9 @@ const ComicIndex = ({ user, msgAlert}) => {
                     {Comic.name} appears in {Comic.editions} editions
                 </a>
             </Card.Content> */}
+
         </Card>
+ 
     ))
 
     return (
