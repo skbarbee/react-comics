@@ -58,12 +58,14 @@ const ComicIndex = ({ user, msgAlert}) => {
     ))
 
     return (
-        <Container className='comic-panel'>
-            <Card.Group itemsPerRow={5}>
-                { ComicCards }
-            </Card.Group>
-        </Container>
-
+        <>
+            <h1 className="index-header">All Comics</h1>
+            <Container className='comic-panel'>
+                <Card.Group itemsPerRow={5}>
+                    { ComicCards }
+                </Card.Group>
+            </Container>
+        </>
     )
 }
 

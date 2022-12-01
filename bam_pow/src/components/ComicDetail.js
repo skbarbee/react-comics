@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image, Button, Form } from "semantic-ui-react"
+import { Card, Container, Image, Button, Form, Feed } from "semantic-ui-react"
 import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
 import DatePicker from "react-datepicker"
@@ -366,7 +366,7 @@ const ComicDetail = (props) => {
 									/>
 								</Form.Field>
 
-								<Form.Button onClick={handleSubmit}>Update</Form.Button>
+								<Form.Button color="green" onClick={handleSubmit}>Update</Form.Button>
 							</Form>
 						</Container>
 						<Container className = "comic-panel">
