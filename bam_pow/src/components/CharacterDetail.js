@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { Card, Container, Image, Button, Form, Feed } from "semantic-ui-react"
 
 import { characterShow, characterUpdate, characterDelete } from "../api/character"
 
 const CharacterDetail = (props) => {
     const { user , msgAlert } = props
-
+    const [appeared, setAppeared] = useState([])
     const [Character, setCharacter] = useState([])
     const { id } = useParams()
     const navigate = useNavigate()
@@ -17,6 +17,7 @@ const CharacterDetail = (props) => {
         characterShow(user, id)
             .then((res) => {
                 setCharacter(res.data.character)
+                setAppeared(res.data.appeared)
             })
             .catch((error) => {
                 msgAlert({
@@ -79,6 +80,20 @@ const CharacterDetail = (props) => {
             })
         })
     }
+
+    let allAppearances
+
+	if (appeared === []) {
+        allAppearances = <>nothing</>
+	} else {
+		allAppearances = appeared.map((titles) => (
+			// console.log(titles.title)
+			<Card>
+				<h1>{titles.title}</h1>
+			</Card>
+		))
+	}
+
 console.log(user)
 	return (
 		<>
@@ -110,6 +125,14 @@ console.log(user)
                     </Card>
                 </Card.Group>
 			</Container>
+            <Container className="comic-panel">
+                <Link to='/characters'> <Button>Back to All Characters</Button></Link>
+			    <h1 className="comic-panel-font">
+				    Appears in 
+			    </h1>
+			    {allAppearances}
+		    </Container>
+
             {
 				user !== null
 				?
