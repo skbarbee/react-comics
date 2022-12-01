@@ -3,6 +3,7 @@
     background-image: url("./imgs/loginpage.svg");
 	background-size: cover;
 	background-position: center;
+    background-attachment: fixed;
 	color: white;
 	height: 100vh;
 }

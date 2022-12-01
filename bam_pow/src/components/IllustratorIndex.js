@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Icon, Image, Container, Button } from 'semantic-ui-react'
-
+import { Link } from 'react-router-dom'
 import { illustratorIndex } from '../api/illustrator'
 
 const IllustratorIndex = ({ user, msgAlert}) => {
@@ -58,9 +58,12 @@ const IllustratorIndex = ({ user, msgAlert}) => {
 						<Button icon link onClick={handleLike}>
 							{heart}
 						</Button>
-						<Button secondary href={"/illustrators/" + Illustrator.id}>
+						<Link to={`/illustrators/${Illustrator.id}`}>
+						
+						<Button primary>
 							View author
 						</Button>
+						</Link>
 					</Button.Group>
 				</div>
 			</Card.Content>

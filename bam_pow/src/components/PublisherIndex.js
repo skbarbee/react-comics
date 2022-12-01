@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
-
+import { Link } from 'react-router-dom'
 import { publisherIndex } from "../api/publisher"
 
 const PublisherIndex = ({ user, msgAlert }) => {
@@ -35,7 +35,7 @@ const PublisherIndex = ({ user, msgAlert }) => {
 	}
 
 	const PublisherCards = allPublishers.map((Publisher) => (
-		<Card href={"/publishers/" + Publisher.id}>
+		<Card>
 			<Image src={Publisher.cover} wrapped ui={false} />
 			<Card.Content>
 				<Card.Header>{Publisher.publisher_name}</Card.Header>
@@ -55,9 +55,12 @@ const PublisherIndex = ({ user, msgAlert }) => {
 						<Button icon link onClick={handleLike}>
 							{heart}
 						</Button>
-						<Button secondary href={"/authors/" + Publisher.id}>
+						<Link to={`/publishers/${Publisher.id}`}>
+						
+						<Button primary>
 							View author
 						</Button>
+						</Link>
 					</Button.Group>
 				</div>
 			</Card.Content>

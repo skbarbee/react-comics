@@ -22,16 +22,15 @@ import ComicCreate from "./components/ComicCreate"
 import IllustratorIndex from "./components/IllustratorIndex"
 import AuthorIndex from "./components/AuthorIndex"
 import PublisherIndex from "./components/PublisherIndex"
-import AuthorCreate from "./components/AuthorCreate"	
+import AuthorCreate from "./components/AuthorCreate"
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
 import IllustratorCreate from "./components/IllustratorCreate"
-import './App.css'
+import "./App.css"
 import Discover from "./components/Discover"
-import AuthorDetail from './components/AuthorDetail'
-
-
-
+import AuthorDetail from "./components/AuthorDetail"
+import PublisherDetail from "./components/PublisherDetail"
+import IllustratorDetail from "./components/IllustratorDetail"
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -59,133 +58,152 @@ const App = () => {
 
 	return (
 		<div className="App">
-
-		<Fragment >
-			<Header user={user} />
-			<Routes>
-				<Route
-					path="/"
-					element={<Home msgAlert={msgAlert} user={user} />}
-				/>
-				<Route
-					path="/sign-up"
-					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path="/sign-in"
-					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path="/sign-out"
-					element={
-						<RequireAuth user={user}>
-							<SignOut
+			<Fragment>
+				<Header user={user} />
+				<Routes>
+					<Route
+						path="/"
+						element={<Home msgAlert={msgAlert} user={user} />}
+					/>
+					<Route
+						path="/sign-up"
+						element={
+							<SignUp msgAlert={msgAlert} setUser={setUser} />
+						}
+					/>
+					<Route
+						path="/sign-in"
+						element={
+							<SignIn msgAlert={msgAlert} setUser={setUser} />
+						}
+					/>
+					<Route
+						path="/sign-out"
+						element={
+							<RequireAuth user={user}>
+								<SignOut
+									msgAlert={msgAlert}
+									clearUser={clearUser}
+									user={user}
+								/>
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/change-password"
+						element={
+							<RequireAuth user={user}>
+								<ChangePassword
+									msgAlert={msgAlert}
+									user={user}
+								/>
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/comics"
+						element={<ComicIndex msgAlert={msgAlert} user={user} />}
+					/>
+					<Route
+						path="/comics/:id"
+						element={
+							<ComicDetail msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/characters"
+						element={
+							<CharacterIndex msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/characters/:id"
+						element={
+							<CharacterDetail msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/mypage"
+						element={<MyPage msgAlert={msgAlert} user={user} />}
+					/>
+					<Route
+						path="/add-comic"
+						element={
+							<ComicCreate msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/add-character"
+						element={
+							<CharacterCreate msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/add-illustrator"
+						element={
+							<IllustratorCreate
 								msgAlert={msgAlert}
-								clearUser={clearUser}
 								user={user}
 							/>
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path="/change-password"
-					element={
-						<RequireAuth user={user}>
-							<ChangePassword msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
-				<Route 
-					path='/comics' 
-					element={
-						<ComicIndex msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/comics/:id' 
-					element={
-						<ComicDetail msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/characters' 
-					element={
-						<CharacterIndex msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/characters/:id' 
-					element={
-						<CharacterDetail msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/mypage' 
-					element={
-						<MyPage msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/add-comic' 
-					element={
-						<ComicCreate msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/add-character' 
-					element={
-						<CharacterCreate msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/add-illustrator' 
-					element={
-						<IllustratorCreate msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/add-publisher' 
-					element={
-						<PublisherCreate msgAlert={msgAlert} user={user} />
-						} 
-				/>
+						}
+					/>
+					<Route
+						path="/add-publisher"
+						element={
+							<PublisherCreate msgAlert={msgAlert} user={user} />
+						}
+					/>
 
-				<Route 
-				path='/add-author' 
-				element={
-					<AuthorCreate msgAlert={msgAlert} user={user} />
-					} 
-				/>
-				<Route 
-					path='/publishers' 
-					element={
-						<PublisherIndex msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/illustrators' 
-					element={
-						<IllustratorIndex msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/authors' 
-					element={
-						<AuthorIndex msgAlert={msgAlert} user={user} />
-						} 
-				/>
-				<Route 
-					path='/authors/:id' 
-					element={
-						<AuthorDetail msgAlert={msgAlert} user={user} />
-						} 
-				/>
-								<Route 
-					path='/discover' 
-					element={
-						<Discover msgAlert={msgAlert} user={user} />
-						} 
-				/>
-			</Routes>
+					<Route
+						path="/add-author"
+						element={
+							<AuthorCreate msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/publishers"
+						element={
+							<PublisherIndex msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/publishers/:id"
+						element={
+							<PublisherDetail msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/illustrators"
+						element={
+							<IllustratorIndex msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/illustrators/:id"
+						element={
+							<IllustratorDetail
+								msgAlert={msgAlert}
+								user={user}
+							/>
+						}
+					/>
+					<Route
+						path="/authors"
+						element={
+							<AuthorIndex msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/authors/:id"
+						element={
+							<AuthorDetail msgAlert={msgAlert} user={user} />
+						}
+					/>
+					<Route
+						path="/discover"
+						element={<Discover msgAlert={msgAlert} user={user} />}
+					/>
+				</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
 						key={msgAlert.id}
@@ -198,7 +216,7 @@ const App = () => {
 				))}
 			</Fragment>
 		</div>
-		)
+	)
 }
 
 export default App

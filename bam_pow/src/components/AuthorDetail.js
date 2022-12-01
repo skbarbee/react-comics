@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image } from "semantic-ui-react"
+import { useParams, useNavigate, Link } from "react-router-dom"
+import { Card, Container, Image, Button } from "semantic-ui-react"
 import { authorShow } from "../api/author"
 
 const AuthorDetail = (user, msgAlert) => {
@@ -45,6 +45,7 @@ const AuthorDetail = (user, msgAlert) => {
     }
 	return (
 		<Container className="comic-panel">
+            <Link to='/authors'> <Button>Back to All Authors</Button></Link>
 			<h1 className="comic-panel-font">
 				Titles written by
 				{authorName}
