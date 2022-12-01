@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Image } from "semantic-ui-react"
-import { authorShow } from "../api/author"
+import { Card, Container, Image, Button } from "semantic-ui-react"
+import { authorShow, authorUpdate, authorDelete } from "../api/author"
 
-const AuthorDetail = (user, msgAlert) => {
+const AuthorDetail = (props) => {
+	const { user , msgAlert } = props
 	const [written, setWritten] = useState([])
 	const [author, setAuthor] = useState(null)
 	const { id } = useParams()
-	console.log(id)
+	const [deleted, setDeleted] = useState(false)
 
 	useEffect(() => {
 		authorShow(user, id)
@@ -26,8 +27,12 @@ const AuthorDetail = (user, msgAlert) => {
 				})
 			})
 	}, [])
+
+	const navigate = useNavigate()
+
     let allWritten
     let authorName
+
 	if (written === []) {
         allWritten = <>nothing</>
 	} else {
@@ -43,14 +48,58 @@ const AuthorDetail = (user, msgAlert) => {
     } else {
         authorName = ` ${author.first_name}  ${author.last_name}`
     }
+
+	const handleDeleteAuthor = () => {
+        authorDelete(user, id)
+        .then(() => {
+            setDeleted(true)
+            msgAlert({
+                heading: 'Success',
+                message: 'Deleting an Author',
+                variant: 'success'
+            })
+            
+        })
+		.then(() => {navigate('/authors')})
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: 'Deleting an Author Failure' + error,
+                variant: 'danger'
+            })
+        })
+    }
+
 	return (
-		<Container className="comic-panel">
-			<h1 className="comic-panel-font">
-				Titles written by
-				{authorName}
-			</h1>
-			{allWritten}
-		</Container>
+		<>
+			<Container className="comic-panel">
+				<h1 className="comic-panel-font">
+					Titles written by
+					{authorName}
+				</h1>
+				{allWritten}
+			</Container>
+			{
+				user !== null
+				?
+					user.staff === true
+					?
+					<>
+						<Container className = "comic-panel">
+							<h1 className="comic-panel-font">Delete this Author</h1>
+							<Button 
+								color="red" 
+								onClick={handleDeleteAuthor}
+								>Delete Author
+							</Button>
+						</Container>					
+					</>
+					:
+					null
+				:
+				null
+			}
+		</>
 	)
 }
 

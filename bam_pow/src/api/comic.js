@@ -16,7 +16,6 @@ export const postComic = (data) => {
 				characters : data.comicbook_characters,
 				release_date: data.release_date,
 				cover: data.cover
-
 			}
 		},
 		// headers: {
@@ -42,9 +41,18 @@ export const comicShow = (user, id) => {
 export const comicUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/comics/' + id,
-		data: {
-			comic: data,
+		url: apiUrl + '/comics/' + id + '/',
+		data : {
+			comicbook : {
+				title : data.title,
+				edition :Number(data.edition),
+				publisher: data.publisher_id,
+				authors : data.comicbook_authors,
+				illustrators : data.comicbook_illustrators,
+				characters : data.comicbook_characters,
+				release_date: data.release_date,
+				cover: data.cover
+			}
 		},
 		headers: {
 			Authorization: `Token token=${user.token}`,

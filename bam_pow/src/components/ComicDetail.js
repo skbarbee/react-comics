@@ -5,17 +5,17 @@ import Select from "react-select"
 import "react-datepicker/dist/react-datepicker.css"
 import DatePicker from "react-datepicker"
 
-import { comicShow, comicUpdate, comicDelete } from "../api/comic"
+import { comicShow, comicUpdate, comicDelete, postComic } from "../api/comic"
 
 import {
 	getAuthors,
 	getCharacters,
 	getIllustrators,
 	getPublishers,
-	postComic,
 } from "../api/api_calls"
 
-const ComicDetail = (user, msgAlert, props) => {
+const ComicDetail = (props) => {
+	const { user , msgAlert } = props
     const [Comic, setComic] = useState([])
     const [deleted, setDeleted] = useState(false)
     const { id } = useParams()
@@ -57,7 +57,7 @@ const ComicDetail = (user, msgAlert, props) => {
 		getIllustrators()
 			.then((res) => {
 				let illustrators = res.data.illustrators
-				console.log("the res", illustrators)
+				// console.log("the res", illustrators)
 				const illustratorOptions = illustrators.map(
 					(illustrator, index) => ({
 						key: illustrator.id,
@@ -138,12 +138,12 @@ const ComicDetail = (user, msgAlert, props) => {
 		setComic((Comic.release_date = `${year}-${month}-${day}`))
 
 // Change this to patch
-		postComic(Comic)
+		comicUpdate(Comic, user, id)
 			.then(res => {navigate('/comics')})
 			.then(() => {
 				msgAlert({
 					heading: "Success",
-					message: "Comic Added!",
+					message: "Comic Updated!",
 					variant: "success",
 				})
 			})
@@ -247,7 +247,7 @@ const ComicDetail = (user, msgAlert, props) => {
         })
     }
 
-
+	console.log(user)
 	return (
 		<>
 			<Container>
@@ -276,108 +276,113 @@ const ComicDetail = (user, msgAlert, props) => {
 					</Card>
 					</Card.Group>
 				</div>
-				{/* {
-					user.staff === false
+				{
+					user !== null
 					?
-					<> */}
-						<div className="comic-panel">
-							<Form size="medium">
-								<h1 className="comic-panel-font">
-									Edit this Comic
-								</h1>
-								<Form.Input
-									required
-									fluid
-									label="Comic Title"
-									placeholder="Title"
-									onChange={handleChange}
-									name="title"
-									value={Comic.title}
-								/>
-								<Form.Field>
-									<label>Edition</label>
-									<input
-										type="number"
-										name="edition"
+						user.staff === true
+						?
+						<>
+							<Container className="comic-panel">
+								<Form size="medium">
+									<h1 className="comic-panel-font">
+										Edit this Comic
+									</h1>
+									<Form.Input
+										required
+										fluid
+										label="Comic Title"
+										placeholder="Title"
 										onChange={handleChange}
-										value={Comic.edition}
+										name="title"
+										value={Comic.title}
 									/>
-								</Form.Field>
-								<Form.Field>
-									<label>Authors</label>
-									<Select
-										required
-										options={authors}
-										name="authors"
-										isMulti
-										onChange={handleAuthorSelect}
-									/>
-								</Form.Field>
-								<Form.Field>
-									<label>Illustrators</label>
-									<Select
-										required
-										options={illustrators}
-										name="illustrators"
-										isMulti
-										onChange={handleIllustratorSelect}
-									/>
-								</Form.Field>
+									<Form.Field>
+										<label>Edition</label>
+										<input
+											type="number"
+											name="edition"
+											onChange={handleChange}
+											value={Comic.edition}
+										/>
+									</Form.Field>
+									<Form.Field>
+										<label>Authors</label>
+										<Select
+											// defaultValue = {}
+											required
+											options={authors}
+											name="authors"
+											isMulti
+											onChange={handleAuthorSelect}
+										/>
+									</Form.Field>
+									<Form.Field>
+										<label>Illustrators</label>
+										<Select
+											required
+											options={illustrators}
+											name="illustrators"
+											isMulti
+											onChange={handleIllustratorSelect}
+										/>
+									</Form.Field>
 
-								<Form.Field>
-									<label>Publisher</label>
-									<Select
-										required
-										options={publishers}
-										name="publisher"
-										onChange={handlePublisherSelect}
-									/>
-								</Form.Field>
+									<Form.Field>
+										<label>Publisher</label>
+										<Select
+											required
+											options={publishers}
+											name="publisher"
+											onChange={handlePublisherSelect}
+										/>
+									</Form.Field>
 
-								<Form.Field required>
-									<label>Characters</label>
-									<Select
-										required
-										options={characters}
-										name="characters"
-										isMulti
-										onChange={handleCharacterSelect}
+									<Form.Field required>
+										<label>Characters</label>
+										<Select
+											required
+											options={characters}
+											name="characters"
+											isMulti
+											onChange={handleCharacterSelect}
+										/>
+									</Form.Field>
+									<Form.Input
+										fluid
+										label="Cover"
+										placeholder="Paste a link to the cover"
+										onChange={handleChange}
+										name="cover"
+										value={Comic.cover}
 									/>
-								</Form.Field>
-								<Form.Input
-									fluid
-									label="Cover"
-									placeholder="Paste a link to the cover"
-									onChange={handleChange}
-									name="cover"
-									value={Comic.cover}
-								/>
-								<Form.Field required>
-									<label>Release Date</label>
-									<DatePicker
-										selected={startDate}
-										onChange={(date) => setStartDate(date)}
-										name="releaseDate"
-										dateFormat={"MM/dd/yyyy"}
-									/>
-								</Form.Field>
+									<Form.Field required>
+										<label>Release Date</label>
+										<DatePicker
+											selected={startDate}
+											onChange={(date) => setStartDate(date)}
+											name="releaseDate"
+											dateFormat={"MM/dd/yyyy"}
+										/>
+									</Form.Field>
 
-								<Form.Button onClick={handleSubmit}>Add</Form.Button>
-							</Form>
-						</div>
-						<div className = "comic-panel">
-							<h1 className="comic-panel-font">Delete this Comic</h1>
-							<Button 
-								color="red" 
-								onClick={handleDeleteComic}
-								>Delete Comic
-							</Button>
-						</div>
-						
-					{/* </>
+									<Form.Button onClick={handleSubmit}>Update</Form.Button>
+								</Form>
+							</Container>
+							<Container className = "comic-panel">
+								<h1 className="comic-panel-font">Delete this Comic</h1>
+								<Button 
+									color="red" 
+									onClick={handleDeleteComic}
+									>Delete Comic
+								</Button>
+							</Container>
+							
+						</>
+						:
+						null
 					:
 					null
-				} */}
+				}
 
 			</Container>
 		</>
