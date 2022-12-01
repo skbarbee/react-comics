@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { Card, Container, Image, Button, Form } from "semantic-ui-react"
 
 import { publisherShow, publisherUpdate, publisherDelete } from "../api/publisher"
 
 const PublisherDetail = (props) => {
     const { user , msgAlert } = props
-
+    const [published, setPublished] = useState([])
     const [Publisher, setPublisher] = useState([])
     const { id } = useParams()
     const navigate = useNavigate()
@@ -17,6 +17,7 @@ const PublisherDetail = (props) => {
         publisherShow(user, id)
             .then((res) => {
                 setPublisher(res.data.publisher)
+                setPublished(res.data.published)
             })
             .catch((error) => {
                 msgAlert({
@@ -37,6 +38,24 @@ const PublisherDetail = (props) => {
 
             return { ...prevPublisher, ...updatedPublisher }
         })
+    }
+
+    let allPublished
+    let publisherName
+
+	if (published === []) {
+        allPublished = <>nothing</>
+	} else {
+		allPublished = published.map((titles) => (
+			<Card>
+				<h1>{titles.title}</h1>
+			</Card>
+		))
+	}
+    if (Publisher === null) {
+        publisherName = "no such publisher"
+    } else {
+        publisherName = ` ${Publisher.publisher_name}`
     }
 
     const handleUpdatePublisher = (e) => {
@@ -82,14 +101,14 @@ const PublisherDetail = (props) => {
 console.log(user)
 	return (
 		<>
-			<Container className = "comic-panel">
-					<Card>
-						<Card.Content>
-							<Card.Header>{Publisher.publisher_name}</Card.Header>
-						</Card.Content>
-					</Card>
-					{/* </Card.Group> */}
-			</Container>
+			<Container className="comic-panel">
+                <Link to='/publishers'> <Button>Back to All Publishers</Button></Link>
+			    <h1 className="comic-panel-font">
+				    Titles published by
+				    {publisherName}
+			    </h1>
+			    {allPublished}
+		</Container>
 
             {
 				user !== null
