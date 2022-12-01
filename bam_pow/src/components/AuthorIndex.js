@@ -3,10 +3,12 @@ import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 import { Link } from 'react-router-dom'
 
 import { authorIndex, authorShow } from "../api/author"
+import { favoritesIndex } from "../api/favorites"
 
 const AuthorIndex = ({ user, msgAlert }) => {
 	const [allAuthors, setAllAuthors] = useState([])
 	const [liked, setLiked] = useState(false)
+	const [allFavorites, setAllFavorites]= useState([])
 	console.log("user in author index",user)
 
 	useEffect(() => {
@@ -14,6 +16,12 @@ const AuthorIndex = ({ user, msgAlert }) => {
         //     .then((res) => {
         //         console.log(res.data)
         //     })
+		// favoritesIndex(user)
+        // .then(res => {
+        //     setAllFavorites(res.data.favorites)
+		// 	// console.log('This is the res from favorites in author', res.data)
+		// 	// console.log("all faves",allFavorites)
+        // })
 		authorIndex(user)
 			.then((res) => {
 				setAllAuthors(res.data.authors)
@@ -28,8 +36,11 @@ const AuthorIndex = ({ user, msgAlert }) => {
 			})
 	}, [])
 
+ 
+	// console.log("mapped",favorited.favorite_authors)
+
 	const handleLike = () => {
-		setLiked(true)
+		// setLiked(true)
 		console.log("liked")
 	}
 	let heart
