@@ -3,7 +3,7 @@ import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 import { authorIndex, authorShow } from "../api/author"
-import { favoritesIndex, favoritesPost } from "../api/favorites"
+import { favoritesIndex, favoritesAuthorPost } from "../api/favorites"
 
 const AuthorIndex = ({ user, msgAlert }) => {
 	const [allAuthors, setAllAuthors] = useState([])
@@ -40,7 +40,7 @@ const AuthorIndex = ({ user, msgAlert }) => {
 		console.log("this is the id", id)
 		console.log("this is the user", user)
 		let fav = { favorite_authors: id }
-		favoritesPost(fav, user).catch((error) => {
+		favoritesAuthorPost(fav, user).catch((error) => {
 			msgAlert({
 				heading: "Failure",
 				message: "favorite Author Failure" + error,
