@@ -94,18 +94,19 @@ console.log(user)
                         null
                     }
                     <Card>
-                        <Card.Content>
-                            <Card.Header>{Character.title}</Card.Header>
-                            <Card.Description>
+                        <Card.Header>
+                            <h1>
+                                {Character.alias}
+                            </h1>
+                        </Card.Header>
+                        <Card.Meta>
+                            <h3>
                                 {Character.real_name}
-                            </Card.Description>
-                            <Card.Description>
-                                {Character.alias} 
-                            </Card.Description>
-                            <Card.Description>
-                                {Character.details}
-                            </Card.Description>
-                        </Card.Content>
+                            </h3>
+                        </Card.Meta>
+                        <Card.Description>
+                            {Character.details}
+                        </Card.Description>
                     </Card>
                 </Card.Group>
 			</Container>
