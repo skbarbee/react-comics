@@ -26,6 +26,7 @@ import AuthorCreate from "./components/AuthorCreate"
 import CharacterCreate from "./components/CharacterCreate"
 import PublisherCreate from "./components/PublisherCreate"
 import IllustratorCreate from "./components/IllustratorCreate"
+import IllustratorDetail from "./components/IllusratorDetail"
 import './App.css'
 import Discover from "./components/Discover"
 import AuthorDetail from './components/AuthorDetail'
@@ -165,6 +166,12 @@ const App = () => {
 					path='/illustrators' 
 					element={
 						<IllustratorIndex msgAlert={msgAlert} user={user} />
+						} 
+				/>
+				<Route 
+					path='/illustrators/:id' 
+					element={
+						<IllustratorDetail msgAlert={msgAlert} user={user} />
 						} 
 				/>
 				<Route 
