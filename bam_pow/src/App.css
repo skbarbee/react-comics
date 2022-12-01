@@ -1,6 +1,16 @@
+
 .App {
-    background-image: url('./imgs/loginpage.svg');
-    background-size: cover;
-    color: white;
-    height: 100vh;
+    background-image: url("./imgs/loginpage.svg");
+	background-size: cover;
+	background-position: center;
+	color: white;
+	height: 100vh;
+}
+
+@media only screen and (max-width: 500px) {
+    .App {
+        /* background-image: url("./imgs/loginpage2.svg"); */
+        background-color: black;
+        height: 150vh;
+    }
 }

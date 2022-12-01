@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
+import { Link } from "react-router-dom"
 
 import { characterIndex } from "../api/character"
 
@@ -63,9 +64,10 @@ const CharacterIndex = ({ user, msgAlert }) => {
 						<Button icon link onClick={handleLike}>
 							{heart}
 						</Button>
-						<Button secondary href={"/characters/" + Character.id}>
-							View author
-						</Button>
+
+						<Link to={`/characters/${Character.id}`}>
+							<Button primary>View Character</Button>
+						</Link>
 					</Button.Group>
 				</div>
 			</Card.Content>
