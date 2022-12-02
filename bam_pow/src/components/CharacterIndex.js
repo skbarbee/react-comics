@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react"
 import { Link } from "react-router-dom"
+import { favoritesCharacterPost } from "../api/favorites"
 
 import { characterIndex } from "../api/character"
 
@@ -21,6 +22,19 @@ const CharacterIndex = ({ user, msgAlert }) => {
 				})
 			})
 	}, [])
+
+	const postFave = (id, user) => {
+		// console.log("this is the id", id)
+		// console.log("this is the user", user)
+		let fav = { favorite_characters: id }
+		favoritesCharacterPost(fav, user).catch((error) => {
+			msgAlert({
+				heading: "Failure",
+				message: "favorite Author Failure" + error,
+				variant: "danger",
+			})
+		})
+	}
 
 	const handleLike = () => {
 		setLiked(true)
@@ -60,7 +74,7 @@ const CharacterIndex = ({ user, msgAlert }) => {
 			<Card.Content>
 				<div className="ui two buttons">
 					<Button.Group>
-						<Button icon link onClick={handleLike}>
+						<Button icon link onClick={() => postFave(Character.id, user)}>
 							{heart}
 						</Button>
 

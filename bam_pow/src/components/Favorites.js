@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Card, Icon, Image, Container, Button, Grid } from "semantic-ui-react";
-import { useNavigate, Link } from "react-router-dom";
+import { Card, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { favoritesIndex } from "../api/favorites";
 
 
