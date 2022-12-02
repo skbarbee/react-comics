@@ -20,7 +20,7 @@ const Favorites = ({ user, msgAlert }) => {
         });
       });
   }, []);
-  console.log("this is favorites in favorites", favorites);
+  
 
   if (!favorites) {
     return <p>Loading...</p>;

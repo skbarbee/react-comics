@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Card, Icon, Image, Container, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
+import { favoritesIndex } from "../api/favorites";
 import { authorIndex } from "../api/author";
 import { favoritesAuthorPost } from "../api/favorites";
 
 const AuthorIndex = ({ user, msgAlert }) => {
   const [allAuthors, setAllAuthors] = useState([]);
   const [liked, setLiked] = useState(false);
-  const [allFavorites, setAllFavorites] = useState([]);
-  console.log("user in author index", user);
+  const [authorArray, setAuthorArray] = useState([])
+  const [favoriteAuthors, setFavorites] = useState(null);
+
+  useEffect(() => {
+    favoritesIndex(user)
+      .then((res) => {
+        setFavorites(res.data.users[0].favorite_authors.map(author => author.id))
+      })
+      .catch((error) => {
+        msgAlert({
+          heading: "Failure",
+          message: "Index Favorites Failure" + error,
+          variant: "danger",
+        });
+      });
+  }, []);
+console.log('FAVAuthors',favoriteAuthors)
+
+
+  
+
 
   useEffect(() => {
     authorIndex(user)
@@ -27,9 +46,17 @@ const AuthorIndex = ({ user, msgAlert }) => {
   }, []);
 
   const postFave = (id, user) => {
-    // console.log("this is the id", id)
+    console.log("this is the id", id)
     // console.log("this is the user", user)
+    setFavorites((prevFav)=>{ 
+      return{
+        
+
+      }
+      
+    })
     let fav = { favorite_authors: id };
+    console.log('this is the fav', fav)
     favoritesAuthorPost(fav, user).catch((error) => {
       msgAlert({
         heading: "Failure",
